@@ -1,0 +1,17 @@
+<h3 class="page-title"> Welcome to GitHacker! </h3>
+<p class="light"> Collaborative Hardware Management application. <p>
+<hr>
+<div>
+<p class="slead"> You don't have access to any projects right now. <p>
+      
+      </br>
+      <% if true %> //current_user.can_create_project?
+        <p>You can unlimited projects and assign them to groups. </p>
+        <p>Click on the button below to add a new one </p>
+      <% else %>
+        <p>If you are added to a project, it will be displayed here. </p>
+
+      <% if true %> //current_user.can_create_project?
+      <div class="link_holder"> 
+        <%= link_to new_project_path, "New project »",  class: "btn btn-default" %>
+         </div>

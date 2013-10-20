@@ -1,13 +1,7 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 gem 'rails', '4.0.0'
-gem 'sass-rails', '~> 4.0.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'jquery-rails'
-gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'cancan'
 gem 'devise'
 gem 'devise_invitable'
@@ -17,6 +11,25 @@ gem 'rolify'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'thin'
 gem 'heroku'
+
+  gem "sass-rails"
+  gem "coffee-rails"
+  gem "uglifier"
+  gem "therubyracer"
+  gem 'turbolinks'
+  gem 'jquery-turbolinks'
+
+  gem 'chosen-rails',     "1.0.0"
+  gem 'select2-rails'
+  gem 'jquery-atwho-rails', "0.3.0"
+  gem "jquery-rails",     "2.1.3"
+  gem "jquery-ui-rails",  "2.0.2"
+  gem "modernizr",        "2.6.2"
+  gem "raphael-rails", "~> 2.1.2"
+  gem 'bootstrap-sass'
+  gem "font-awesome-rails"
+  gem "gemoji", "~> 1.2.1", require: 'emoji/railtie'
+  gem "gon"
 
 group :development do
   gem 'better_errors'

@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019201919) do
+ActiveRecord::Schema.define(version: 20131019214439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "projects", force: true do |t|
+    t.string   "name",                       null: false
+    t.string   "path",                       null: false
+    t.string   "tagline",                    null: false
+    t.text     "description"
+    t.integer  "creator_id"
+    t.boolean  "public",      default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "repositories", force: true do |t|
+    t.string   "name",                     null: false
+    t.string   "path",                     null: false
+    t.integer  "owner_id"
+    t.string   "tagline",     default: "", null: false
+    t.text     "description", default: ""
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "name"
