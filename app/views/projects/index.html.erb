@@ -23,12 +23,13 @@
 	<% else %>
 		<ul>
 		<% @projects.each do |project| %>
-			<li> 
 				<p><%= project.path %></p>
 				<p><%= project.tagline %> </p>
 				<p>Last activity: <%= project.last_activity_to_text %> </p>
-			</li>
+			<hr>
 		<% end %>
 	</ul>
 	<% end %>
+
+	<%= link_to "Create Project", new_project_path, :class => "btn btn-primary pull-right" %>
 </div>

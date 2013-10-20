@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
-gem 'rails', '4.0.0'
+gem 'rails'
 gem 'jbuilder', '~> 1.2'
 gem 'cancan'
 gem 'devise'
@@ -8,12 +8,10 @@ gem 'devise_invitable'
 gem 'figaro'
 gem 'pg'
 gem 'rolify'
-gem 'simple_form', '>= 3.0.0.rc'
 gem 'thin'
 gem 'heroku'
+gem 'protected_attributes'
 
-  gem "sass-rails"
-  gem "coffee-rails"
   gem "uglifier"
   gem "therubyracer"
   gem 'turbolinks'
@@ -30,12 +28,14 @@ gem 'heroku'
   gem "font-awesome-rails"
   gem "gemoji", "~> 1.2.1", require: 'emoji/railtie'
   gem "gon"
+gem 'simple_form', '>= 3.0.0.rc'
 
 group :development do
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'hub', :require=>nil
   gem 'quiet_assets'
   gem 'rails_layout'
+  gem 'better_errors'
 end
 group :development, :test do
   gem 'factory_girl_rails'
@@ -48,3 +48,4 @@ group :test do
   gem 'email_spec'
   gem 'launchy'
 end
+
