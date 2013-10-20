@@ -66,6 +66,7 @@ body {
 
 .main-nav ul {
 	margin: auto;
+	padding:0px;
 	height: 40px;
 	overflow: hidden;
 }
@@ -102,3 +103,5 @@ hr {
 	-webkit-margin-start: auto;
 	-webkit-margin-end: auto;
 }
+
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
