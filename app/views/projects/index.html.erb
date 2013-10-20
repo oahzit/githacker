@@ -23,9 +23,23 @@
 	<% else %>
 		<ul>
 		<% @projects.each do |project| %>
-				<p><%= project.path %></p>
+				<h4 class="project-title">
+					<span class="access-icon">
+					<% if project.public %>
+					<i class="icon-globe" style="margin-top:5px;"></i>
+					<% else %>
+					<i class="icon-lock" style="margin-top:5px;"></i>
+					<% end %>
+					</span>
+					
+					<%= link_to project.name, project_path(project), :class=>"project" %>
+					<%= project.path %></a>
+				</h4>
 				<p><%= project.tagline %> </p>
-				<p>Last activity: <%= project.last_activity_to_text %> </p>
+				<div class="last-activity">
+				<span class="light">Last activity:</span>
+				<span class="date">about 17 hours ago</span>
+				</div>
 			<hr>
 		<% end %>
 	</ul>

@@ -135,7 +135,19 @@ h3.page-title {
 	margin-bottom: 15px;
 }
 
-p.light {
+li {
+line-height: 18px;
+}
+
+.light {
 	color: #888;
 }
 
+p {
+	margin: 0 0 9px;
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
