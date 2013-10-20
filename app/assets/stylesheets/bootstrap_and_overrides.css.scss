@@ -1,3 +1,56 @@
 @import "bootstrap";
 body { padding-top: 60px; }
 @import "bootstrap-responsive";
+
+/* SIDE NAV */
+.nav-pills .nav-stacked > .active >a {
+	border-color: #2fa0bb;
+	border-radius: 0;
+	background: #F1F1F1;
+	color: #474d57;
+	font-weight: bold;
+	text-shadow: 0 1px 1px #fff;
+}
+
+.nav-pills.nav-stacked>li>a {
+	border-left: 4px solid #EEE;
+	padding: 12px;
+}
+
+.nav>li>a {
+	sdisplay: block;
+}
+
+.nav-stacked > li > a {
+	margin-right: 0;
+}
+
+
+.nav-pills>li>a {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	-webkit-border-radius: px;
+	border-radius: 0px;
+	-moz-border-radius: 0;
+	-ms-border-radius: 0;
+	-o-border-radius: 0;
+}
+
+pills > li > a {
+	padding-right: 12px;
+	padding-left: 12px;
+	margin-right: 2px;
+	line-height: 14px;
+}
+
+a {
+outline: none;
+text-decoration: none;
+color: #474d57;
+}
+
+pills > li > a {
+	color: #474d57;
+}

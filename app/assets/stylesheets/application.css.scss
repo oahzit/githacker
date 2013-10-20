@@ -20,16 +20,16 @@ body {
 }
 
 .content {
-	background-color: #eee;
-  	padding: 20px;
-  	margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-  	-webkit-border-radius: 0 0 6px 6px;
-  	-moz-border-radius: 0 0 6px 6px;
-  	border-radius: 0 0 6px 6px;
-  	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  	box-shadow: 0 1px 2px rgba(0,0,0,.15);
+	width: 1170px;
+  	padding-top: 0px;
+	margin-right: auto;
+	margin-left: auto;
 }
+
+.center {
+	text-align:center;
+}
+
 
 /* TOP NAVIGATION */
 .navbar-static-top {
@@ -104,4 +104,38 @@ hr {
 	-webkit-margin-end: auto;
 }
 
+/* GLYPHICONS */
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
+/* COUNTER */
+.main-nav ul .count {
+	font-weight: normal;
+	display: inline-block;
+	height: 15px;
+	padding: 1px 6px;
+	height: auto;
+	font-size: 0.82em;
+	line-height: 14px;
+	text-align: center;
+	color: #777;
+	background: #eee;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+	border-radius: 8px;
+}
+
+/* HEADERS */
+h3.page-title {
+	color: #474d57;
+	font-size: 20px;
+	line-height: 1.5;
+	margin-top: 0px;
+	margin-bottom: 15px;
+}
+
+p.light {
+	color: #888;
+}
+
