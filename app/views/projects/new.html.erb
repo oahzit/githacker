@@ -1,36 +1,4 @@
 <h3 class="page-title"> Create a new Project </h3>
 <div class="row">
-  <%= form_for @project  do |f| %>
-        <div class="form-group col-lg-11">   
-        <p><%= f.label :name, "Project Name" %>
-        <%= f.text_field :name, placeholder: "Example Project", class: "form-control", tabindex: 1, autofocus: true %></p>
-
-        <p><%= f.label :path, "Select Repository" %>
-        <%= f.text_field :path, class: "form-control" %></p>
-
-        <p><%= f.label :tagline, "Tagline" %>
-        <%= f.text_field :tagline, class: "form-control" %></p>
-
-        <p><%= f.label :description, "Description (optional)" %>
-        <%= f.text_area :description, placeholder: "enter project description", class: "form-control", rows: 3, maxlength: 500, tabindex: 3 %></p>
-        
-        <p><%= f.check_box :public, { checked: true}, true, false %>
-        <span class="help-inline"> Make project visible to everyone </span></p>
-
-        <%= f.hidden_field :creator_id, :value => current_user.id %>
-
-      <div class="actions">
-        <%= f.submit 'Create project', class: "btn btn-primary project-submit", tabindex: 4 %>
-
-        <% if true %> <!-- current_user.can_create_group? -->
-          <div class="pull-right">
-            <div class="controls light">
-              Need a group for several dependent projects?
-              <!-- link_to "Create a group", new_group_path, class: "btn btn-default btn-small" -->
-            </div>
-          </div>
-          <% end %>
-        </div>
-      </div>
-  <% end %>
+  <%= render "form" %>
 </div>
