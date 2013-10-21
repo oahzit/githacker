@@ -189,3 +189,56 @@ color: gray;
 	border: 1px solid #CCC;
 	margin-bottom: 20px;
 }
+
+.ui-box {
+	background: #FFF;
+	margin-bottom: 20px;
+	border: 1px solid #CCC;
+	word-wrap: break-word;
+}
+
+.ui-box .title {
+	background: #eee;
+	background-image: -webkit-gradient(linear, 0 0, 0 30, color-stop(0.066, #eee), to(#dfdfdf));
+	background-image: -webkit-linear-gradient(#eee 6.6%, #dfdfdf);
+	background-image: -moz-linear-gradient(#eee 6.6%, #dfdfdf);
+	background-image: -o-linear-gradient(#eee 6.6%, #dfdfdf);
+	border-bottom: 1px solid #CCC;
+	color: #456;
+	font-size: 16px;
+	text-shadow: 0 1px 1px #fff;
+	padding: 0 10px;
+	font-size: 14px;
+	line-height: 40px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.ui-box ul {
+	margin: 0;
+}
+
+.well-list {
+	margin: 0;
+	list-style: none;
+}
+
+.well-list li {
+	padding: 10px;
+	min-height: 20px;
+	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.well-list{margin:0;list-style:none}
+.well-list li{padding:10px;min-height:20px;border-bottom:1px solid #eee;border-bottom:1px solid rgba(0,0,0,0.05)}
+.well-list li.disabled{color:#888}
+.well-list li.unstyled:hover{background:none}
+.well-list li.smoke{background-color:#f5f5f5}
+.well-list li:hover{background:#d9edf7;border-bottom:1px solid #ADF}
+.well-list li:last-child{border-bottom:none}
+.well-list li:last-child.bottom{background:#f5f5f5}
+.well-list li .author{color:#999}
+.well-list li p{padding-top:1px;margin:0;color:#222}
+.well-list li p img{position:relative;top:3px}
+.well-list li .well-title{font-size:14px;line-height:18px}

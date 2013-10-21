@@ -5,4 +5,9 @@ Githacker::Application.routes.draw do
   
   resources :projects
 
+  get 'help'        => 'help#index'
+  get 'help/uses'   => 'help#uses'
+  get 'help/docs'   => 'help#docs'
+
+
 end
