@@ -1,6 +1,35 @@
 @import "bootstrap";
 body { padding-top: 60px; }
+
+
+body {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+	color: #333;
+}
+
+
 @import "bootstrap-responsive";
+/* TOP NAV */
+.navbar .brand {
+	float: left;
+	display: block;
+	padding: 10px 20px 10px;
+	margin-left: -20px;
+	font-size: 20px;
+	font-weight: 200;
+	color: #fff;
+	text-shadow: none;
+}
+
+.navbar .nav > li > a {
+	float: none;
+	padding: 10px 15px 10px;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: none;
+}
 
 /* SIDE NAV */
 .nav-pills .nav-stacked > .active >a {
@@ -46,9 +75,10 @@ pills > li > a {
 }
 
 a {
-outline: none;
-text-decoration: none;
-color: #474d57;
+	outline: none;
+	color: #3a89a3;
+	text-decoration: none;
+	cursor: autol
 }
 
 pills > li > a {

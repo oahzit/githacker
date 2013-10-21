@@ -12,13 +12,6 @@
  *= require_tree .
 */
 
-body {
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-size: 13px;
-	line-height: 18px;
-	color: #333;
-}
-
 .content {
 	width: 1170px;
   	padding-top: 0px;
@@ -150,4 +143,49 @@ p {
 	-webkit-margin-after: 1em;
 	-webkit-margin-start: 0px;
 	-webkit-margin-end: 0px;
+}
+
+/* AVATAR */
+.event-item.event-inline .avatar {
+	width: 20px;
+	height: 20px;
+}
+
+.avatar {
+	float: left;
+	margin-right: 12px;
+	width: 40px;
+	border: 1px solid #ddd;
+	padding: 1px;
+}
+
+img {
+	max-width: 100%;
+	width: auto\9;
+	height: auto;
+	vertical-align: middle;
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+}
+
+
+.cgray, li.commit .commit-row-info .committed_ago, li.commit.inline-commit .committed_ago, ul.notes .discussion-header, ul.notes .note-header, ul.notes .discussion .discussion-body .discussion-hidden .note, .discussion .discussion-actions a, .discussion .note-actions a, .note .discussion-actions a, .note .note-actions a {
+color: gray;
+}
+
+
+.project_clone_panel {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	background: #eee;
+	background-image: -webkit-gradient(linear, 0 0, 0 30, color-stop(0.066, #eee), to(#dfdfdf));
+	background-image: -webkit-linear-gradient(#eee 6.6%, #dfdfdf);
+	background-image: -moz-linear-gradient(#eee 6.6%, #dfdfdf);
+	background-image: -o-linear-gradient(#eee 6.6%, #dfdfdf);
+	padding: 4px 7px;
+	border: 1px solid #CCC;
+	margin-bottom: 20px;
 }
