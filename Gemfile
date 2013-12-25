@@ -12,6 +12,8 @@ gem 'thin'
 gem 'heroku'
 gem 'protected_attributes'
 
+gem 'git'
+
   gem "uglifier"
   gem "therubyracer"
   gem 'turbolinks'

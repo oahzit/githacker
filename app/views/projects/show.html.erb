@@ -53,8 +53,9 @@
 			<p class="light"> <%= @project.tagline %></p>
 			<hr>
 			<p><span class="light"> Repo size </span> 0.5 MB</p>
-			<p><span class="light"> Repo size </span> <%= @project.created_at.to_time.strftime('%b %d, %Y')%></p>
+			<p><span class="light"> Created on </span> <%= @project.created_at.to_time.strftime('%b %d, %Y')%></p>
 			<p><span class="light"> Owned by </span> <%= link_to @owner.name, user_path(@owner) %></p>
+			<p class="center"><%= link_to "view all members", team_project_path(@project) %></p>
 			<hr>
 			<p><a> 21 commits </a></p>
 			<p><a> 1 branches </a></p>

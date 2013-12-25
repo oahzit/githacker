@@ -1,5 +1,4 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
+/* This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
@@ -23,6 +22,11 @@
 	text-align:center;
 }
 
+.select-mini {
+  font-size: 13px;
+  height: 14px;
+  width: 100px;
+}
 
 /* TOP NAVIGATION */
 .navbar-static-top {
@@ -42,7 +46,7 @@
 	height: 50px;
 }
 
-/* NAVIGATION */
+/* MAIN NAVIGATION */
 .main-nav {
 	background: #f5f5f5;
 	padding-top: 4px;
@@ -242,3 +246,8 @@ color: gray;
 .well-list li p{padding-top:1px;margin:0;color:#222}
 .well-list li p img{position:relative;top:3px}
 .well-list li .well-title{font-size:14px;line-height:18px}
+
+.nav-pills>.active>a,
+.nav-pills>.active>a:hover,
+.nav-pills>.active>a:focus
+{color:#fff;background-color:#08c}
