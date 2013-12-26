@@ -1,0 +1,105 @@
+<script type="text/javascript">
+$("#add-member-submit-btn").bind('click', function(event) {
+	$("#new_users_project").submit();
+});
+</script>
+
+<% content_for :nav do %>
+<%= render 'layouts/nav/project' %>
+<% end %>
+
+<div class="row">
+
+	<div class="col-lg-12">
+		<div class="project_clone_panel">
+			<strong><%= @project.name %> </strong>
+			<p class="pull-right"><%= link_to "Edit", edit_project_path(@project), :class => "btn btn-default btn-small" %><p>
+			</div>
+		</div>
+
+		<div class="col-lg-9">
+
+		<!--
+		<div class="event_filter">
+			<div class="filter_icon "><a href="/kachina/githacker" class="has_tooltip event_filter_link" data-original-title="Push events" id="push_event_filter"><i class="icon-upload-alt"></i></a></div>
+
+			<div class="filter_icon inactive"><a href="/kachina/githacker" class="has_tooltip event_filter_link" data-original-title="Merge events" id="merged_event_filter"><i class="icon-check"></i></a></div>
+
+			<div class="filter_icon inactive"><a href="/kachina/githacker" class="has_tooltip event_filter_link" data-original-title="Comments" id="comments_event_filter"><i class="icon-comments"></i></a></div>
+
+			<div class="filter_icon inactive"><a href="/kachina/githacker" class="has_tooltip event_filter_link" data-original-title="Team" id="team_event_filter"><i class="icon-user"></i></a></div>
+		</div>
+	-->
+
+	<div class="content_list">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Access Level</th>
+					<th>Notification Level</th>
+					<th>Date Joined</th>
+					<th></th>
+				</tr>       
+			</thead>
+			<tbody>
+
+				<% @members.each do |member| %>
+				<tr>
+
+					<td><%= member.user.name %></td>
+					<td><%= member.user.email %></td>
+
+					<% if true %>
+					<td><%= select_tag "access", options_for_select(ACCESS_LEVEL.map{|role| [ role[1], role[0] ]}, member.access), :class => "select-mini" %></td>
+
+					<% else %>
+					<td><%= member.project_access %></td>
+					<% end %>
+
+					<td><%= member.project_notification %></td>
+					<td><%= member.date_added %></td>
+					<td>
+						<% if member.user != current_user %>
+						<%= link_to raw("<span class=\"glyphicon glyphicon-remove\" style=\"font-size:18px;color:#999;\"></span>".html_safe), remove_member_path(member),  method: :remove_member, data: { confirm: 'Are you sure? This action cannot be undone.' }, :id=>'delete_member'%>
+						<% end %>
+					</td>
+						<% end %>
+					</tr>
+				</tbody>
+			</table>
+
+			<% if @usersproject.access == 0 || @usersproject.access == 1 %>
+			<%= form_for UsersProject.new, :url => add_member_path(), :html => {:method => :post} do |f| %>
+			<h4>Add email(s) to invite users to join Project</h4>
+			<%= text_field_tag :email %>
+			<%= f.select :access, ACCESS_LEVEL.map{|role| [ role[1], role[0] ]} %>
+			<span id = "add-member-submit-btn"><%= link_to raw("<span class=\"glyphicon glyphicon-plus-sign\" style=\"font-size:24px;\"></span>".html_safe) %></span>     
+
+			<% end %>
+			<% end %>
+		</div>
+
+		<div class="loading hide" style="display: none;"></div>
+	</div>
+
+	<div class="col-lg-3">
+		<div class="light-well">
+			<h3 class="page-title"> <%= @project.name %></h3>
+			<p class="light"> <%= @project.tagline %></p>
+			<hr>
+			<p><span class="light"> Repo size </span> N/A </p>
+			<p><span class="light"> Created on </span> <%= @project.created_at.to_time.strftime('%b %d, %Y')%></p>
+			<p><span class="light"> Owned by </span> <%= link_to @owner.name, user_path(@owner) %></p>
+			<p class="center"><%= link_to "view all members", team_project_path(@project) %></p>
+			<hr>
+			<p><a> N/A commits </a></p>
+			<p><a> N/A branches </a></p>
+			<p><a> N/A forks </a></p>
+			<hr>
+			<p><span class="light"> Wiki </span> </p>
+			<p><span class="light"> Website </span> </p>
+		</div>
+	</div>
+</div>
