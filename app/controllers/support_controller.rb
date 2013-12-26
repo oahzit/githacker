@@ -1,4 +1,4 @@
-class HelpController < ApplicationController
+class SupportController < ApplicationController
   def index
   end
 

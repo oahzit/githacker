@@ -1,23 +1,22 @@
 Githacker::Application.routes.draw do
-  root :to => "home#index"
-  devise_for :users, :controllers => {:registrations => "registrations"}
-  resources :users
-  
-  resources :projects do 
-  	member do
-  		get 'team'
-  	end
-  end
+	root :to => "home#index"
+	devise_for :users, :controllers => {:registrations => "registrations"}
+	resources :users
 
-  match 'projects/:id/team/' => 'projects#add_member', :controller => 'projects', :action => 'add_member', :via => [:post], :as => 'add_member'
-  match 'projects/:id/team/delete' => 'projects#remove_member', :controller => 'projects', :action => 'remove_member', :via => [:post], :as => 'remove_member'
+	resources :projects do 
+		member do
+			get 'team'
+		end
+	end
 
-  resources :users_projects
+	match 'projects/:id/team/' => 'projects#add_member', :controller => 'projects', :action => 'add_member', :via => [:post], :as => 'add_member'
+	match 'projects/:id/team/delete' => 'projects#remove_member', :controller => 'projects', :action => 'remove_member', :via => [:post], :as => 'remove_member'
+
+	resources :users_projects
 
 
-  get 'help'        => 'help#index'
-  get 'help/uses'   => 'help#uses'
-  get 'help/docs'   => 'help#docs'
+	get 'support' => 'support#index'
+	get 'support/docs' => 'support#docs'
 
 
 end

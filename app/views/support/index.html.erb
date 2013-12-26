@@ -1,0 +1,167 @@
+<script type="text/javascript">
+$(document).ready(function() {
+
+    //NOTE that I am selecting on a class here
+    $('#toggle').click(function(e) {
+        //You also need to prevent the default behaviour of 
+        e.preventDefault();
+
+        $("#container").toggle();
+    });
+
+    $(".section").hide();
+    $("#overview").show();
+
+    if(window.location.hash) {
+    	var hash = window.location.hash.substring(1);
+    	$("#overview").hide();
+    	showdiv(hash);
+    }
+
+});
+
+function hidealldivs(){
+	$(".section").hide();
+	$("#overview").hide();
+}
+
+function showdiv(id){
+	document.getElementById(id).style.display = "block";
+}
+</script>
+
+<% if !user_signed_in? %>
+<% content_for :nav do %>
+<%= render 'layouts/nav/dashboard' %>
+<% end %>
+<% end %>
+
+<div class="row">
+	<div class="col-lg-4">
+		<div class="ui-box">
+			<div class="title">
+				<strong>Forecasted Use Cases </strong>
+			</div>
+
+			<ul class="well-list">
+
+				<li> <strong><a href="/help/support#overview">Overview</a></strong>
+					<p>Find out what we're all about!</p>
+				</li>
+
+				<li> <strong><a href="/help/support#overview">Personal Projects</a></strong>
+					<p>Have your own ideas? Start a project solo. </p>
+				</li>
+
+				<li> <strong><a href="/help/support#overview">Project Management</a></strong>
+					<p> Coordinate projects across your companies team.</p>
+				</li>
+
+				<li> <strong><a href="/help/support#overview">Open Source Hardware</a></strong>
+					<p> Become a part of the open source hardware movement! </p>
+				</li>
+
+				<li> <strong><a href="/help/support#overview">Professional Workspace</a></strong>
+					<p> Curate resource libraries and follow fellow professionals</p>
+				</li>
+
+				<li> <strong><a href="/help/support#overview">Competitions</a></strong>
+					<p> Open up design challenges to engingeers worldwide. </p>
+				</li>
+
+				<li> <strong><a href="/help/support#overview">Portfolio</a></strong>
+					<p> Your activity demonstrates your knowledge and expertise </p>
+				</li>	
+
+			</ul>
+		</div>
+
+		<div class="ui-box">
+			<div class="title">
+				Contact Us
+			</div>
+
+			<ul class="well-list">
+				<li> Email our <a href="mailto:kachina@alum.mit.edu">support contact</a> with site suggestions. </li>
+				<li> For press inquires email our fearless leader, <a href="mailto:kachina@alum.mit.edu">Kachina</a>. </li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="col-lg-7">
+
+		<div id="overview">
+			<h3 class="page-title">Documentation Overview</h3>
+			<hr>
+			<p class="light"> Welcome to GitHacker. As you can tell this is a work in progress. 
+			</p>
+
+			<p class="light"> Our hope is to create a platform for remote collaboration for hardware projects. We aim to connect makers with causes of a greater scale, to education and leverage existing resources, and assist in turning your ideas into viable products. 
+			</p>
+
+			<p class="light"> We have a suite of tools in mind and are partnering with organizations to get our tools to beta. Please come back later for more details.
+			</p>
+		</div>
+
+		<div class="section" id="personal">
+			<h3 class="page-title">Personal Projects</h3>
+			<hr>
+			<p class="light"> Githacker is designed to allow you to create solo projects and to invite collaborators.
+			</p>
+			<hr>
+
+			<div class="numberCircle">1</div>
+			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
+				<h3 class="page-title">Register an account</h3>
+				<p class="light"> It's as easy as that ... <strong>if you're a student</strong>. Now you can search studios in your area, register for classes, manage your own personal calendar and keep track of your attendance/purchase history. </p>
+			</div>
+			<hr>
+
+			<div class="numberCircle">2</div>
+			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
+				<h3 class="page-title">Connect with Stripe</h3>
+				<p class="light"> If you have an account with Stripe it's as simple as clicking a single button to give our app permissions to manage billing and payments through our system. Stripe is simple, secure and focuses on supreme service. Once you've completed that step you can use all of our services as an <strong> independent professional</strong>. Signing up is <strong> FREE</strong>. Click here to <a href="#stripe" onclick="hidealldivs(); showdiv('stripe')">learn more about it</a>.</p> 
+				<p class="light"> To complete activation click the "create account to manage my professional services" link under your 
+					<% if user_signed_in? %>
+					<%= link_to 'profile settings page', settings_profile_path() %>.
+					<% else %>
+					profile settings page.
+					<% end %>
+				</p>
+			</div>
+			<hr>
+
+			<div class="numberCircle">3</div>
+			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
+				<h3 class="page-title">Share Studio Details</h3>
+				<p class="light"> For <strong>studio owners</strong> who organizes events at one or more locations, need to manage staff and instructors, or has available space for professionals to book all you need to do to access additional services is to add studio details through the
+					<% if user_signed_in? %>
+					<%= link_to 'appropriate settings page', settings_studio_path() %>.
+					<% else %>
+					appropriate settings page.
+					<% end %>
+				</p>
+			</div>
+		</div>
+
+
+
+	</div>
+</div>
+
+<% if user_signed_in? %>
+<div class="col-lg-4">
+	<div class="ui-box">
+		<div class="title">
+			How This Works
+		</div>
+
+		<ul class="well-list">
+			<li> Get started by <%= link_to "creating a project", new_project_path %></li>
+			<li> Share your projects within <a href="#">your team</a> <span class="pull-right"><a href="#">>>></a></span></li>
+			<li> Learn how to <a href="#"> assign issues</a> </li>
+			<li> Curate your <a href="#"> own library </a> and search it via <a href="#"> hashtags</a> </li>
+		</ul>
+	</div>
+</div>
+<% end %>
