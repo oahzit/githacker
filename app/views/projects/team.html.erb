@@ -62,7 +62,7 @@ $("#add-member-submit-btn").bind('click', function(event) {
 					<td><%= member.date_added %></td>
 					<td>
 						<% if member.user != current_user %>
-						<%= link_to raw("<span class=\"glyphicon glyphicon-remove\" style=\"font-size:18px;color:#999;\"></span>".html_safe), remove_member_path(member),  method: :remove_member, data: { confirm: 'Are you sure? This action cannot be undone.' }, :id=>'delete_member'%>
+						<%= link_to raw("<span class=\"glyphicon glyphicon-remove\" style=\"font-size:18px;color:#999;\"></span>".html_safe), remove_member_path(member.project, member),  method: :remove_member, via: :post, data: { confirm: 'Are you sure? This action cannot be undone.' }%>
 						<% end %>
 					</td>
 						<% end %>

@@ -19,6 +19,7 @@ class UsersProject < ActiveRecord::Base
   scope :reporters, -> { where(access: REPORTER) }
   scope :developers, -> { where(access: DEVELOPER) }
   scope :masters,  -> { where(access: MASTER) }
+  scope :owners,  -> { where(access: 0) }
 
   scope :in_project, ->(project) { where(project_id: project.id) }
   scope :in_projects, ->(projects) { where(project_id: projects.map { |p| p.id }) }

@@ -10,7 +10,7 @@ Githacker::Application.routes.draw do
 	end
 
 	match 'projects/:id/team/' => 'projects#add_member', :controller => 'projects', :action => 'add_member', :via => [:post], :as => 'add_member'
-	match 'projects/:id/team/delete' => 'projects#remove_member', :controller => 'projects', :action => 'remove_member', :via => [:post], :as => 'remove_member'
+	match 'projects/:id/team/:user_id/delete' => 'projects#remove_member', :controller => 'projects', :action => 'remove_member', :via => [:post], :as => 'remove_member'
 
 	resources :users_projects
 
