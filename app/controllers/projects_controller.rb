@@ -54,7 +54,7 @@ end
 def add_member
     @project = Project.find(params[:id])
     @user = User.where(:email => params[:email]).first
-    @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id)
+    @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: params[:users_project][:access])
     respond_to do |format|
         if @usersproject.save
            UserMailer.add_member_email(@user, @project).deliver
