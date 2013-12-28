@@ -13,7 +13,16 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
+        # When a project is created 
+        @user = current_user
         @project = Project.create(params[:project])
+
+        # a group is automatically generated
+        @group = Group.create(name: "Master", owner_id: @user.id)
+
+        # and the user who created it is added to the group and project
+        @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: 0)
+        @usersgroup = UsersGroup.create(user_id: @user.id, group_id: @group.id, access: 0, notification_level: 0, parent_id: 0)
 
         respond_to do |format|
             if @project.save
@@ -42,7 +51,7 @@ class ProjectsController < ApplicationController
             format.json { render json: @message.errors, status: :unprocessable_entity }
         end 
     end
-end
+end 
 
 def team
     @project = Project.find(params[:id])
@@ -52,16 +61,19 @@ def team
 end
 
 def add_member
-    @project = Project.find(params[:id])
-    @user = User.where(:email => params[:email]).first
-    @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: params[:users_project][:access])
-    respond_to do |format|
-        if @usersproject.save
-           UserMailer.add_member_email(@user, @project).deliver
-           format.html { redirect_to team_project_path(@project), notice: 'Project was successfully updated.' }
-       else
-       end
+   UsersProject.in_project(Project.find(1)).count
+   @project = Project.find(params[:id])
+   @user = User.where(:email => params[:email]).first
+   @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: params[:users_project][:access])
+   respond_to do |format|
+    if @usersproject.save
+       UserMailer.add_member_email(@user, @project).deliver
+       format.html { redirect_to team_project_path(@project), notice: 'Project was successfully updated.' }
+   else
+       format.html { redirect_to team_project_path(@project), notice: 'Project was unsuccessfully updated.' }
+
    end
+end
 end
 
 def remove_member
