@@ -2,7 +2,7 @@
 	<div class="container">
 		<ul>
 			<li><%= link_to raw("<span class=\"glyphicon glyphicon-home\"></span>".html_safe), root_path() %></li>
-    		<li><%= link_to "Projects", projects_path() %></li>
+    		<li><%= link_to "Projects", user_projects_path(current_user) %></li>
     		<li><a>Issues <span class="count">0</span> </a> </li>
     		<li><a>Timeline</a></li>
     		<li><a>Library</a></li>

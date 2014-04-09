@@ -1,6 +1,12 @@
 class ProjectsController < ApplicationController
 	def index
-		@projects = current_user.projects.all
+        @user = User.find(params[:user_id])
+		@projects = @user.projects.order("updated_at DESC").all
+        @users_projects = UsersProject.where(:user_id => @user.id)
+        @as_owner = Project.where(:creator_id => @user.id).all
+        @as_member = @users_projects.where(:access => 1).all
+        @as_watcher = @users_projects.where(:access => 2).all
+
 	end
 
 	def show
@@ -9,12 +15,13 @@ class ProjectsController < ApplicationController
 	end
 
 	def new
+        @user = User.find(params[:user_id])
 		@project = Project.new
 	end
 
 	def create
         # When a project is created 
-        @user = current_user
+        @user = User.find(params[:user_id])
         @project = Project.create(params[:project])
 
         # a group is automatically generated
@@ -22,11 +29,10 @@ class ProjectsController < ApplicationController
 
         # and the user who created it is added to the group and project
         @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: 0)
-        @usersgroup = UsersGroup.create(user_id: @user.id, group_id: @group.id, access: 0, notification_level: 0, parent_id: 0)
 
         respond_to do |format|
             if @project.save
-                format.html { redirect_to project_path(@project), notice: 'Project was successfully created.' }
+                format.html { redirect_to user_project_path(@user, @project), notice: 'Project was successfully created.' }
                 format.json { head :no_content }
             else
                 format.html { render :action => 'new', alert: 'Project was unsuccessfully created.' }

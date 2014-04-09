@@ -3,8 +3,10 @@
 	  <%= render 'layouts/nav/dashboard' %>
 	<% end %>
 
-	<h3 style="text-align:center;">Welcome! Now let's get hacking</h3>
-	<%= link_to "Start your own project", new_user_project_path(@user), :class => "btn btn-default" %>
+	<h3>Home</h3>
+	<% @users.each do |user| %>
+	  <p>User: <%=link_to user.name, user %></p>
+	<% end %>
 
 <% else %>
 	<% content_for :nav do %>

@@ -1,4 +1,4 @@
-<%= form_for @project  do |f| %>
+<%= form_for [@user, @project]  do |f| %>
         <div class="form-group col-lg-11">   
         <p><%= f.label :name, "Project Name" %>
         <%= f.text_field :name, placeholder: "Example Project", class: "form-control", tabindex: 1, autofocus: true %></p>

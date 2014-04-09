@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :users_projects
-  has_many :projects, foreign_key: "project_id", :through => :users_projects
+  has_many :projects, foreign_key: "project_id", :through => :users_projects, :uniq => true
 
   has_many :users_groups
   attr_accessible :name, :email, :password, :password_confirmation
