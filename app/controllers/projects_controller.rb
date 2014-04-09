@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
         @project = Project.create(params[:project])
 
         # a group is automatically generated
-        @group = Group.create(name: "Master", owner_id: @user.id)
+        @group = Group.create(name: "Master Group: #{@project.id}", owner_id: @user.id)
 
         # and the user who created it is added to the group and project
         @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: 0)
@@ -61,18 +61,20 @@ def team
 end
 
 def add_member
-   UsersProject.in_project(Project.find(1)).count
-   @project = Project.find(params[:id])
-   @user = User.where(:email => params[:email]).first
-   @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: params[:users_project][:access])
-   respond_to do |format|
-    if @usersproject.save
-       UserMailer.add_member_email(@user, @project).deliver
-       format.html { redirect_to team_project_path(@project), notice: 'Project was successfully updated.' }
-   else
-       format.html { redirect_to team_project_path(@project), notice: 'Project was unsuccessfully updated.' }
+ UsersProject.in_project(Project.find(1)).count
+ @project = Project.find(params[:id])
+ @group = Group.where(:name => "Master Group: #{@project.id}").first
+ @user = User.where(:email => params[:email]).first
+ @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: params[:users_project][:access])
+ @usersgroup = UsersGroup.create(user_id: @user.id, group_id: @group.id, access: 0, notification_level: 0)
+respond_to do |format|
+    if @usersproject.save && @usersgroup.save
+     UserMailer.add_member_email(@user, @project).deliver
+     format.html { redirect_to team_project_path(@project), notice: 'Project was successfully updated.' }
+ else
+     format.html { redirect_to team_project_path(@project), notice: 'Project was unsuccessfully updated.' }
 
-   end
+ end
 end
 end
 
