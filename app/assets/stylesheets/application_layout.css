@@ -171,15 +171,12 @@ p {
 
 .avatar {
   float: left;
-  margin-right: 12px;
-  width: 40px;
+  width: auto;
   border: 1px solid #ddd;
   padding: 1px;
 }
 
 img {
-  max-width: 100%;
-  width: auto\9;
   height: auto;
   vertical-align: middle;
   border: 0;
