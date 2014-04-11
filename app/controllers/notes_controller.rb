@@ -1,4 +1,4 @@
-class IssuesController < ApplicationController
+class NotesController < ApplicationController
 	def display
 
 	end

@@ -14,8 +14,12 @@
 *= require bootstrap-datepicker
 */
 
+
 @import 'bootstrap';
 @import 'bootstrap-datetimepicker';
+li {
+	list-style-type:none;
+}
 
 .content {
 	width: 1170px;

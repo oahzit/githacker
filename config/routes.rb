@@ -8,6 +8,7 @@ Githacker::Application.routes.draw do
 
 	resources :projects do
 		resources :issues
+		resources :notes
 		resources :discussions
 		resources :settings
 	end

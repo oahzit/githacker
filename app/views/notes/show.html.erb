@@ -1,0 +1,22 @@
+<% content_for :nav do %>
+<%= render 'layouts/nav/project' %>
+<% end %>
+
+<div class="row">
+			<h4><%= @issue.subject %> </h4>
+			<p><%= @issue.body %> </p>
+
+		<div class="span9">
+
+	<div class="content_list">
+
+	<% if !@comments.present? %>
+	There are no comments on this thread.
+	<% else %>
+	<% @comments.each do |comment| %>
+		<%= comment.body %> </br>
+	<% end %>
+	<% end %>
+	</div>
+</div>
+</div>
