@@ -6,54 +6,45 @@ class NotesController < ApplicationController
 	def index
 		@user = current_user
 		@project = Project.find(params[:project_id])
-		@issues = @project.discussions.issues.active.popular
+		@notes = @project.discussions.active.notes
 	end
 
 	def show
         @project = Project.find(params[:project_id])
-        @issue = Discussion.find(params[:id])
-        @comments = @issue.comments
+        @note = Discussion.find(params[:id])
+        @comments = @note.comments
 	end
 
 	def new
 		@project = Project.find(params[:project_id])
-    	@issue = @project.discussions.new
+    	@note = @project.discussions.new
 	end
 
 	def create
-        # When an issue is created 
+        # When an note is created 
 		@project = Project.find(params[:project_id])
-        @issue = @project.discussions.create(params[:discussions])
-
-        # a group is automatically generated
-        @group = Group.create(name: "Master Group: #{@project.id}", owner_id: @user.id)
-
-        # and the user who created it is added to the group and project
-        @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: 0)
-
-        # leave a trail when project is created 
-        @activity = Activity.new.create_message!(@user, @project)
+        @note = @project.discussions.create(params[:note])
 
         respond_to do |format|
-        	if @project.save
-        		format.html { redirect_to user_project_path(@user, @project), notice: 'Project was successfully created.' }
+        	if @note.save
+        		format.html { redirect_to :back, notice: 'Note was successfully created.' }
         		format.json { head :no_content }
         	else
-        		format.html { render :action => 'new', alert: 'Project was unsuccessfully created.' }
+        		format.html { render :action => 'new', alert: 'Note was unsuccessfully created.' }
         		format.json { render json: @message.errors, status: :unprocessable_entity }
         	end 
         end
     end
 
     def edit
-    	@issue = Discussion.find(params[:id])
+    	@note = Discussion.find(params[:id])
     end
 
     def update
-    	@issue = Discussion.find(params[:id])
+    	@note = Discussion.find(params[:id])
 
     	respond_to do |format|
-    		if @issue.update_attributes(params[:discussion])
+    		if @note.update_attributes(params[:discussion])
     			format.html { redirect_to project_path(@project), notice: 'Project was successfully updated.' }
     			format.json { head :no_content }
     		else
@@ -64,20 +55,20 @@ class NotesController < ApplicationController
     end 
 
     def up_vote
-        @issue = Discussion.find(params[:id])
-        @issue.up_vote
+        @note = Discussion.find(params[:id])
+        @note.up_vote
         redirect_to :back
     end
 
     def down_vote
-        @issue = Discussion.find(params[:id])
-        @issue.down_vote
+        @note = Discussion.find(params[:id])
+        @note.down_vote
         redirect_to :back
     end
 
     def destroy
-    	@issue = Discussion.find(params[:id])
-    	@issue.destroy
+    	@note = Discussion.find(params[:id])
+    	@note.destroy
     	redirect_to :back
     end
 

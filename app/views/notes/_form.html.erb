@@ -1,14 +1,10 @@
           <%= simple_form_for [@project, Note.new] do |f| %>
-        <div class="form-group col-lg-11">   
-        <p><%= f.label :subject, "Subject" %>
-        <%= f.text_field :subject, placeholder: "Example Project", class: "form-control", tabindex: 1, autofocus: true %></p>
+          <div class="form-group" style="padding:15px;">   
+            <p><%= f.text_field :subject, placeholder: "Note Subject", class: "form-control", tabindex: 1, autofocus: true %></p>
 
-        <p><%= f.text_field :body, class: "form-control" %></p>
-        <p><%= f.hidden_field :author_id, :value => current_user.id %></p>
-        <p><%= f.hidden_field :type, :value => "Issue" %></p>
-
-      <div class="actions">
-        <%= f.submit 'Create Issue', class: "btn btn-primary", tabindex: 4 %>
-        </div>
-      </div>
-  <% end %>
+            <p><%= f.text_area :body, class: "form-control", :rows => 6, placeholder: "add body of the note here" %></p>
+            <p><%= f.hidden_field :author_id, :value => current_user.id %></p>
+            <p><%= f.hidden_field :type, :value => "Note" %></p>
+            <p><%= f.submit 'Add Note', class: "btn btn-primary pull-right", tabindex: 4 %></p>
+          </div>
+          <% end %>         

@@ -1,3 +1,11 @@
 <% content_for :nav do %>
   <%= render 'layouts/nav/dashboard' %>
 <% end %>
+
+<% if @issues.present? %>
+	<% @issues.each do |issue| %>
+	<%= issue.subject %>
+	<% end %>
+<% else %>
+Here
+<% end %>

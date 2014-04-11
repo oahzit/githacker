@@ -1,28 +1,29 @@
 class IssuesController < ApplicationController
 	def display
+        @user = User.find(params[:user_id])
+        @issues = @user.issues
+    end
 
-	end
+    def index
+      @user = current_user
+      @project = Project.find(params[:project_id])
+      @issues = @project.discussions.issues.active.popular
+  end
 
-	def index
-		@user = current_user
-		@project = Project.find(params[:project_id])
-		@issues = @project.discussions.issues.active.popular
-	end
+  def show
+    @project = Project.find(params[:project_id])
+    @issue = Discussion.find(params[:id])
+    @comments = @issue.comments
+end
 
-	def show
-        @project = Project.find(params[:project_id])
-        @issue = Discussion.find(params[:id])
-        @comments = @issue.comments
-	end
+def new
+  @project = Project.find(params[:project_id])
+  @issue = @project.discussions.new
+end
 
-	def new
-		@project = Project.find(params[:project_id])
-    	@issue = @project.discussions.new
-	end
-
-	def create
+def create
         # When an issue is created 
-		@project = Project.find(params[:project_id])
+        @project = Project.find(params[:project_id])
         @issue = @project.discussions.create(params[:discussions])
 
         # a group is automatically generated

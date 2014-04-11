@@ -5,24 +5,71 @@
 body{
 	background-color: #eee;
 }
-#notes-body {
-display:inline-block;
-background-color: #fff;
-margin: 0 auto;
-box-shadow: 0 1px 2px #aaa;
-border-collapse: collapse;
-border: 0;
-text-shadow: none;
-width:100%;
-background-color: #fff;
+.notes-body {
+	display:inline-block;
+	background-color: #fff;
+	margin: 0 auto;
+	box-shadow: 0 1px 2px #aaa;
+	border-collapse: collapse;
+	border: 0;
+	text-shadow: none;
+	width:100%;
+	background-color: #fff;
 }
 
+/*TABLES*/
+
+.simpletable{
+  padding:0px !important;
+}
+
+.simpletable a {
+color: #888;
+}
+
+.simpletable td.lastEditedDate {
+color: #999;
+font-size: smaller;
+white-space: nowrap;
+padding-top: 13px;
+}
+
+.actions > a > .glyphicon {
+color: #888;
+}
+
+.simpletable td.title {
+width: 100%;
+height: 42px;
+padding-top: 13px;
+padding-left: 20px;
+}
+
+td:last-child {
+border-right: 0;
+}
+
+.simpletable td.actions {
+padding-right: 6px;
+padding-top: 2px;
+color: #888;
+}
+
+.simpletable td.last {
+text-align: right;
+}
+
+table {
+margin-bottom: 0px !important;
+}
+
+
 </style>
-   <script type="text/javascript">
-   $(document).ready(function() {
-   		$("#new_note_form").hide();
-   });
-   </script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#new_note_form").hide();
+});
+</script>
 <div class="row">
 
 	<div class="col-lg-12">
@@ -31,39 +78,30 @@ background-color: #fff;
 			<span class="glyphicon glyphicon-plus-sign pull-right" style="font-size:20px;" onClick='$("#new_note_form").toggle();'>			
 			</div>
 
-			<section id="notes-body" style="margin-top:-10px;">
-				<div id="new_note_form">
+			<section class="notes-body" id="new_note_form" style="margin-top:-15px;margin-bottom:20px;">
+				<div style="padding-bottom:10px;">
 					<%= render 'form'%>
 				</div>
 			</section>
-			</div>
-
-			<div class="content_list">
-
-				<% if !@notes.present? %>
-				<p class="center">There are no notes for this project.</p>
-				<% else %>
-				<% @notes.each do |note| %>
-				<%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_note_path(note) %>
-
-				<%= note.vote_count %>
-				<%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_note_path(note) %>
-
-				<div>
-					<span class="cgray pull-right">
-						<%= note.created %>
-					</span>
-
-					<img alt="" style="font-size:13px" class="avatar s24" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
-
-					<div style="display:inline">
-						<strong>
-							<%= link_to note.subject, project_note_path(@project, note) %>
-						</strong>
-					</div>
-				</div>
-			</br>
-			<% end %>
-			<% end %>
 		</div>
+
+		<% if !@notes.present? %>
+		<p class="center">There are no notes for this project.</p>
+		<% else %>
+
+		<section class="notes-body simpletable" style="width:97%;margin-left:15px;">
+			<table class="table table-condensed table-hover">
+				<tbody>
+					<% @notes.each do |note| %>
+					<tr>
+						<td class="title first"><%= link_to note.subject, [@project, note] %></td>
+						<td class="lastEditedDate"><%= note.created %></td>
+						<td class="action last"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_note_path(@project, note), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</section>
+		<% end %>
 	</div>
+</div>

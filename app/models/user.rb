@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  :recoverable, :rememberable, :trackable, :validatable
 
   has_one :profile
   accepts_nested_attributes_for :profile
@@ -15,18 +15,29 @@ class User < ActiveRecord::Base
   has_many :projects, foreign_key: "project_id", :through => :users_projects, :uniq => true
 
   has_many :users_groups, dependent: :destroy
-    has_many :groups, foreign_key: "group_id", :through => :users_groups, :uniq => true
+  has_many :groups, foreign_key: "group_id", :through => :users_groups, :uniq => true
 
   attr_accessible :name, :email, :password, :password_confirmation
 
     # Required to create complete profile for user
     def instantiate_profile
-        @profile = Profile.where(:name => name).first
-        if @profile.present?
-            self.profile = @profile
-            self.profile.update_attributes(:name => name)
-        else
-            self.create_profile(:name => name)
-        end
+      @profile = Profile.where(:name => name).first
+      if @profile.present?
+        self.profile = @profile
+        self.profile.update_attributes(:name => name)
+      else
+        self.create_profile(:name => name)
+      end
     end
-end
+
+    def issues
+      @issues = []
+      self.projects.each do |project|
+        project.discussions.issues.active.each do |issue|
+          @issues << issue
+        end
+      end
+      return @issues
+    end
+
+  end
