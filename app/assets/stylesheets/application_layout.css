@@ -1,0 +1,266 @@
+/* This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= require bootstrap
+ *= require bootstrap_and_overrides
+ *= require bootstrap-datepicker
+*/
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
+
+body {
+  background-color: #eee;
+  }
+
+
+li {
+  list-style-type:none;
+}
+
+.content {
+  width: 1170px;
+    padding-top: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.center {
+  text-align:center;
+}
+
+.select-mini {
+  font-size: 13px;
+  height: 14px;
+  width: 100px;
+}
+
+/* TOP NAVIGATION */
+.navbar-static-top {
+  position: fixed;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.navbar {
+  overflow: visible;
+  margin-bottom: 18px;
+}
+
+.navbar .navbar-inner {
+  height: 50px;
+}
+
+/* MAIN NAVIGATION */
+.main-nav {
+  background: #f5f5f5;
+  padding-top: 4px;
+  border-bottom: 1px solid #E1E1E1;
+  margin-bottom: 0px;
+  margin-top: 56px;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 0;
+  z-index: 5;
+}
+
+.main-nav ul {
+  margin: auto;
+  padding:0px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.main-nav ul li {
+  list-style-type: none;
+  margin: 0;
+  display: table-cell;
+  width: 1%;
+}
+
+.main-nav ul a {
+  display: block;
+  text-align: center;
+  font-weight: normal;
+  height: 38px;
+  line-height: 34px;
+  color: #777;
+  text-shadow: 0 1px 1px white;
+  padding: 0 10px;
+  text-decoration: none;
+  padding-top: 2px;
+}
+
+/* DIVIDERS */
+hr {
+  margin: 18px 0;
+  border: 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #fff;
+  display: block;
+  -webkit-margin-before: 0.5em;
+  -webkit-margin-after: 0.5em;
+  -webkit-margin-start: auto;
+  -webkit-margin-end: auto;
+}
+
+/* GLYPHICONS */
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
+/* COUNTER */
+.main-nav ul .count {
+  font-weight: normal;
+  display: inline-block;
+  height: 15px;
+  padding-top:-5px;
+  padding: 1px 6px;
+  font-size: 0.82em;
+  line-height: 14px;
+  text-align: center;
+  color: #777;
+  background: #eee;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+}
+
+/* HEADERS */
+h3.page-title {
+  color: #474d57;
+  font-size: 20px;
+  line-height: 1.5;
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+
+li {
+line-height: 18px;
+}
+
+.light {
+  color: #888;
+}
+
+p {
+  margin: 0 0 9px;
+  display: block;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+/* AVATAR */
+.event-item.event-inline .avatar {
+  width: 20px;
+  height: 20px;
+}
+
+.avatar {
+  float: left;
+  margin-right: 12px;
+  width: 40px;
+  border: 1px solid #ddd;
+  padding: 1px;
+}
+
+img {
+  max-width: 100%;
+  width: auto\9;
+  height: auto;
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+
+
+.cgray, li.commit .commit-row-info .committed_ago, li.commit.inline-commit .committed_ago, ul.notes .discussion-header, ul.notes .note-header, ul.notes .discussion .discussion-body .discussion-hidden .note, .discussion .discussion-actions a, .discussion .note-actions a, .note .discussion-actions a, .note .note-actions a {
+color: gray;
+}
+
+
+.project_clone_panel {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background: #eee;
+  background-image: -webkit-gradient(linear, 0 0, 0 30, color-stop(0.066, #eee), to(#dfdfdf));
+  background-image: -webkit-linear-gradient(#eee 6.6%, #dfdfdf);
+  background-image: -moz-linear-gradient(#eee 6.6%, #dfdfdf);
+  background-image: -o-linear-gradient(#eee 6.6%, #dfdfdf);
+  padding: 4px 7px;
+  border: 1px solid #CCC;
+  margin-bottom: 20px;
+}
+
+.ui-box {
+  background: #FFF;
+  margin-bottom: 20px;
+  border: 1px solid #CCC;
+  word-wrap: break-word;
+}
+
+.ui-box .title {
+  background: #eee;
+  background-image: -webkit-gradient(linear, 0 0, 0 30, color-stop(0.066, #eee), to(#dfdfdf));
+  background-image: -webkit-linear-gradient(#eee 6.6%, #dfdfdf);
+  background-image: -moz-linear-gradient(#eee 6.6%, #dfdfdf);
+  background-image: -o-linear-gradient(#eee 6.6%, #dfdfdf);
+  border-bottom: 1px solid #CCC;
+  color: #456;
+  font-size: 16px;
+  text-shadow: 0 1px 1px #fff;
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 40px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.ui-box ul {
+  margin: 0;
+}
+
+.well-list {
+  margin: 0;
+  list-style: none;
+}
+
+.well-list li {
+  padding: 10px;
+  min-height: 20px;
+  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.well-list{margin:0;list-style:none}
+.well-list li{padding:10px;min-height:20px;border-bottom:1px solid #eee;border-bottom:1px solid rgba(0,0,0,0.05)}
+.well-list li.disabled{color:#888}
+.well-list li.unstyled:hover{background:none}
+.well-list li.smoke{background-color:#f5f5f5}
+.well-list li:hover{background:#d9edf7;border-bottom:1px solid #ADF}
+.well-list li:last-child{border-bottom:none}
+.well-list li:last-child.bottom{background:#f5f5f5}
+.well-list li .author{color:#999}
+.well-list li p{padding-top:1px;margin:0;color:#222}
+.well-list li p img{position:relative;top:3px}
+.well-list li .well-title{font-size:14px;line-height:18px}
+
+.nav-pills>.active>a,
+.nav-pills>.active>a:hover,
+.nav-pills>.active>a:focus
+{color:#fff;background-color:#08c}

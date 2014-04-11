@@ -29,7 +29,7 @@ gem 'git'
   gem "font-awesome-rails"
   gem "gemoji", "~> 1.2.1", require: 'emoji/railtie'
   gem "gon"
-gem 'simple_form', '>= 3.0.0.rc'
+  gem 'simple_form', '>= 3.0.0.rc'
 
 group :development do
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
