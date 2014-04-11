@@ -9,17 +9,18 @@ class UsersProject < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :project
+  accepts_nested_attributes_for :project
 
   validates :user_id, uniqueness: { scope: [:project_id], message: "already exists in project" }
   validates :project_id, presence: true
 
   delegate :name, :username, :email, to: :user, prefix: true
 
-  scope :guests, -> { where(access: GUEST) }
-  scope :reporters, -> { where(access: REPORTER) }
-  scope :developers, -> { where(access: DEVELOPER) }
-  scope :masters,  -> { where(access: MASTER) }
-  scope :owners,  -> { where(access: 0) }
+  scope :guests, -> { where(access_level: GUEST) }
+  scope :reporters, -> { where(access_level: REPORTER) }
+  scope :developers, -> { where(access_level: DEVELOPER) }
+  scope :masters,  -> { where(access_level: MASTER) }
+  scope :owners,  -> { where(access_level: 0) }
 
   scope :in_project, ->(project) { where(project_id: project.id) }
   scope :in_projects, ->(projects) { where(project_id: projects.map { |p| p.id }) }

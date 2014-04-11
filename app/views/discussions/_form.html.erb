@@ -5,7 +5,7 @@
 
         <p><%= f.text_field :body, class: "form-control" %></p>
         <p><%= f.hidden_field :author_id, :value => current_user.id %></p>
-        <p><%= f.hidden_field :archived, :value => false %></p>
+        <p><%= f.hidden_field :type, :value => "Issue" %></p>
 
       <div class="actions">
         <%= f.submit 'Create Issue', class: "btn btn-primary", tabindex: 4 %>

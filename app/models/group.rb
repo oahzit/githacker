@@ -1,10 +1,9 @@
-class Group < Repository
+class Group < ActiveRecord::Base
   has_many :users_groups, dependent: :destroy
-  has_many :users, through: :users_groups
+  has_many :users, foreign_key: "user_id", :through => :users_groups, :uniq => true
 
-  def human_name
-    name
-  end
+  has_many :projects
+  attr_accessible :user_id, :group_id, :access_level
 
   def owners
     @owners ||= users_groups.owners.map(&:user)
@@ -12,12 +11,12 @@ class Group < Repository
 
   def add_users(user_ids, group_access)
     user_ids.compact.each do |user_id|
-      self.users_groups.create(user_id: user_id, access: group_access)
+      self.users_groups.create(user_id: user_id, access_level: group_access)
     end
   end
 
   def add_user(user, group_access)
-    self.users_groups.create(user_id: user.id, access: group_access)
+    self.users_groups.create(user_id: user.id, access_level: group_access)
   end
 
   def add_owner(user)
@@ -33,6 +32,6 @@ class Group < Repository
   end
 
   def members
-    users_groups
+    users
   end
 end

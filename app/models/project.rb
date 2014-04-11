@@ -1,13 +1,12 @@
 class Project < ActiveRecord::Base
 	belongs_to :user
-	belongs_to :repository
+	belongs_to :group
 
 	has_many :users_projects
     has_many :users, foreign_key: "user_id", :through => :users_projects, :uniq => true
   has_many :activities
   has_many :discussions
-  
-	attr_accessible :name, :path, :tagline, :description, :creator_id, :public
+	attr_accessible :name, :webite, :wiki, :github, :tagline, :description, :creator_id, :public
 
   scope :public_viewing, where(:public => true)
 

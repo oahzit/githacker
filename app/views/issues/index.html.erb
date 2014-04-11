@@ -16,30 +16,28 @@
 	<div class="content_list">
 
 	<% if !@issues.present? %>
-	Testing
+	There are no open issues for this project.
 	<% else %>
-	<% @issues.each do |activity| %>
+	<% @issues.each do |issue| %>
+		<%= issue.vote_count %>
 		<div class="event-inline event-item">
 			<span class="cgray pull-right">
-				<%= activity.created %>
+				<%= issue.created %>
 			</span>
 
 			<img alt="" class="avatar s24" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
 
 			<div class="event-title">
 				<strong>
-					<%= activity.message %>
-				<!-- <span class="author_name"><a href="/u/kachina">Kachina Gosselin</a></span></strong>
-				<span class="event_label joined">created project</span>
-				<strong>
-					<span class="tiny"><%= @project.name %></span> -->
+					<%= link_to issue.subject, project_issue_path(@project, issue) %>
 				</strong>
 			</div>
-	<% end %>
-	<% end %>
-			</div>
-	</div>
+						</div>
 
+	<% end %>
+	<% end %>
+	</div>
+</div>
 
 
 	<div class="span3">
@@ -57,8 +55,8 @@
 			<p><a> 3 forks </a></p>
 		-->
 		<hr>
-		<p><span class="light"> Wiki </span> </p>
-		<p><span class="light"> Website </span> </p>
+		<p><span class="light"> <%= link_to "Website", @project.website %> </span> </p>
+		<p><span class="light"> <%= link_to "Wiki", @project.wiki %> </span> </p>
 	</div>
 </div>
 </div>

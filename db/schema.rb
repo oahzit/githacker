@@ -11,20 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410223000) do
+ActiveRecord::Schema.define(version: 20140411064419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: true do |t|
-    t.string   "message"
+    t.text     "message"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "comments", force: true do |t|
-    t.string   "body"
+    t.text     "body"
     t.integer  "discussion_id"
     t.string   "author_id"
     t.datetime "created_at"
@@ -33,12 +33,26 @@ ActiveRecord::Schema.define(version: 20140410223000) do
 
   create_table "discussions", force: true do |t|
     t.string   "subject"
-    t.string   "body"
-    t.integer  "type"
-    t.boolean  "archived"
+    t.text     "body"
+    t.string   "type"
+    t.boolean  "archive",    default: false
     t.integer  "author_id"
-    t.integer  "vote_count"
-    t.integer  "status"
+    t.integer  "vote_count", default: 0
+    t.integer  "status",     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "group_id"
+    t.integer  "project_id"
+  end
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.integer  "owner_id"
+    t.string   "tagline",     default: ""
+    t.text     "description", default: ""
+    t.boolean  "inherit",     default: false
+    t.boolean  "private",     default: true
+    t.integer  "parent_id",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,13 +64,16 @@ ActiveRecord::Schema.define(version: 20140410223000) do
     t.string   "city"
     t.string   "state"
     t.string   "name"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "projects", force: true do |t|
     t.string   "name",                       null: false
-    t.string   "path",                       null: false
+    t.string   "wiki"
+    t.string   "website"
+    t.string   "github"
     t.string   "tagline",                    null: false
     t.text     "description"
     t.integer  "creator_id"
@@ -65,12 +82,9 @@ ActiveRecord::Schema.define(version: 20140410223000) do
     t.datetime "updated_at"
   end
 
-  create_table "repositories", force: true do |t|
-    t.string   "name",                     null: false
-    t.string   "path",                     null: false
-    t.integer  "owner_id"
-    t.string   "tagline",     default: "", null: false
-    t.text     "description", default: ""
+  create_table "projects_groups", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -124,13 +138,11 @@ ActiveRecord::Schema.define(version: 20140410223000) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_groups", force: true do |t|
-    t.integer  "access",             default: 0
+    t.integer  "access_level",       default: 0
     t.integer  "group_id"
     t.integer  "user_id"
-    t.integer  "notification_level"
+    t.integer  "notification_level", default: 0
     t.string   "name"
-    t.integer  "parent_id"
-    t.boolean  "inherit"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -138,7 +150,7 @@ ActiveRecord::Schema.define(version: 20140410223000) do
   create_table "users_projects", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
-    t.integer  "access",             default: 0
+    t.integer  "access_level",       default: 0
     t.integer  "notification_level", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -154,7 +166,7 @@ ActiveRecord::Schema.define(version: 20140410223000) do
   create_table "users_skills", force: true do |t|
     t.integer  "user_id"
     t.integer  "skill_id"
-    t.integer  "level"
+    t.integer  "level",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

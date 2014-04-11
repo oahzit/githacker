@@ -8,13 +8,12 @@ class DiscussionsController < ApplicationController
         # When a discussion is created 
         @project = Project.find(params[:project_id])
         @discussion = Discussion.create(params[:discussion])
-        @discussion.type = 1
 
         # leave a trail when Discussion is created 
 
         respond_to do |format|
         	if @discussion.save
-        		@activity = Activity.new.create_discussion!(@project, @discussion)
+        		@activity = Activity.new.create_issue!(@project, @discussion)
         		format.html { redirect_to project_discussion_path(@project, @discussion), notice: 'Discussion was successfully created.' }
         		format.json { head :no_content }
         	else

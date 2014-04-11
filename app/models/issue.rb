@@ -1,0 +1,3 @@
+class Issue < Discussion
+	
+end

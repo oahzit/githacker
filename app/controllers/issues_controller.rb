@@ -6,10 +6,13 @@ class IssuesController < ApplicationController
 	def index
 		@user = current_user
 		@project = Project.find(params[:project_id])
-		@issues = @project.discussions.issues.all
+		@issues = @project.discussions.issues.popular.recent.all
 	end
 
 	def show
+        @project = Project.find(params[:project_id])
+        @issue = Discussion.find(params[:id])
+        @comments = @issue.comments
 	end
 
 	def new

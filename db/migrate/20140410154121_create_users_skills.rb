@@ -3,7 +3,7 @@ class CreateUsersSkills < ActiveRecord::Migration
     create_table :users_skills do |t|
       t.integer :user_id
       t.integer :skill_id
-      t.integer :level
+      t.integer :level, :default => 0
 
       t.timestamps
     end

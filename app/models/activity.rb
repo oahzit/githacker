@@ -11,6 +11,14 @@ end
 
 def create_discussion!(project, discussion)
 	self.message = "#{discussion.category} created for project #{project.name}"
+  self.project_id = project.id
+  self.save
+end
+
+def create_issue!(project, issue)
+  self.message = "#{User.find(issue.author_id).name} opened issue #{issue.subject}"
+  self.project_id = project.id
+  self.save
 end
 
 def created
