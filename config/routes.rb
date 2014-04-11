@@ -3,7 +3,7 @@ Githacker::Application.routes.draw do
 	devise_for :users, :controllers => {:registrations => "registrations"}
 	resources :users do
 		resources :groups 
-			resources :users_projects
+		resources :users_projects
 	end
 
 	resources :projects do

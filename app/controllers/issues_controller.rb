@@ -7,7 +7,7 @@ class IssuesController < ApplicationController
     def index
       @user = current_user
       @project = Project.find(params[:project_id])
-      @issues = @project.discussions.issues.active.popular
+      @issues = @project.discussions.issues.active
   end
 
   def show
@@ -24,25 +24,16 @@ end
 def create
         # When an issue is created 
         @project = Project.find(params[:project_id])
-        @issue = @project.discussions.create(params[:discussions])
-
-        # a group is automatically generated
-        @group = Group.create(name: "Master Group: #{@project.id}", owner_id: @user.id)
-
-        # and the user who created it is added to the group and project
-        @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: 0)
-
-        # leave a trail when project is created 
-        @activity = Activity.new.create_message!(@user, @project)
+        @issue = @project.discussions.create(params[:discussion])
 
         respond_to do |format|
-        	if @project.save
-        		format.html { redirect_to user_project_path(@user, @project), notice: 'Project was successfully created.' }
-        		format.json { head :no_content }
-        	else
-        		format.html { render :action => 'new', alert: 'Project was unsuccessfully created.' }
-        		format.json { render json: @message.errors, status: :unprocessable_entity }
-        	end 
+            if @issue.save
+                format.html { redirect_to :back, notice: 'Issue was successfully created.' }
+                format.json { head :no_content }
+            else
+                format.html { render :action => 'new', alert: 'Issue was unsuccessfully created.' }
+                format.json { render json: @message.errors, status: :unprocessable_entity }
+            end 
         end
     end
 

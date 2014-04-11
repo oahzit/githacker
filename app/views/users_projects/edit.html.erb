@@ -1,0 +1,8 @@
+<% content_for :nav do %>
+  <%= render 'layouts/nav/project' %>
+<% end %>
+
+<h3 class="page-title"> Edit <%= @project.name %> </h3>
+<div class="row">
+  <%= render "form" %>
+</div>

@@ -7,7 +7,7 @@
 <div class="col-lg-12">
 	<div class="project_clone_panel">
 	<strong><%= @project.name %> </strong>
-	<p class="pull-right"><%= link_to "Edit", edit_project_path(@project), :class => "btn btn-default btn-small" %><p>
+	<p class="pull-right"><%= link_to "Edit", edit_user_users_project_path(@user, @users_project), :class => "btn btn-default btn-small" %><p>
 	</div>
 </div>
 
@@ -65,8 +65,8 @@
 			<p><a> 3 forks </a></p>
 			-->
 			<hr>
-			<p><span class="light"> Wiki </span> </p>
-			<p><span class="light"> Website </span> </p>
-		</div>
+			<p><span class="light"> <%= link_to "Website", @project.website, :target => "_blank" %> </span> </p>
+			<p><span class="light"> <%= link_to "Wiki", @project.wiki, :target => "_blank" %> </span> </p>
+					</div>
 	</div>
 </div>

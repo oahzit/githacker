@@ -4,6 +4,7 @@
 
 <div class="row">
 			<h4><%= @issue.subject %> </h4>
+			<hr>
 			<p><%= @issue.body %> </p>
 
 		<div class="span9">
@@ -11,7 +12,7 @@
 	<div class="content_list">
 
 	<% if !@comments.present? %>
-	There are no comments on this thread.
+	<p class="center">There are no comments on this thread.</p>
 	<% else %>
 	<% @comments.each do |comment| %>
 		<%= comment.body %> </br>

@@ -23,4 +23,10 @@ class DiscussionsController < ApplicationController
         end
     end
 
+
+    def destroy
+        @discussion = Discussion.find(params[:id])
+        @discussion.destroy
+        redirect_to :back
+    end
 end

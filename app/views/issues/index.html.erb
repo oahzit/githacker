@@ -2,65 +2,71 @@
 <%= render 'layouts/nav/project' %>
 <% end %>
 
-<div class="row">
+<style type="text/css">
+body{
+	background-color: #eee;
+}
+.discussions-body {
+	display:inline-block;
+	background-color: #fff;
+	margin: 0 auto;
+	box-shadow: 0 1px 2px #aaa;
+	border-collapse: collapse;
+	border: 0;
+	text-shadow: none;
+	width:100%;
+	background-color: #fff;
+}
 
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#new_issue_form").hide();
+});
+</script>
+
+<div class="row">
+<% @discussion = Issue.new %>
 	<div class="col-lg-12">
 		<div class="project_clone_panel">
 			<strong>Issues for <%= @project.name %> </strong>
-			<p class="pull-right"><%= link_to "Create", new_project_discussion_path(@project), :class => "btn btn-default btn-sm" %><p>
-			</div>
+			<span class="glyphicon glyphicon-plus-sign pull-right" style="font-size:20px;" onClick='$("#new_issue_form").toggle();'></span>			
 		</div>
-
-		<div class="span9">
-
-			<div class="content_list">
-
-				<% if !@issues.present? %>
-				There are no open issues for this project.
-				<% else %>
-				<% @issues.each do |issue| %>
-	<%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_issue_path(issue) %>
-
-				<%= issue.vote_count %>
-	<%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_issue_path(issue) %>
-
-				<div>
-					<span class="cgray pull-right">
-						<%= issue.created %>
-					</span>
-
-					<img alt="" style="font-size:13px" class="avatar s24" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
-
-					<div style="display:inline">
-						<strong>
-							<%= link_to issue.subject, project_issue_path(@project, issue) %>
-						</strong>
-					</div>
-				</div>
-</br>
-				<% end %>
-				<% end %>
+		<section class="discussions-body" id="new_issue_form" style="margin-top:-15px;margin-bottom:20px;">
+			<div style="padding-bottom:10px;">
+				<%= render 'discussions/form'%>
 			</div>
-		</div>
-
-
-		<div class="span3">
-			<div class="light-well">
-				<h3 class="page-title"> <%= @project.name %></h3>
-				<p class="light"> <%= @project.tagline %></p>
-				<hr>
-				<!-- 		<p><span class="light"> Repo size </span> 0.5 MB</p> -->			
-				<p><span class="light"> Created on </span> <%= @project.created_at.to_time.strftime('%b %d, %Y')%></p>
-			<!--
- 			<p class="center"> view all members</p>
-			<hr>
-			<p><a> 21 commits </a></p>
-			<p><a> 1 branches </a></p>
-			<p><a> 3 forks </a></p>
-		-->
-		<hr>
-		<p><span class="light"> <%= link_to "Website", @project.website %> </span> </p>
-		<p><span class="light"> <%= link_to "Wiki", @project.wiki %> </span> </p>
+		</section>
 	</div>
-</div>
-</div>
+
+	<% if !@issues.present? %>
+	<p class="center"> There are no open issues for this project.</p>
+	<% else %>
+
+
+	<section class="discussions-body simpletable" style="width:97%;margin-left:15px;">
+		<table class="table table-condensed table-hover">
+			<tbody>
+				<% @issues.each do |issue| %>
+				<tr>
+					<td><span><%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_issue_path(issue) %></span>
+
+						<%= issue.vote_count %>
+						<span><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_issue_path(issue) %></span>
+					</td> 
+					<td>					<img alt="" style="font-size:13px" class="avatar s24" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
+					</td>
+					<td class="title first"><%= link_to issue.subject, project_issue_path(@project, issue) %>
+					</td>
+					<td class="lastEditedDate"><%= issue.created %></td>
+					<td class="action last"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_issue_path(@project, issue), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</section>
+
+	<% end %>
+
+

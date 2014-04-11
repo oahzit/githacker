@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
     has_many :users, foreign_key: "user_id", :through => :users_projects, :uniq => true
   has_many :activities
   has_many :discussions
-	attr_accessible :name, :webite, :wiki, :github, :tagline, :description, :creator_id, :public
+	attr_accessible :name, :website, :wiki, :github, :tagline, :description, :creator_id, :public
 
   scope :public_viewing, where(:public => true)
 
