@@ -9,8 +9,13 @@
  *
  *= require_self
  *= require_tree .
- *= require bootstrap
+*= require bootstrap
+*= require bootstrap_and_overrides
+*= require bootstrap-datepicker
 */
+
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';
 
 .content {
 	width: 1170px;
@@ -52,7 +57,7 @@
 	background: #f5f5f5;
 	padding-top: 4px;
 	border-bottom: 1px solid #E1E1E1;
-	margin-bottom: 15px;
+	margin-bottom: 0px;
 }
 
 .container {
@@ -110,8 +115,8 @@ hr {
 	font-weight: normal;
 	display: inline-block;
 	height: 15px;
+	padding-top:-5px;
 	padding: 1px 6px;
-	height: auto;
 	font-size: 0.82em;
 	line-height: 14px;
 	text-align: center;

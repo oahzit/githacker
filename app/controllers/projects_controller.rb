@@ -1,17 +1,11 @@
 class ProjectsController < ApplicationController
 	def index
-        @user = User.find(params[:user_id])
-		@projects = @user.projects.order("updated_at DESC").all
-        @users_projects = UsersProject.where(:user_id => @user.id)
-        @as_owner = Project.where(:creator_id => @user.id).all
-        @as_member = @users_projects.where(:access => 1).all
-        @as_watcher = @users_projects.where(:access => 2).all
-
+		@projects = Project.public_viewing.order("updated_at DESC").all
 	end
 
 	def show
 		@project = Project.find(params[:id])
-		@owner = User.find(@project.creator_id)
+        @activities = @project.activities.order("updated_at DESC").all
 	end
 
 	def new
@@ -29,6 +23,9 @@ class ProjectsController < ApplicationController
 
         # and the user who created it is added to the group and project
         @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: 0)
+
+        # leave a trail when project is created 
+        @activity = Activity.new.create_message!(@user, @project)
 
         respond_to do |format|
             if @project.save

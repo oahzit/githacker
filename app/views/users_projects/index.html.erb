@@ -1,0 +1,53 @@
+<% content_for :nav do %>
+  <%= render 'layouts/nav/dashboard' %>
+<% end %>
+
+<h3 class="page-title"> My Projects </h3>
+<p class="light"> All projects you have access to and are watching are listed here. </p>
+<hr>
+
+<div class="col-lg-3">
+    <ul class="nav nav-pills nav-stacked">
+      <li><a> ALL
+          <span class="pull-right"> <%= @projects.count %> <span></a></li>
+      <li><a> Owner
+          <span class="pull-right"> <%= @as_owner.count %> <span></a></li>
+      <li><a> Member
+          <span class="pull-right"> <%= @as_member.count %> <span></a></li>    
+      <li><a> Watching
+          <span class="pull-right"> <%= @as_watcher.count %> <span></a></li>    
+    </ul>
+    <% if true %> <!-- @groups.present? -->
+    <% end %>
+</div>
+
+<div class="col-lg-9">
+	<% if @projects.blank? %>
+	    <h3 class="page-title center"> There are no projects here.</h3>
+	<% else %>
+		<ul>
+		<% @projects.each do |project| %>
+				<h4 class="project-title">
+					<span class="access-icon">
+					<% if project.public %>
+					<i class="icon-globe" style="margin-top:5px;"></i>
+					<% else %>
+					<i class="icon-lock" style="margin-top:5px;"></i>
+					<% end %>
+					</span>
+					
+					<%= link_to project.name, user_users_project_path(current_user, project), :class=>"project" %>
+					<%= project.path %></a>
+				</h4>
+				<p><%= project.tagline %> </p>
+				<div class="last-activity">
+				<span class="light">Last activity:</span>
+				<span class="date"><%= project.last_edited %></span>
+				</div>
+			<hr>
+		<% end %>
+	</ul>
+	<% end %>
+
+	<%= link_to "Create Project", new_user_users_project_path(current_user), :class => "btn btn-primary pull-right" %>
+</div>

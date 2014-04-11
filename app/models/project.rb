@@ -4,10 +4,12 @@ class Project < ActiveRecord::Base
 
 	has_many :users_projects
     has_many :users, foreign_key: "user_id", :through => :users_projects, :uniq => true
-
+  has_many :activities
+  has_many :discussions
+  
 	attr_accessible :name, :path, :tagline, :description, :creator_id, :public
 
-  scope :sorted, order('projects.created_at ASC')
+  scope :public_viewing, where(:public => true)
 
 	def last_activity_to_text
 	end

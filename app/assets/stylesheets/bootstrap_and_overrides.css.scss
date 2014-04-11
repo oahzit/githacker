@@ -44,6 +44,10 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	text-shadow: none;
 }
 
+.modal.fade {width:auto;
+    margin: 0 auto;
+    background-color:transparent;}
+
 /* SIDE NAV */
 .nav-pills .nav-stacked > .active >a {
 	border-color: #2fa0bb;

@@ -1,10 +1,11 @@
 <%= link_to "Githacker", root_path, :class => 'brand' %>
-<ul class="nav navbar-nav navbar-right">
+<ul class="nav navbar-nav navbar-right" style="margin-top:5px;">
   <% if user_signed_in? %>
     <% if current_user.has_role? :admin %>
       <li><%= link_to 'Admin', users_path %></li>
     <% end %>
 
+  <!-- <li><%= link_to 'Add Skills', new_users_skill_path, :class=> "btn btn-default btn-sm", :style=>"padding:5px 20px;height:30px;", :data => {:toggle => "modal", :target => "#addSkillsModal"}, :remote => true %></li> -->
     <li><%= link_to 'Edit account', edit_user_registration_path %></li>
     <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
   
@@ -13,3 +14,4 @@
     <li><%= link_to 'Sign up', new_user_registration_path %></li>
   <% end %>
 </ul>
+

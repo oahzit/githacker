@@ -1,38 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Githacker" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Githacker" %>">
-    <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>
-    <%= yield(:head) %>
-  </head>
-  <body class="<%= controller_name %> <%= action_name %>">
-    <div class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </nav>
-    </div>
-    
-    <%= yield(:nav) %> 
-      
-    <div id="main" role="main">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "Githacker" %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Githacker" %>">
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <%= csrf_meta_tags %>
+  <%= yield(:head) %>
+</head>
+<body class="<%= controller_name %> <%= action_name %>">
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <nav class="navbar-inner">
       <div class="container">
-        <div class="content">
-           <div class="row">
-            <div class="span12">
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            </div>
-          </div>
-          <footer>
-          </footer>
+        <%= render 'layouts/navigation' %>
+      </div>
+    </nav>
+  </div>
+
+  <%= yield(:nav) %> 
+
+  <div id="main" role="main">
+    <% if user_signed_in? %>
+    <%= render 'users_skills/add_users_skills' %>
+    <% end %>
+    <% if current_page?(root_url) %>
+    <%= render 'layouts/messages' %>
+    <%= yield %>
+    <% else %>
+
+    <div class="container">
+      <div class="content" style="margin-top:20px;">
+       <div class="row">
+        <div class="span12 offset1">
+          <%= render 'layouts/messages' %>
+          <%= yield %>
+
         </div>
-      </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
-  </body>
+      </div>
+      <footer>
+      </footer>
+    </div>
+  </div> <!--! end of .container -->
+
+  <% end %>
+
+</div> <!--! end of #main -->
+</body>
 </html>

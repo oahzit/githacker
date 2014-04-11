@@ -3,11 +3,12 @@
 	  <%= render 'layouts/nav/dashboard' %>
 	<% end %>
 
-	<h3 style="text-align:center;">Welcome! Now let's get hacking</h3>
-	<%= link_to "Start your own project", new_user_project_path(@user), :class => "btn btn-default" %>
+	<h3 style="text-align:center;margin-bottom:25px;">Welcome! Now let's get hacking ...</h3>
+	<p style = "text-align:center;"><%= link_to "Start your own project", new_user_users_project_path(@user), :class => "btn btn-default" %></p>
 
 <% else %>
 	<% content_for :nav do %>
-	  <!-- render 'layouts/nav/index' -->
+	  <%= render 'layouts/nav/public' %>
 	<% end %>
+	<%= render 'homepage' %>
 <% end %>

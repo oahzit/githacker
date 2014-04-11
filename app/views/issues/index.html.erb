@@ -1,0 +1,64 @@
+<% content_for :nav do %>
+<%= render 'layouts/nav/project' %>
+<% end %>
+
+<div class="row">
+
+	<div class="col-lg-12">
+		<div class="project_clone_panel">
+			<strong>Issues for <%= @project.name %> </strong>
+			<p class="pull-right"><%= link_to "Create", new_project_discussion_path(@project), :class => "btn btn-default btn-sm" %><p>
+			</div>
+		</div>
+
+		<div class="span9">
+
+	<div class="content_list">
+
+	<% if !@issues.present? %>
+	Testing
+	<% else %>
+	<% @issues.each do |activity| %>
+		<div class="event-inline event-item">
+			<span class="cgray pull-right">
+				<%= activity.created %>
+			</span>
+
+			<img alt="" class="avatar s24" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
+
+			<div class="event-title">
+				<strong>
+					<%= activity.message %>
+				<!-- <span class="author_name"><a href="/u/kachina">Kachina Gosselin</a></span></strong>
+				<span class="event_label joined">created project</span>
+				<strong>
+					<span class="tiny"><%= @project.name %></span> -->
+				</strong>
+			</div>
+	<% end %>
+	<% end %>
+			</div>
+	</div>
+
+
+
+	<div class="span3">
+		<div class="light-well">
+			<h3 class="page-title"> <%= @project.name %></h3>
+			<p class="light"> <%= @project.tagline %></p>
+			<hr>
+			<!-- 		<p><span class="light"> Repo size </span> 0.5 MB</p> -->			
+			<p><span class="light"> Created on </span> <%= @project.created_at.to_time.strftime('%b %d, %Y')%></p>
+			<!--
+ 			<p class="center"> view all members</p>
+			<hr>
+			<p><a> 21 commits </a></p>
+			<p><a> 1 branches </a></p>
+			<p><a> 3 forks </a></p>
+		-->
+		<hr>
+		<p><span class="light"> Wiki </span> </p>
+		<p><span class="light"> Website </span> </p>
+	</div>
+</div>
+</div>

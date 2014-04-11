@@ -1,0 +1,172 @@
+
+<style type="text/css">
+#homepage
+body#homepage{
+  padding:0px;
+}
+
+main{
+  padding:0px;
+  margin:0px;
+  width:1640px !important;
+}
+
+main section {
+  width: inherit !important;
+}
+.newsletter-sign-up {
+  position: relative;
+  z-index: 1;
+  min-height: 300px;
+  margin-top: -150px;
+  padding: 40px 0 2em;
+  background: #f8f8f8;
+  background: -webkit-linear-gradient(top, #f8f8f8, rgba(248,248,248,0.9) 5px, #f8f8f8 150px);
+  background: linear-gradient(to bottom, #f8f8f8,rgba(248,248,248,0.9) 5px,#f8f8f8 150px);
+  text-align: center;
+  box-shadow: 0 -1px 1px rgba(17,17,17,0.1);
+}
+
+.top {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  background: url("http://rangeapp.com/assets/images/landing-1024.jpg") center center no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  margin:0px;
+}
+
+.sign-in {
+  width:100px !important;
+  position: absolute;
+  z-index: 999;
+  top: 20px;
+  right: 20px;
+  font-size: 0.85em;
+  line-height: 1;
+  text-align: center;
+}
+
+.top__content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  padding-top: 10%;
+  overflow: hidden;
+}
+
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.top__header {
+  font-family: "Sentinel A", "Sentinel B", serif;
+  font-weight: 300;
+  font-size: 4em;
+  line-height: 1.15;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+  margin-left: -100px;
+}
+
+.top__subheader {
+  padding: 1.5em 0 0 0.2em;
+  font-family: "Whitney SSm A", "Whitney SSm B", sans-serif;
+  font-weight: 300;
+  font-size: 1.25em;
+  margin-left: 100px;
+  margin-top: -10px;
+}
+
+p.faded {
+  color: #ba9;
+  font-weight: 500;
+  margin: .25rem .25rem .4rem .25rem;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
+
+#nav-query {
+  color: #999;
+  font-size: 12;
+  margin: -1px 0;
+}
+
+.sign-in{
+  margin-right: 25px;
+  margin-top: -8px;
+}
+
+.signin-button{
+  display: block;
+  padding: 10px;
+  padding-top: 9px;
+  border: 1px solid rgba(63,63,81,0.2);
+  border-radius: 4px;
+}
+
+.signin-button:hover{
+  background:white;
+  color: #000  !important;
+  text-shadow:none;
+  text-decoration:none
+}
+
+a.signin-button{ 
+  color:#555459 !important;
+} 
+</style>
+
+<script type="text/javascript">
+  $('body')[0].id="homepage";
+function toggleContent(){
+
+if($("#signupModal").length > 0) {
+  //it doesn't exist
+$(".top__content").hide();
+} else {
+  $(".top__content").show();
+}
+}
+
+$(window).load(function(){
+$(function () {
+    /* hidden.bs.modal event example */
+    $('#signupModal').on('hidden.bs.modal', function () {
+          window.alert('hidden event fired!');
+    })
+});
+});
+
+</script>
+
+<section class="top">
+ <div class="top__content">
+  <div class="wrap">
+    <h1 class="top__header">
+      <span>Get out of the garage. Join the Maker movement.</span> 
+      <span>Be part of a global team.</span>
+    </h1>
+    <p class="top__subheader">
+      <span>Introducing <b>GitHacker</b> — your tool for remote hardware collaboration.</span>
+    </p>
+  </div>
+</div>
+
+</section>
+
+<section>
+  <form class="newsletter-sign-up">
+    <p class="faded"> We're in limited beta release. Email kachina@alum.mit.edu to get an invitation. </p>
+
+  </form>
+</section>
+
+

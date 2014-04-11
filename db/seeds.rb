@@ -12,8 +12,25 @@ YAML.load(ENV['ROLES']).each do |role|
   Role.find_or_create_by_name(role)
   puts 'role: ' << role
 end
-puts 'DEFAULT USERS'
-user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
-puts 'user: ' << user.name
-user.confirm!
-user.add_role :admin
+
+# puts 'DEFAULT USERS'
+# user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
+# puts 'user: ' << user.name
+# user.confirm!
+# user.add_role :admin
+
+puts 'DEFAULT SKILLS'
+Skill.create!(:name => "Legal")
+Skill.create!(:name => "Documentation")
+Skill.create!(:name => "Arduino")
+Skill.create!(:name => "Electronics")
+Skill.create!(:name => "Mechanical Design")
+Skill.create!(:name => "Woodworking")
+Skill.create!(:name => "Software")
+Skill.create!(:name => "Design")
+Skill.create!(:name => "Business Development")
+Skill.create!(:name => "Community Management")
+Skill.create!(:name => "Video")
+Skill.create!(:name => "Photography")
+Skill.create!(:name => "Outreach")
+Skill.create!(:name => "Fundraising")

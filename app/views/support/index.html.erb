@@ -30,48 +30,43 @@ function showdiv(id){
 }
 </script>
 
-<% if !user_signed_in? %>
+<% if user_signed_in? %>
 <% content_for :nav do %>
 <%= render 'layouts/nav/dashboard' %>
 <% end %>
+
+<% else %>
+<% content_for :nav do %>
+<%= render 'layouts/nav/public' %>
+<% end %>
+
+
 <% end %>
 
 <div class="row">
-	<div class="col-lg-4">
+	<div class="span4">
 		<div class="ui-box">
 			<div class="title">
-				<strong>Forecasted Use Cases </strong>
+				<strong>Getting Started Hacking</strong>
 			</div>
 
 			<ul class="well-list">
 
-				<li> <strong><a href="/help/support#overview">Overview</a></strong>
+				<li> <strong><a href="/support#overview" onclick="hidealldivs(); showdiv('overview')">Overview</a></strong>
 					<p>Find out what we're all about!</p>
 				</li>
 
-				<li> <strong><a href="/help/support#overview">Personal Projects</a></strong>
+				<li> <strong><a href="/support#personal" onclick="hidealldivs(); showdiv('personal')">Personal Projects</a></strong>
 					<p>Have your own ideas? Start a project solo. </p>
 				</li>
 
-				<li> <strong><a href="/help/support#overview">Project Management</a></strong>
+				<li> <strong><a href="/support#management" onclick="hidealldivs(); showdiv('management')">Project Management</a></strong>
 					<p> Coordinate projects across your companies team.</p>
 				</li>
 
-				<li> <strong><a href="/help/support#overview">Open Source Hardware</a></strong>
+				<li> <strong><a href="/support#opensource" onclick="hidealldivs(); showdiv('opensource')">Open Source Hardware</a></strong>
 					<p> Become a part of the open source hardware movement! </p>
 				</li>
-
-				<li> <strong><a href="/help/support#overview">Professional Workspace</a></strong>
-					<p> Curate resource libraries and follow fellow professionals</p>
-				</li>
-
-				<li> <strong><a href="/help/support#overview">Competitions</a></strong>
-					<p> Open up design challenges to engingeers worldwide. </p>
-				</li>
-
-				<li> <strong><a href="/help/support#overview">Portfolio</a></strong>
-					<p> Your activity demonstrates your knowledge and expertise </p>
-				</li>	
 
 			</ul>
 		</div>
@@ -88,7 +83,7 @@ function showdiv(id){
 		</div>
 	</div>
 
-	<div class="col-lg-7">
+	<div class="span8">
 
 		<div id="overview">
 			<h3 class="page-title">Documentation Overview</h3>
@@ -123,7 +118,7 @@ function showdiv(id){
 				<p class="light"> If you have an account with Stripe it's as simple as clicking a single button to give our app permissions to manage billing and payments through our system. Stripe is simple, secure and focuses on supreme service. Once you've completed that step you can use all of our services as an <strong> independent professional</strong>. Signing up is <strong> FREE</strong>. Click here to <a href="#stripe" onclick="hidealldivs(); showdiv('stripe')">learn more about it</a>.</p> 
 				<p class="light"> To complete activation click the "create account to manage my professional services" link under your 
 					<% if user_signed_in? %>
-					<%= link_to 'profile settings page', settings_profile_path() %>.
+					profile settings page.
 					<% else %>
 					profile settings page.
 					<% end %>
@@ -136,7 +131,91 @@ function showdiv(id){
 				<h3 class="page-title">Share Studio Details</h3>
 				<p class="light"> For <strong>studio owners</strong> who organizes events at one or more locations, need to manage staff and instructors, or has available space for professionals to book all you need to do to access additional services is to add studio details through the
 					<% if user_signed_in? %>
-					<%= link_to 'appropriate settings page', settings_studio_path() %>.
+					appropriate settings page.
+					<% else %>
+					appropriate settings page.
+					<% end %>
+				</p>
+			</div>
+		</div>
+
+
+		<div class="section" id="management">
+			<h3 class="page-title">Project Management</h3>
+			<hr>
+			<p class="light"> We understand that it is difficult to manage remote teams. So we have tried to build tools that enable others to contribute without disrupting your workflow.
+			</p>
+			<hr>
+
+			<div class="numberCircle">1</div>
+			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
+				<h3 class="page-title">Add your core team</h3>
+				<p class="light"> It's as easy as that ... <strong>if you're a student</strong>. Now you can search studios in your area, register for classes, manage your own personal calendar and keep track of your attendance/purchase history. </p>
+			</div>
+			<hr>
+
+			<div class="numberCircle">2</div>
+			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
+				<h3 class="page-title">Open Issues to the Community</h3>
+				<p class="light"> If you have an account with Stripe it's as simple as clicking a single button to give our app permissions to manage billing and payments through our system. Stripe is simple, secure and focuses on supreme service. Once you've completed that step you can use all of our services as an <strong> independent professional</strong>. Signing up is <strong> FREE</strong>. Click here to <a href="#stripe" onclick="hidealldivs(); showdiv('stripe')">learn more about it</a>.</p> 
+				<p class="light"> To complete activation click the "create account to manage my professional services" link under your 
+					<% if user_signed_in? %>
+					profile settings page.
+					<% else %>
+					profile settings page.
+					<% end %>
+				</p>
+			</div>
+			<hr>
+
+			<div class="numberCircle">3</div>
+			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
+				<h3 class="page-title">Post Job Openings</h3>
+				<p class="light"> For <strong>studio owners</strong> who organizes events at one or more locations, need to manage staff and instructors, or has available space for professionals to book all you need to do to access additional services is to add studio details through the
+					<% if user_signed_in? %>
+					appropriate settings page.
+					<% else %>
+					appropriate settings page.
+					<% end %>
+				</p>
+			</div>
+		</div>
+
+
+		<div class="section" id="opensource">
+			<h3 class="page-title">Open Source Hardware</h3>
+			<hr>
+			<p class="light"> It's up to you to open source your software. Doing so enables you to be part of the greater maker movement and build a global community around your product and vision. 
+			</p>
+			<hr>
+
+			<div class="numberCircle">1</div>
+			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
+				<h3 class="page-title">Register an account</h3>
+				<p class="light"> It's as easy as that ... <strong>if you're a student</strong>. Now you can search studios in your area, register for classes, manage your own personal calendar and keep track of your attendance/purchase history. </p>
+			</div>
+			<hr>
+
+			<div class="numberCircle">2</div>
+			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
+				<h3 class="page-title">Connect with Stripe</h3>
+				<p class="light"> If you have an account with Stripe it's as simple as clicking a single button to give our app permissions to manage billing and payments through our system. Stripe is simple, secure and focuses on supreme service. Once you've completed that step you can use all of our services as an <strong> independent professional</strong>. Signing up is <strong> FREE</strong>. Click here to <a href="#stripe" onclick="hidealldivs(); showdiv('stripe')">learn more about it</a>.</p> 
+				<p class="light"> To complete activation click the "create account to manage my professional services" link under your 
+					<% if user_signed_in? %>
+					profile settings page.
+					<% else %>
+					profile settings page.
+					<% end %>
+				</p>
+			</div>
+			<hr>
+
+			<div class="numberCircle">3</div>
+			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
+				<h3 class="page-title">Share Studio Details</h3>
+				<p class="light"> For <strong>studio owners</strong> who organizes events at one or more locations, need to manage staff and instructors, or has available space for professionals to book all you need to do to access additional services is to add studio details through the
+					<% if user_signed_in? %>
+					appropriate settings page.
 					<% else %>
 					appropriate settings page.
 					<% end %>

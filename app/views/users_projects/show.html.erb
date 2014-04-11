@@ -1,0 +1,72 @@
+<% content_for :nav do %>
+  <%= render 'layouts/nav/project' %>
+<% end %>
+
+<div class="row">
+
+<div class="col-lg-12">
+	<div class="project_clone_panel">
+	<strong><%= @project.name %> </strong>
+	<p class="pull-right"><%= link_to "Edit", edit_project_path(@project), :class => "btn btn-default btn-small" %><p>
+	</div>
+</div>
+
+	<div class="col-lg-9">
+
+		<!--
+		<div class="event_filter">
+			<div class="filter_icon "><a href="/kachina/githacker" class="has_tooltip event_filter_link" data-original-title="Push events" id="push_event_filter"><i class="icon-upload-alt"></i></a></div>
+
+			<div class="filter_icon inactive"><a href="/kachina/githacker" class="has_tooltip event_filter_link" data-original-title="Merge events" id="merged_event_filter"><i class="icon-check"></i></a></div>
+
+			<div class="filter_icon inactive"><a href="/kachina/githacker" class="has_tooltip event_filter_link" data-original-title="Comments" id="comments_event_filter"><i class="icon-comments"></i></a></div>
+
+			<div class="filter_icon inactive"><a href="/kachina/githacker" class="has_tooltip event_filter_link" data-original-title="Team" id="team_event_filter"><i class="icon-user"></i></a></div>
+		</div>
+		-->
+	<% @activities.each do |activity| %>
+	<div class="content_list">
+		<div class="event-inline event-item">
+			<span class="cgray pull-right">
+			<%= activity.created %>
+			</span>
+
+			<img alt="" class="avatar s24" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
+
+			<div class="event-title">
+				<strong>
+				<%= activity.message %>
+				<!-- <span class="author_name"><a href="/u/kachina">Kachina Gosselin</a></span></strong>
+				<span class="event_label joined">created project</span>
+				<strong>
+				<span class="tiny"><%= @project.name %></span> -->
+				</strong>
+			</div>
+		</div>
+	</div>
+	<% end %>
+
+	<div class="loading hide" style="display: none;"></div>
+	</div>
+
+	<div class="col-lg-3">
+		<div class="light-well">
+			<h3 class="page-title"> <%= @project.name %></h3>
+			<p class="light"> <%= @project.tagline %></p>
+			<hr>
+<!-- 		<p><span class="light"> Repo size </span> 0.5 MB</p> -->			
+			<p><span class="light"> Created on </span> <%= @project.created_at.to_time.strftime('%b %d, %Y')%></p>
+			<p><span class="light"> Owned by </span> <%= @owner.name %></p>
+			<!--
+ 			<p class="center"> view all members</p>
+			<hr>
+			<p><a> 21 commits </a></p>
+			<p><a> 1 branches </a></p>
+			<p><a> 3 forks </a></p>
+			-->
+			<hr>
+			<p><span class="light"> Wiki </span> </p>
+			<p><span class="light"> Website </span> </p>
+		</div>
+	</div>
+</div>

@@ -5,10 +5,26 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_one :profile
+  accepts_nested_attributes_for :profile
+  before_create :instantiate_profile
+
   has_many :users_projects
+  has_many :users_skills
+  has_many :skills, foreign_key: "skill_id", :through => :users_skills, :uniq => true
   has_many :projects, foreign_key: "project_id", :through => :users_projects, :uniq => true
 
   has_many :users_groups
   attr_accessible :name, :email, :password, :password_confirmation
 
+    # Required to create complete profile for user
+    def instantiate_profile
+        @profile = Profile.where(:name => name).first
+        if @profile.present?
+            self.profile = @profile
+            self.profile.update_attributes(:name => name)
+        else
+            self.create_profile(:name => name)
+        end
+    end
 end
