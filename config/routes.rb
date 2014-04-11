@@ -11,6 +11,7 @@ Githacker::Application.routes.draw do
 		resources :notes
 		resources :discussions
 		resources :settings
+		resources :features
 	end
 
     match 'users/:user_id/issues/all' => 'issues#display', :controller => 'issues', :action => 'display', :via => [:get], :as => 'all_issues'
@@ -20,9 +21,10 @@ Githacker::Application.routes.draw do
 	resources :users_groups
 	resources :users_skills
 
+
+	get 'features' => 'features#index'
+	get 'resources' => 'resources#index'
 	get 'support' => 'support#index'
 	get 'support/docs' => 'support#docs'
-	get 'resources' => 'resources#index'
-
 
 end

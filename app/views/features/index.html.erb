@@ -1,0 +1,6 @@
+<% content_for :nav do %>
+  <%= render 'layouts/nav/project' %>
+<% end %>
+
+	<h3 style="text-align:center;margin-bottom:25px;">Your files are presently stored off-site:</h3>
+	<p style = "text-align:center;"><%= link_to "Visit them on GitHub", @project.github, :target => "_blank", :class => "btn btn-default" %></p>

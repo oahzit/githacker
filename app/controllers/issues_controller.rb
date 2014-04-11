@@ -7,7 +7,7 @@ class IssuesController < ApplicationController
     def index
       @user = current_user
       @project = Project.find(params[:project_id])
-      @issues = @project.discussions.issues.active
+      @issues = @project.discussions.issues.active.recent.all
   end
 
   def show
@@ -24,7 +24,7 @@ end
 def create
         # When an issue is created 
         @project = Project.find(params[:project_id])
-        @issue = @project.discussions.create(params[:discussion])
+        @issue = @project.discussions.create(params[:issue])
 
         respond_to do |format|
             if @issue.save
