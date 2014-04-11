@@ -13,40 +13,44 @@
 
 		<div class="span9">
 
-	<div class="content_list">
+			<div class="content_list">
 
-	<% if !@issues.present? %>
-	There are no open issues for this project.
-	<% else %>
-	<% @issues.each do |issue| %>
-		<%= issue.vote_count %>
-		<div class="event-inline event-item">
-			<span class="cgray pull-right">
-				<%= issue.created %>
-			</span>
+				<% if !@issues.present? %>
+				There are no open issues for this project.
+				<% else %>
+				<% @issues.each do |issue| %>
+	<%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_issue_path(issue) %>
 
-			<img alt="" class="avatar s24" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
+				<%= issue.vote_count %>
+	<%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_issue_path(issue) %>
 
-			<div class="event-title">
-				<strong>
-					<%= link_to issue.subject, project_issue_path(@project, issue) %>
-				</strong>
+				<div>
+					<span class="cgray pull-right">
+						<%= issue.created %>
+					</span>
+
+					<img alt="" style="font-size:13px" class="avatar s24" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
+
+					<div style="display:inline">
+						<strong>
+							<%= link_to issue.subject, project_issue_path(@project, issue) %>
+						</strong>
+					</div>
+				</div>
+</br>
+				<% end %>
+				<% end %>
 			</div>
-						</div>
-
-	<% end %>
-	<% end %>
-	</div>
-</div>
+		</div>
 
 
-	<div class="span3">
-		<div class="light-well">
-			<h3 class="page-title"> <%= @project.name %></h3>
-			<p class="light"> <%= @project.tagline %></p>
-			<hr>
-			<!-- 		<p><span class="light"> Repo size </span> 0.5 MB</p> -->			
-			<p><span class="light"> Created on </span> <%= @project.created_at.to_time.strftime('%b %d, %Y')%></p>
+		<div class="span3">
+			<div class="light-well">
+				<h3 class="page-title"> <%= @project.name %></h3>
+				<p class="light"> <%= @project.tagline %></p>
+				<hr>
+				<!-- 		<p><span class="light"> Repo size </span> 0.5 MB</p> -->			
+				<p><span class="light"> Created on </span> <%= @project.created_at.to_time.strftime('%b %d, %Y')%></p>
 			<!--
  			<p class="center"> view all members</p>
 			<hr>

@@ -3,8 +3,8 @@ class Discussion < ActiveRecord::Base
 	belongs_to :project
 	has_many :comments 
 	
-	scope :popular, order("vote_count DESC")
-	scope :recent, order("updated_at DESC")
+	scope :popular, order("updated_at DESC").sort{|a,b| b.vote_count <=> a.vote_count }
+	scope :recent, order("updated_at ASC")
 	scope :archived, where(:archived => true)
 	scope :notes, where(:type => "Note")
 	scope :issues, where(:type => "Issue")
