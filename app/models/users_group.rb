@@ -5,11 +5,11 @@ class UsersGroup < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 
-  scope :guests, -> { where(access: GUEST) }
-  scope :reporters, -> { where(access: REPORTER) }
-  scope :developers, -> { where(access: DEVELOPER) }
-  scope :masters,  -> { where(access: MASTER) }
-  scope :owners,  -> { where(access: OWNER) }
+  scope :guests, -> { where(access_level: GUEST) }
+  scope :reporters, -> { where(access_level: REPORTER) }
+  scope :developers, -> { where(access_level: DEVELOPER) }
+  scope :masters,  -> { where(access_level: MASTER) }
+  scope :owners,  -> { where(access_level: OWNER) }
   scope :master_groups, -> { where(parent_id: null)}
 
   scope :with_group, ->(group) { where(group_id: group.id) }

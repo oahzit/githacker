@@ -1,6 +1,6 @@
 class Group < ActiveRecord::Base
   has_many :users_groups, dependent: :destroy
-  has_many :users, foreign_key: "user_id", :through => :users_groups, :uniq => true
+  has_many :users, foreign_key: "user_id", :through => :users_groups
 
   has_many :projects
   attr_accessible :user_id, :group_id, :access_level

@@ -1,0 +1,12 @@
+<%= form_for [@user, @users_project], :class => "form-inline" do |f| %>
+
+<div class="input-append" style="width:80%;margin-top:-15px;">
+  <%= email_field_tag "email", nil, placeholder: "enter email address", class: "form-control", :style=>"width: 90%;", tabindex: 1, autofocus: true %>
+  <%= f.hidden_field :user_id, :value => @user.id %>
+  <%= f.hidden_field :project_id, :value => @project.id %>
+  <%= f.hidden_field :access_level, :value => 1 %>
+
+    <%= f.submit 'Add To Team', class: "btn btn-default project-submit", tabindex: 4 %>
+
+</div>
+<% end %>

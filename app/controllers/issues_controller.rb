@@ -7,7 +7,7 @@ class IssuesController < ApplicationController
     def index
       @user = current_user
       @project = Project.find(params[:project_id])
-      @issues = @project.discussions.issues.active.recent.all
+      @issues = @project.discussions.issues.active.recent
       @comments = @issues.comments
   end
 
