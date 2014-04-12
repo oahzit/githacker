@@ -3,21 +3,39 @@
 <% end %>
 
 <div class="row">
-			<h4><%= @issue.subject %> </h4>
+	<h4><strong><%= @issue.subject %></strong> </h4>
+	<hr>
+	<p><%= @issue.body %> </p>
+
+	<div class="span9">
+
+		<div class="content_list">
+	<hr>
+
+			<% if !@comments.present? %>
+			<p class="center">There are no responses to this issue. Be the first to comment.</p>
+			<% else %>
+
+		</br>
+			<h4><strong><%= @issue.comments.count %> Responses</strong> </h4>
 			<hr>
-			<p><%= @issue.body %> </p>
 
-		<div class="span9">
+			<% @comments.each do |comment| %>
+			<%= comment.body %> 			
+			<hr>
 
-	<div class="content_list">
+			<% end %>
+			<% end %>
 
-	<% if !@comments.present? %>
-	<p class="center">There are no comments on this thread.</p>
-	<% else %>
-	<% @comments.each do |comment| %>
-		<%= comment.body %> </br>
-	<% end %>
-	<% end %>
+
+			<%= simple_form_for Comment.new do |f| %>
+			<div class="form-group" style="padding:15px;">   
+				<p><%= f.text_area :body, class: "form-control", :rows => 6, placeholder: "Add your response here" %></p>
+				<p><%= f.hidden_field :author_id, :value => current_user.id %></p>
+				<p><%= f.hidden_field :discussion_id, :value => @issue.id %></p>
+				<p><%= f.submit 'Add Comment', class: "btn btn-primary pull-right", tabindex: 4 %></p>
+			</div>
+			<% end %>
+		</div>
 	</div>
-</div>
 </div>

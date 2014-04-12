@@ -8,6 +8,7 @@ class IssuesController < ApplicationController
       @user = current_user
       @project = Project.find(params[:project_id])
       @issues = @project.discussions.issues.active.recent.all
+      @comments = @issues.comments
   end
 
   def show

@@ -23,7 +23,6 @@
 					</span>
 					
 					<%= link_to project.name, project_path(project), :class=>"project" %>
-					<%= project.path %></a>
 				</h4>
 				<p><%= project.tagline %> </p>
 				<div class="last-activity">
@@ -36,7 +35,7 @@
 	<% end %>
 </div>
 
-<div class="col-lg-3">
+<!-- <div class="col-lg-3">
     <ul class="nav nav-pills nav-stacked">
       <li><a> ALL
           <span class="pull-right"> <%= @projects.count %> <span></a></li>
@@ -47,9 +46,7 @@
       <li><a> Watching
           <span class="pull-right"> <%= @projects.count %> <span></a></li>    
     </ul>
-    <% if true %> <!-- @groups.present? -->
-    <% end %>
-</div>
+</div> -->
 <% else %>
 <div class='span12'>
 

@@ -1,3 +1,15 @@
-<h3>User</h3>
-<p>User: <%= @user.name %></p>
+<% content_for :nav do %>
+  <%= render 'layouts/nav/public' %>
+<% end %>
+
+<div class="row">
+<div class="col-lg-3">
+<h3><%= @user.name %></h3>
 <p>Email: <%= @user.email if @user.email %></p>
+</div>
+
+<div class="col-lg-9">
+</br>
+	Thank you for stopping by. There's not much to see at the moment but shortly you will be able to look up background information about users relevant to their experiences. You'll see a list of self-endorsed skills, projects and endorsements from folks who have worked with them on this platform and off it.  
+</div>
+</div>
