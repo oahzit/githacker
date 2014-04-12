@@ -44,7 +44,7 @@ function showdiv(id){
 <% end %>
 
 <div class="row">
-	<div class="span4">
+	<div class="col-lg-4">
 		<div class="ui-box">
 			<div class="title">
 				<strong>Getting Started Hacking</strong>
@@ -83,7 +83,7 @@ function showdiv(id){
 		</div>
 	</div>
 
-	<div class="span8">
+	<div class="col-lg-8">
 
 		<div id="overview">
 			<h3 class="page-title">Documentation Overview</h3>
@@ -94,7 +94,7 @@ function showdiv(id){
 			<p class="light"> Our hope is to create a platform for remote collaboration for hardware projects. We aim to connect makers with causes of a greater scale, to education and leverage existing resources, and assist in turning your ideas into viable products. 
 			</p>
 
-			<p class="light"> We have a suite of tools in mind and are partnering with organizations to get our tools to beta. Please come back later for more details.
+			<p class="light"> We are building our suite of tools with a select group of companies testing out our beta site. Please contact us if interested in participating.
 			</p>
 		</div>
 
@@ -108,34 +108,24 @@ function showdiv(id){
 			<div class="numberCircle">1</div>
 			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
 				<h3 class="page-title">Register an account</h3>
-				<p class="light"> It's as easy as that ... <strong>if you're a student</strong>. Now you can search studios in your area, register for classes, manage your own personal calendar and keep track of your attendance/purchase history. </p>
+				<p class="light"> The first set is to create an account. Don't worry our services are free. </p>
 			</div>
 			<hr>
 
 			<div class="numberCircle">2</div>
 			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
-				<h3 class="page-title">Connect with Stripe</h3>
-				<p class="light"> If you have an account with Stripe it's as simple as clicking a single button to give our app permissions to manage billing and payments through our system. Stripe is simple, secure and focuses on supreme service. Once you've completed that step you can use all of our services as an <strong> independent professional</strong>. Signing up is <strong> FREE</strong>. Click here to <a href="#stripe" onclick="hidealldivs(); showdiv('stripe')">learn more about it</a>.</p> 
-				<p class="light"> To complete activation click the "create account to manage my professional services" link under your 
-					<% if user_signed_in? %>
-					profile settings page.
-					<% else %>
-					profile settings page.
-					<% end %>
+				<h3 class="page-title">Create a Project</h3>
+				<p class="light"> You'll be navigated to your dashboard. There's not much content at the moment but that's when you can create a project. Each project has it's own page for tracking user storyboards, identifying issues and writing notes specific to the project. If you need assistance check out our resources page. It's basic but enough to get you started and inspired. 
 				</p>
 			</div>
 			<hr>
 
 			<div class="numberCircle">3</div>
 			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
-				<h3 class="page-title">Share Studio Details</h3>
-				<p class="light"> For <strong>studio owners</strong> who organizes events at one or more locations, need to manage staff and instructors, or has available space for professionals to book all you need to do to access additional services is to add studio details through the
-					<% if user_signed_in? %>
-					appropriate settings page.
-					<% else %>
-					appropriate settings page.
-					<% end %>
+				<h3 class="page-title">Give Feedback</h3>
+				<p class="light"> We're glad to have you on board using our tools. In return we would love to get your feedback. If your needs aren't met through our software we'll either point you to a different resource or develop what you need.
 				</p>
+				<p class="light center"> Happy hacking!</p>
 			</div>
 		</div>
 
@@ -143,40 +133,29 @@ function showdiv(id){
 		<div class="section" id="management">
 			<h3 class="page-title">Project Management</h3>
 			<hr>
-			<p class="light"> We understand that it is difficult to manage remote teams. So we have tried to build tools that enable others to contribute without disrupting your workflow.
+			<p class="light"> We understand that it is difficult to manage remote teams. So we are building tools simplify the process without disrupting your workflow.
 			</p>
 			<hr>
 
 			<div class="numberCircle">1</div>
 			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
 				<h3 class="page-title">Add your core team</h3>
-				<p class="light"> It's as easy as that ... <strong>if you're a student</strong>. Now you can search studios in your area, register for classes, manage your own personal calendar and keep track of your attendance/purchase history. </p>
+				<p class="light"> There's your community and then there's your core team. We encourage you to focus on setting up groups that reflect the members in your core team and their specialties and focus. If your project is open to the public we will allow users to be able to watch your project for updates and request to join your efforts. You'll be in charge of approving new members and involving your supporting community.</p>
 			</div>
 			<hr>
 
 			<div class="numberCircle">2</div>
 			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
 				<h3 class="page-title">Open Issues to the Community</h3>
-				<p class="light"> If you have an account with Stripe it's as simple as clicking a single button to give our app permissions to manage billing and payments through our system. Stripe is simple, secure and focuses on supreme service. Once you've completed that step you can use all of our services as an <strong> independent professional</strong>. Signing up is <strong> FREE</strong>. Click here to <a href="#stripe" onclick="hidealldivs(); showdiv('stripe')">learn more about it</a>.</p> 
-				<p class="light"> To complete activation click the "create account to manage my professional services" link under your 
-					<% if user_signed_in? %>
-					profile settings page.
-					<% else %>
-					profile settings page.
-					<% end %>
+				<p class="light"> As your create user stories and features to deliver you'll run into issues. These can be discussed within the team or opened up to the community for resolution. Issues are tagged with skills and users with corresponding talents are automatically notified. Those able to offer support are recognized with points so that you can identify the experts within the platform. 
 				</p>
 			</div>
 			<hr>
 
 			<div class="numberCircle">3</div>
 			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
-				<h3 class="page-title">Post Job Openings</h3>
-				<p class="light"> For <strong>studio owners</strong> who organizes events at one or more locations, need to manage staff and instructors, or has available space for professionals to book all you need to do to access additional services is to add studio details through the
-					<% if user_signed_in? %>
-					appropriate settings page.
-					<% else %>
-					appropriate settings page.
-					<% end %>
+				<h3 class="page-title">Engaging Community</h3>
+				<p class="light"> Outside of the core team is a supportive community. You may need their expertise for an hour for a specific problem or for them to request new features or offer to integrate a solution they've developed. Engaging this community is work but doing so with care can have unexpected and pleasant benefits. Users can choose to watch your project so that they get notified of announcements, open issues and job postings. With our platform you'll see right away if users are a good fit for your organization by seeing how much they've made an effort to contribute before you've even signed the contract. 
 				</p>
 			</div>
 		</div>
@@ -185,62 +164,11 @@ function showdiv(id){
 		<div class="section" id="opensource">
 			<h3 class="page-title">Open Source Hardware</h3>
 			<hr>
-			<p class="light"> It's up to you to open source your software. Doing so enables you to be part of the greater maker movement and build a global community around your product and vision. 
+			<p class="light"> It's up to you to whether or not you open source your product. Doing so enables you to be part of the greater maker movement and build a global community around your product and vision, and enables us to work on projects that are more ambigious, locally adaptive and global in scale. 
 			</p>
-			<hr>
-
-			<div class="numberCircle">1</div>
-			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
-				<h3 class="page-title">Register an account</h3>
-				<p class="light"> It's as easy as that ... <strong>if you're a student</strong>. Now you can search studios in your area, register for classes, manage your own personal calendar and keep track of your attendance/purchase history. </p>
-			</div>
-			<hr>
-
-			<div class="numberCircle">2</div>
-			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
-				<h3 class="page-title">Connect with Stripe</h3>
-				<p class="light"> If you have an account with Stripe it's as simple as clicking a single button to give our app permissions to manage billing and payments through our system. Stripe is simple, secure and focuses on supreme service. Once you've completed that step you can use all of our services as an <strong> independent professional</strong>. Signing up is <strong> FREE</strong>. Click here to <a href="#stripe" onclick="hidealldivs(); showdiv('stripe')">learn more about it</a>.</p> 
-				<p class="light"> To complete activation click the "create account to manage my professional services" link under your 
-					<% if user_signed_in? %>
-					profile settings page.
-					<% else %>
-					profile settings page.
-					<% end %>
-				</p>
-			</div>
-			<hr>
-
-			<div class="numberCircle">3</div>
-			<div style="margin-left:45px;margin-right:45px;margin-top:-36px;">
-				<h3 class="page-title">Share Studio Details</h3>
-				<p class="light"> For <strong>studio owners</strong> who organizes events at one or more locations, need to manage staff and instructors, or has available space for professionals to book all you need to do to access additional services is to add studio details through the
-					<% if user_signed_in? %>
-					appropriate settings page.
-					<% else %>
-					appropriate settings page.
-					<% end %>
-				</p>
-			</div>
 		</div>
 
 
 
 	</div>
 </div>
-
-<% if user_signed_in? %>
-<div class="col-lg-4">
-	<div class="ui-box">
-		<div class="title">
-			How This Works
-		</div>
-
-		<ul class="well-list">
-			<li> Get started by <%= link_to "creating a project", new_project_path %></li>
-			<li> Share your projects within <a href="#">your team</a> <span class="pull-right"><a href="#">>>></a></span></li>
-			<li> Learn how to <a href="#"> assign issues</a> </li>
-			<li> Curate your <a href="#"> own library </a> and search it via <a href="#"> hashtags</a> </li>
-		</ul>
-	</div>
-</div>
-<% end %>

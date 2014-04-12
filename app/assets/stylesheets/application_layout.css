@@ -245,7 +245,7 @@ color: gray;
   border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.well-list{margin:0;list-style:none}
+.well-list{margin:0;list-style:none; padding:0;}
 .well-list li{padding:10px;min-height:20px;border-bottom:1px solid #eee;border-bottom:1px solid rgba(0,0,0,0.05)}
 .well-list li.disabled{color:#888}
 .well-list li.unstyled:hover{background:none}
@@ -263,3 +263,20 @@ color: gray;
 .nav-pills>.active>a:focus
 {color:#fff;background-color:#08c}
 
+          .numberCircle {
+            -webkit-border-radius: 999px;
+            -moz-border-radius: 999px;
+            border-radius: 999px;
+            behavior: url(PIE.htc);
+
+            width: 36px;
+            height: 36px;
+            padding: 8px;
+
+            background: #fff;
+            border: 2px solid #666;
+            color: #666;
+            text-align: center;
+
+            font: 15px Arial, sans-serif
+          }
