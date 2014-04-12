@@ -1,4 +1,4 @@
-<%= form_for [@user, @users_project], :class => "form-inline" do |f| %>
+<%= form_for [@user, UsersProject.new], :url => {:controller => "users_projects", :action => "add_member", :method => :post} do |f| %>
 
 <div class="input-append" style="width:80%;margin-top:-15px;">
   <%= email_field_tag "email", nil, placeholder: "enter email address", class: "form-control", :style=>"width: 90%;", tabindex: 1, autofocus: true %>

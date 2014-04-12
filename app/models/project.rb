@@ -41,8 +41,12 @@ class Project < ActiveRecord::Base
   	end	
   end
 
+  def master_group
+    self.groups.where(:parent_id => 0).first
+  end
+
   def members_count
-    self.groups.where(:parent_id => 0).first.users.count
+    self.master_group.users.count
   end
 
   def groups_count

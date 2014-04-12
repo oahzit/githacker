@@ -3,7 +3,12 @@ Githacker::Application.routes.draw do
 	devise_for :users, :controllers => {:registrations => "registrations"}
 	resources :users do
 		resources :groups 
-		resources :users_projects
+		resources :users_projects do 
+			member do
+				post :add_member  
+			end
+		end
+
 	end
 
 	resources :projects do
@@ -15,9 +20,9 @@ Githacker::Application.routes.draw do
 	end
 
 	resources :comments
-    match 'users/:user_id/issues/all' => 'issues#display', :controller => 'issues', :action => 'display', :via => [:get], :as => 'all_issues'
-    match 'issues/:id/up_vote/' => 'issues#up_vote', :controller => 'issues', :action => 'up_vote', :via => [:get], :as => 'up_vote_issue'
-    match 'issues/:id/down_vote/' => 'issues#down_vote', :controller => 'issues', :action => 'down_vote', :via => [:get], :as => 'down_vote_issue'
+	match 'users/:user_id/issues/all' => 'issues#display', :controller => 'issues', :action => 'display', :via => [:get], :as => 'all_issues'
+	match 'issues/:id/up_vote/' => 'issues#up_vote', :controller => 'issues', :action => 'up_vote', :via => [:get], :as => 'up_vote_issue'
+	match 'issues/:id/down_vote/' => 'issues#down_vote', :controller => 'issues', :action => 'down_vote', :via => [:get], :as => 'down_vote_issue'
 
 	resources :users_groups
 	resources :users_skills

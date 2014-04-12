@@ -3,6 +3,12 @@ has_one :project
 
 attr_accessible :project_id, :message
 
+def add_member!(user, project)
+  self.message = "#{user.email} was added to project #{project.name}"
+  self.project_id = project.id
+  self.save
+end
+
 def create_message!(user, project)
 	self.message = "#{user.name} created project #{project.name}"
 	self.project_id = project.id

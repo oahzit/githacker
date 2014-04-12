@@ -40,8 +40,57 @@ class UsersProjectsController < ApplicationController
 
       respond_to do |format|
         if @project.save
+          # leave a trail when project is created 
+          @activity = Activity.new.create_message!(@user, @project)
+          format.html { redirect_to user_users_projects_path(@user), notice: 'Project was successfully created.' }
+          format.json { head :no_content }
+        else
+          format.html { render :action => 'new', alert: 'Project was unsuccessfully created.' }
+          format.json { render json: @message.errors, status: :unprocessable_entity }
+        end 
+      end
+    end
+
+    def edit 
+      @user = User.find(params[:user_id])
+      @users_project = UsersProject.find(params[:id])
+      @project = Project.find(@users_project.project_id)
+    end
+
+    def update
+      @user = User.find(params[:user_id])
+      @users_project = UsersProject.find(params[:id])
+      @project = Project.find(@users_project.project_id)
+      @project.update_attributes(params[:project])
+      respond_to do |format|
+        if @project.save
+          format.html { redirect_to user_users_project_path(@user, @users_project), notice: 'Project was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render :action => 'edit', alert: 'Project was unsuccessfully updated.' }
+          format.json { render json: @message.errors, status: :unprocessable_entity }
+        end 
+      end
+    end 
+
+  def add_member
+        # When a project is created 
+        @user = User.where(:email => params[:email]).first
+        if !@user.present?
+          @user = User.create!(:email => params[:email], :password => "password", :password_confirmation => "password")
+        end
+        @project = UsersProject.find(params[:id]).project
+        @group = @project.master_group
+        
+        ActiveRecord::Base.transaction do
+          @users_group = UsersGroup.create!(user_id: @user.id, group_id: @group.id, access_level: params[:users_project][:access_level])
+          @users_project = UsersProject.create!(user_id: @user.id, project_id: @project.id, access_level: params[:users_project][:access_level])
+        end
+
+        respond_to do |format|
+          if @users_project.save
                # leave a trail when project is created 
-               @activity = Activity.new.create_message!(@user, @project)
+               @activity = Activity.new.add_member!(@user, @project)
                format.html { redirect_to user_users_projects_path(@user), notice: 'Project was successfully created.' }
                format.json { head :no_content }
              else
@@ -51,26 +100,4 @@ class UsersProjectsController < ApplicationController
           end
         end
 
-        def edit 
-          @user = User.find(params[:user_id])
-          @users_project = UsersProject.find(params[:id])
-          @project = Project.find(@users_project.project_id)
-
-        end
-
-        def update
-          @user = User.find(params[:user_id])
-          @users_project = UsersProject.find(params[:id])
-          @project = Project.find(@users_project.project_id)
-          @project.update_attributes(params[:project])
-          respond_to do |format|
-            if @project.save
-              format.html { redirect_to user_users_project_path(@user, @users_project), notice: 'Project was successfully updated.' }
-              format.json { head :no_content }
-            else
-              format.html { render :action => 'edit', alert: 'Project was unsuccessfully updated.' }
-              format.json { render json: @message.errors, status: :unprocessable_entity }
-            end 
-          end
-        end 
       end
