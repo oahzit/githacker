@@ -108,4 +108,9 @@ class UsersProjectsController < ApplicationController
           @owner = User.find(@project.creator_id)
         end
 
+    def follow
+      @users_project = UsersProject.create!(:user_id => params[:user_id], :project_id => params[:project_id], :access_level => 2)
+      redirect_to :back
+    end
+
       end

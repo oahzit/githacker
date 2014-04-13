@@ -22,7 +22,7 @@
   <%= yield(:nav) %> 
 
   <div id="main" role="main">
-    <% if current_page?(root_url) %>
+    <% if current_page?(root_url) && !user_signed_in? %>
     <%= render 'layouts/messages' %>
     <%= yield %>
     <% else %>

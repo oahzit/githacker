@@ -12,6 +12,12 @@ class Project < ActiveRecord::Base
 
   scope :public_viewing, where(:public => true)
 
+  # ACCESS LEVELS
+    # 0: Owner
+    # 1: Core Team
+    # 2: Member
+    # 3: Watching
+
   def last_activity_to_text
   end
 

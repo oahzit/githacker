@@ -1,5 +1,15 @@
+
+<% if user_signed_in? %>
 <% content_for :nav do %>
-  <%= render 'layouts/nav/public' %>
+<%= render 'layouts/nav/dashboard' %>
+<% end %>
+
+<% else %>
+<% content_for :nav do %>
+<%= render 'layouts/nav/public' %>
+<% end %>
+
+
 <% end %>
 
 </br>

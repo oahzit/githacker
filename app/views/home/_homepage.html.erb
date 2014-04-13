@@ -146,7 +146,10 @@ $(function () {
 });
 
 </script>
-
+  <% content_for :nav do %>
+    <%= render 'layouts/nav/public' %>
+  <% end %>
+  
 <section class="top">
  <div class="top__content">
   <div class="wrap">

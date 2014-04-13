@@ -28,7 +28,7 @@ $(document).ready(function() {
 
 <div class="row">
 <% @discussion = Issue.new %>
-	<div class="col-lg-12">
+	<div class="span12">
 		<div class="project_clone_panel">
 			<strong>Issues for <%= @project.name %> </strong>
 			<span class="glyphicon glyphicon-plus-sign pull-right" style="font-size:20px;" onClick='$("#new_issue_form").toggle();'></span>			
@@ -60,9 +60,9 @@ $(document).ready(function() {
 				<% @issues.each do |issue| %>
 				<tr>
 					<td style="width:10px;">
-						<span><%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_issue_path(issue) %></span>
+						<span><%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_discussion_path(issue) %></span>
 						<strong style="margin-left:3px;"><%= issue.vote_count %></strong>
-						<p style="margin-top:5px;"><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_issue_path(issue) %></p>
+						<p style="margin-top:5px;"><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_discussion_path(issue) %></p>
 					</td> 
 					<td style="width:45px;">					
 						<img alt="" style="margin-top: 6px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">

@@ -10,14 +10,14 @@ $("#add-member-submit-btn").bind('click', function(event) {
 
 <div class="row">
 
-	<div class="col-lg-12">
+	<div class="span12">
 		<div class="project_clone_panel">
 			<strong><%= @project.name %> </strong>
 			<p class="pull-right"><%= link_to "Edit", edit_project_path(@project), :class => "btn btn-default btn-small" %><p>
 			</div>
 		</div>
 
-		<div class="col-lg-9">
+		<div class="span9">
 
 		<!--
 		<div class="event_filter">
@@ -84,7 +84,7 @@ $("#add-member-submit-btn").bind('click', function(event) {
 		<div class="loading hide" style="display: none;"></div>
 	</div>
 
-	<div class="col-lg-3">
+	<div class="span3">
 		<div class="light-well">
 			<h3 class="page-title"> <%= @project.name %></h3>
 			<p class="light"> <%= @project.tagline %></p>

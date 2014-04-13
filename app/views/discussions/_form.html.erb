@@ -1,14 +1,11 @@
 <%= form_for [@project, @discussion]  do |f| %>
-        <div class="form-group col-lg-11">   
-        <p><%= f.label :subject, "Subject" %>
-        <%= f.text_field :subject, placeholder: "Example Project", class: "form-control", tabindex: 1, autofocus: true %></p>
+        <div class="form-group span11" style="padding-bottom:10px">   
+        <p><%= f.text_field :subject, placeholder: "storyboard title", class: "form-control", style: "width:100%;", tabindex: 1, autofocus: true %></p>
 
-        <p><%= f.text_field :body, class: "form-control" %></p>
+        <p><%= f.text_area :body, placeholder: "add a description of the new feature and how users interact with it", class: "form-control", rows: 6, style: "width:100%;" %></p>
         <p><%= f.hidden_field :author_id, :value => current_user.id %></p>
         <p><%= f.hidden_field :type, :value => @discussion.type %></p>
 
-      <div class="actions">
-        <%= f.submit 'Create Issue', class: "btn btn-primary", tabindex: 4 %>
+        <%= f.submit 'Create Storyboard', class: "btn btn-default pull-right", tabindex: 4 %>
         </div>
-      </div>
   <% end %>

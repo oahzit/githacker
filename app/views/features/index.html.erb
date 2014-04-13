@@ -32,7 +32,7 @@ $(document).ready(function() {
 
 <div class="row">
 	<% @discussion = Feature.new %>
-	<div class="col-lg-12">
+	<div class="span12">
 		<div class="project_clone_panel">
 			<strong>Storyboard for <%= @project.name %> </strong>
 			<span class="glyphicon glyphicon-plus-sign pull-right" style="font-size:20px;" onClick='$("#new_feature_form").toggle();'></span>			
@@ -62,7 +62,7 @@ $(document).ready(function() {
 		<span class="action last pull-right"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_feature_path(@project, storyboard), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></span>
 			<span class="lastEditedDate pull-right" style="width:110px;"><%= storyboard.created %></span>
 	</br>
-	<div><%= storyboard.body %>
+	<div><%= simple_format(storyboard.body)%>
 	</div>
 
 	</section>
