@@ -50,11 +50,10 @@ $(document).ready(function() {
 			<th>
 				<td></td>
 				<td><strong>Topic</strong></td>
-				<td><strong>Participants</strong></td>
-				<td><strong>Posts</strong></td>
-				<td><strong>Last Activity</strong></td>
+				<!-- <td><strong>Participants</strong></td> -->
 				<td></td>
-			</strong>
+				<td></td>
+				<td></td>
 			</th>
 			<tbody>
 				<% @issues.each do |issue| %>
@@ -64,19 +63,17 @@ $(document).ready(function() {
 						<strong style="margin-left:3px;"><%= issue.vote_count %></strong>
 						<p style="margin-top:5px;"><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_discussion_path(issue) %></p>
 					</td> 
-					<td style="width:45px;">					
+					<td style="width:40px;">					
 						<img alt="" style="margin-top: 6px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
 					</td>
-					<td class="title first" style="padding-left:0px;width:550px;"><%= link_to issue.subject, project_issue_path(@project, issue) %></td>
-					<td style="width:110px;">
+					<td class="title first" style="width:550px;padding-left:0px;"><%= link_to issue.subject, project_issue_path(@project, issue) %> </br>
+						<%= simple_format(issue.body) %></td>
+<!-- 					<td style="width:110px;">
 <span><img alt="" style="display:inline;width:20px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm"></span>
-<span><img alt="" style="display:inline;width:20px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm"></span>
-<span><img alt="" style="display:inline;width:20px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm"></span>
-<span><img alt="" style="display:inline;width:20px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm"></span>
-						  </br>+ <%= @issues.count %> others</td>
-					<td class="center" style="width:50px;"><%= issue.comments.count %></td>
-					<td class="lastEditedDate" style="width:110px;"><%= issue.created %></td>
-					<td class="action last"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_issue_path(@project, issue), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+						  </br>+ <%= @issues.count %> others</td> -->
+					<td class="lastEditedDate"><%= issue.comments.count %> comments</td>
+					<td class="lastEditedDate pull-right">created <%= issue.created %></td>
+					<td class="action last"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_issue_path(@project, issue), :data => { :confirm => "Are you sure?" }, :method => :delete) %></td>
 				</tr>
 				<% end %>
 			</tbody>

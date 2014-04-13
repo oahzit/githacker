@@ -5,7 +5,7 @@
 <div class="row">
 	<h4><strong><%= @issue.subject %></strong> </h4>
 	<hr>
-	<p><%= @issue.body %> </p>
+	<p><%= simple_format(@issue.body) %> </p>
 
 	<div class="span9">
 

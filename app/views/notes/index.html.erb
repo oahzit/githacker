@@ -30,10 +30,10 @@ $(document).ready(function() {
 			<strong>Notes for <%= @project.name %> </strong>
 			<span class="glyphicon glyphicon-plus-sign pull-right" style="font-size:20px;" onClick='$("#new_note_form").toggle();'>			
 			</div>
-
+<% @discussion = Note.new %>
 			<section class="discussions-body" id="new_note_form" style="margin-top:-15px;margin-bottom:20px;">
 				<div style="padding-bottom:10px;">
-					<%= render 'form'%>
+					<%= render 'discussions/form'%>
 				</div>
 			</section>
 		</div>
@@ -49,7 +49,7 @@ $(document).ready(function() {
 					<tr>
 						<td class="title first"><%= link_to note.subject, [@project, note] %></td>
 						<td class="lastEditedDate"><%= note.created %></td>
-						<td class="action last"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_note_path(@project, note), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+						<td class="action last"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_note_path(@project, note), :data => { :confirm => "Are you sure?" }, :method => :delete) %></td>
 					</tr>
 					<% end %>
 				</tbody>

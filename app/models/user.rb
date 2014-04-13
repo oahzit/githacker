@@ -33,11 +33,11 @@ class User < ActiveRecord::Base
     def issues
       @issues = []
       self.projects.each do |project|
-        project.discussions.issues.active.each do |issue|
+        project.discussions.issues.active.recent.each do |issue|
           @issues << issue
         end
       end
-      return @issues
+      return @issues.sort_by{|e| -e[:vote_count]}
     end
 
   end

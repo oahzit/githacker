@@ -4,7 +4,7 @@
 
 <div class="row">
 			<h4><%= @note.subject %> </h4>
-			<p><%= @note.body %> </p>
+			<p><%= simple_format(@note.body) %> </p>
 
 		<div class="span9">
 
@@ -14,7 +14,7 @@
 	There are no comments on this thread.
 	<% else %>
 	<% @comments.each do |comment| %>
-		<%= comment.body %> </br>
+		<%= simple_format(comment.body) %> </br>
 	<% end %>
 	<% end %>
 	</div>

@@ -2,10 +2,48 @@
   <%= render 'layouts/nav/dashboard' %>
 <% end %>
 
-<% if @issues.present? %>
-	<% @issues.each do |issue| %>
-	<%= issue.subject %>
+<style type="text/css">
+body{
+	background-color: #eee;
+}</style>
+	<% if !@issues.present? %>
+	<p class="center"> There are no issues for project you are following.</p>
+	<% else %>
+
+
+	<section class="discussions-body simpletable" style="width:97%;margin-left:15px;">
+		<table class="table table-condensed table-hover">
+			<th>
+				<td></td>
+				<td><strong>Topic</strong></td>
+				<!-- <td><strong>Participants</strong></td> -->
+				<td></td>
+				<td></td>
+				<td></td>
+			</th>
+			<tbody>
+				<% @issues.each do |issue| %>
+				<tr>
+					<td style="width:10px;">
+						<span><%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_discussion_path(issue) %></span>
+						<strong style="margin-left:3px;"><%= issue.vote_count %></strong>
+						<p style="margin-top:5px;"><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_discussion_path(issue) %></p>
+					</td> 
+					<td style="width:40px;">					
+						<img alt="" style="margin-top: 6px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
+					</td>
+					<td class="title first" style="width:550px;padding-left:0px;"><%= link_to issue.subject, project_issue_path(@project, issue) %> </br>
+						<%= simple_format(issue.body) %></td>
+<!-- 					<td style="width:110px;">
+<span><img alt="" style="display:inline;width:20px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm"></span>
+						  </br>+ <%= @issues.count %> others</td> -->
+					<td class="lastEditedDate"><%= issue.comments.count %> comments</td>
+					<td class="lastEditedDate pull-right">created <%= issue.created %></td>
+					<td class="action last"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_issue_path(@project, issue), :data => { :confirm => "Are you sure?" }, :method => :delete) %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</section>
+
 	<% end %>
-<% else %>
-Here
-<% end %>
