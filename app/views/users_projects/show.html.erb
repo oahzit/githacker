@@ -26,7 +26,6 @@ $(document).ready(function() {
 				<section id="add_member_form">
 					<%= render 'add_member' %>
 				</section>
-
 		<!--
 		<div class="event_filter">
 			<div class="filter_icon "><a href="/kachina/githacker" class="has_tooltip event_filter_link" data-original-title="Push events" id="push_event_filter"><i class="icon-upload-alt"></i></a></div>
@@ -38,6 +37,7 @@ $(document).ready(function() {
 			<div class="filter_icon inactive"><a href="/kachina/githacker" class="has_tooltip event_filter_link" data-original-title="Team" id="team_event_filter"><i class="icon-user"></i></a></div>
 		</div>
 	-->
+	<hr>
 	<% @activities.each do |activity| %>
 	<div class="content_list">
 		<div class="event-inline event-item">
@@ -58,6 +58,7 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
+	<hr>
 	<% end %>
 
 	<div class="loading hide" style="display: none;"></div>
@@ -71,6 +72,9 @@ $(document).ready(function() {
 		<!-- 		<p><span class="light"> Repo size </span> 0.5 MB</p> -->			
 		<p><span class="light"> Created on </span> <%= @project.created_at.to_time.strftime('%b %d, %Y')%></p>
 		<p><span class="light"> Owned by </span> <%= @owner.name %></p>
+		<% if @project.members_count > 1 %>
+		<%= link_to "view the entire team", team_user_users_project_path(@user, @users_project)%>
+		<% end %>
 			<!--
  			<p class="center"> view all members</p>
 			<hr>

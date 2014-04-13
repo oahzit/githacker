@@ -6,6 +6,7 @@ Githacker::Application.routes.draw do
 		resources :users_projects do 
 			member do
 				post :add_member  
+				get :team
 			end
 		end
 

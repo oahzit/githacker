@@ -73,7 +73,7 @@ class UsersProjectsController < ApplicationController
       end
     end 
 
-  def add_member
+    def add_member
         # When a project is created 
         @user = User.where(:email => params[:email]).first
         if !@user.present?
@@ -98,6 +98,14 @@ class UsersProjectsController < ApplicationController
               format.json { render json: @message.errors, status: :unprocessable_entity }
             end 
           end
+        end
+
+
+        def team
+          @user = User.find(params[:user_id])
+          @users_project = UsersProject.find(params[:id])
+          @project = Project.find(@users_project.project_id)
+          @owner = User.find(@project.creator_id)
         end
 
       end

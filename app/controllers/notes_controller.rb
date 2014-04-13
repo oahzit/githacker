@@ -6,7 +6,7 @@ class NotesController < ApplicationController
 	def index
 		@user = current_user
 		@project = Project.find(params[:project_id])
-		@notes = @project.discussions.active.notes
+		@notes = @project.discussions.notes.order("created_at DESC")
 	end
 
 	def show

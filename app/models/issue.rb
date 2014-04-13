@@ -1,3 +1,3 @@
 class Issue < Discussion
-	
+
 end
