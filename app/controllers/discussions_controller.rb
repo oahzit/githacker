@@ -23,6 +23,18 @@ class DiscussionsController < ApplicationController
         end
     end
 
+    def up_vote
+        @discussion = Discussion.find(params[:id])
+        @discussion.up_vote
+        redirect_to :back
+    end
+
+    def down_vote
+        @discussion = Discussion.find(params[:id])
+        @discussion.down_vote
+        redirect_to :back
+    end
+
 
     def destroy
         @discussion = Discussion.find(params[:id])

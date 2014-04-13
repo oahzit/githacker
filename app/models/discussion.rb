@@ -7,7 +7,7 @@ class Discussion < ActiveRecord::Base
 	scope :recent, -> {order("created_at DESC")}
 	scope :notes, -> {where(:type => "Note")}
 	scope :issues, -> {where(:type => "Issue")}
-	scope :storyboard, -> {where(:type => "Storyboard")}
+	scope :storyboards, -> {where(:type => "Feature")}
 	scope :thread, -> {where(:type => "Thread")}
 
 	scope :active, -> {where(:archive => false)}

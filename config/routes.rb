@@ -22,8 +22,8 @@ Githacker::Application.routes.draw do
 
 	resources :comments
 	match 'users/:user_id/issues/all' => 'issues#display', :controller => 'issues', :action => 'display', :via => [:get], :as => 'all_issues'
-	match 'issues/:id/up_vote/' => 'issues#up_vote', :controller => 'issues', :action => 'up_vote', :via => [:get], :as => 'up_vote_issue'
-	match 'issues/:id/down_vote/' => 'issues#down_vote', :controller => 'issues', :action => 'down_vote', :via => [:get], :as => 'down_vote_issue'
+	match 'discussions/:id/up_vote/' => 'discussions#up_vote', :controller => 'discussions', :action => 'up_vote', :via => [:get], :as => 'up_vote_discussion'
+	match 'discussions/:id/down_vote/' => 'discussions#down_vote', :controller => 'discussions', :action => 'down_vote', :via => [:get], :as => 'down_vote_discussion'
 
 	resources :users_groups
 	resources :users_skills

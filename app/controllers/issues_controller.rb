@@ -55,18 +55,6 @@ def create
     	end
     end 
 
-    def up_vote
-        @issue = Discussion.find(params[:id])
-        @issue.up_vote
-        redirect_to :back
-    end
-
-    def down_vote
-        @issue = Discussion.find(params[:id])
-        @issue.down_vote
-        redirect_to :back
-    end
-
     def destroy
     	@issue = Discussion.find(params[:id])
     	@issue.destroy
