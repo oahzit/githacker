@@ -1,8 +1,17 @@
 <% content_for :nav do %>
-  <%= render 'layouts/nav/dashboard' %>
+<%= render 'layouts/nav/dashboard' %>
 <% end %>
 
 <h3 class="page-title"> Create a new Project </h3>
-<div class="row">
-  <%= render "form" %>
+<%= form_for [@user, @users_project] do |f| %>
+<%= f.fields_for @project do |f| %>
+
+<%= render 'form', :f => f %>
+<%= f.hidden_field :creator_id, :value => current_user.id %>
+
+<div class="actions">
+	<%= f.submit 'Create project', class: "btn btn-primary pull-right", tabindex: 4 %>
 </div>
+</div>
+<% end %>
+<% end %>

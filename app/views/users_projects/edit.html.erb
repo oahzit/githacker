@@ -1,8 +1,19 @@
 <% content_for :nav do %>
-  <%= render 'layouts/nav/project' %>
+<%= render 'layouts/nav/project' %>
 <% end %>
 
-<h3 class="page-title"> Edit <%= @project.name %> </h3>
-<div class="row">
-  <%= render "form" %>
-</div>
+		<p class="help-inline"> This section is under development! Soon we will give you the opportunity to set your notification and access level.</p>
+
+<h4>Edit Project Settings</h4>
+<hr>
+<%= form_for [@user, @users_project] do |f| %>
+  <%= f.fields_for @project do |f| %>
+
+<%= render 'form', :f => f %>
+		<div class="actions">
+			<%= f.submit 'Update Settings', class: "btn btn-primary pull-right", tabindex: 4 %>
+			<%= link_to('Unfollow'.html_safe, user_users_project_path(@user, @users_project), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-default pull-right', :style => "margin-right:10px;") %>
+
+		</div>
+		<% end %>
+		<% end %>

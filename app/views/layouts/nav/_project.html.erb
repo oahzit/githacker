@@ -6,7 +6,7 @@
     		<li><%= link_to "Features", project_features_path(@project) %></li>
             <li><%= link_to "Issues <span class=\"count\"> #{@project.discussions.active.issues.count }</span>".html_safe, project_issues_path(@project) %></li>
             <li><%= link_to "Notes <span class=\"count\"> #{@project.discussions.active.notes.count }</span>".html_safe, project_notes_path(@project) %></li>
-            <li><%= link_to "Settings", project_settings_path(@project) %></li>
+            <li><%= link_to "Settings", edit_user_users_project_path(@user, @users_project) %></li>
 		</ul>
 	</div>
 </nav>

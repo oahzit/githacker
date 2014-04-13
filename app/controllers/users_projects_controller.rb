@@ -61,7 +61,8 @@ class UsersProjectsController < ApplicationController
       @user = User.find(params[:user_id])
       @users_project = UsersProject.find(params[:id])
       @project = Project.find(@users_project.project_id)
-      @project.update_attributes(params[:project])
+      @project.update_attributes(params[:users_project][:project])
+      
       respond_to do |format|
         if @project.save
           format.html { redirect_to user_users_project_path(@user, @users_project), notice: 'Project was successfully updated.' }

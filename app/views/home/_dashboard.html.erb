@@ -21,10 +21,9 @@
 				<% if @user.users_projects.where(:project_id => project.id).first.access_level == 0 %>
 				<i class="icon-bookmark" style="margin-top:5px;"></i>
 				<% else %>
-				<i class="icon-eye-open" style="margin-top:5px;"></i>
+				<%= link_to("<i class=\"icon-eye-open\" style=\"margin-top:5px;\"></i>".html_safe.html_safe, user_users_project_path(@user, @users_project), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-default pull-right', :style => "margin-right:10px;") %>
 				<% end %>
 				<% else %>
-				
 				<%= link_to "<i class=\"icon-eye-close\" style=\"margin-top:5px;\"></i>".html_safe, follow_project_path(current_user, project), :class=>"btn btn-default btn-mini pull-right" %>
 
 				<% end %>
