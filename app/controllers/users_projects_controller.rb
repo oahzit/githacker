@@ -93,7 +93,7 @@ class UsersProjectsController < ApplicationController
           if @users_project.save
                # leave a trail when project is created 
                @activity = Activity.new.add_member!(@user, @project)
-               format.html { redirect_to user_users_projects_path(@user), notice: 'Project was successfully created.' }
+               format.html { redirect_to :back, notice: 'Project was successfully created.' }
                format.json { head :no_content }
              else
               format.html { render :action => 'new', alert: 'Project was unsuccessfully created.' }
