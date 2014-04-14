@@ -1,10 +1,5 @@
 class UsersProject < ActiveRecord::Base
 
-  def self.project_access_roles
-  	access = ["OWNER", "MANAGER", "DEVELOPER", "REPORTER", "GUEST"]
-    return access
-  end
-
   attr_accessible :project_id, :user_id, :access, :notification_level
 
   belongs_to :user
@@ -16,16 +11,24 @@ class UsersProject < ActiveRecord::Base
 
   delegate :name, :username, :email, to: :user, prefix: true
 
-  scope :guests, -> { where(access_level: GUEST) }
-  scope :reporters, -> { where(access_level: REPORTER) }
-  scope :developers, -> { where(access_level: DEVELOPER) }
-  scope :masters,  -> { where(access_level: MASTER) }
+  scope :follower, -> { where(access_level: 2) }
+  scope :member,  -> { where(access_level: 1) }
   scope :owners,  -> { where(access_level: 0) }
 
   scope :in_project, ->(project) { where(project_id: project.id) }
   scope :in_projects, ->(projects) { where(project_id: projects.map { |p| p.id }) }
   scope :with_user, ->(user) { where(user_id: user.id) }
 
+  def access 
+    if self.access_level == 0
+      return "Owner"
+    elsif self.access_level == 1
+      return "Core Member"
+    elsif self.access_level == 2
+      return "Follower"
+    end
+  end
+  
   class << self
 
     # Add users to project teams with passed access option

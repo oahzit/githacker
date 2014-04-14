@@ -1,6 +1,6 @@
 <%= form_for [@user, UsersProject.new], :url => {:controller => "users_projects", :action => "add_member", :method => :post} do |f| %>
 
-<div class="input-append" style="width:80%;margin-top:-15px;">
+<div class="input-append" style="width:100%;">
   <%= email_field_tag "email", nil, placeholder: "enter email address", class: "form-control", :style=>"width: 90%;", tabindex: 1, autofocus: true %>
   <%= f.hidden_field :user_id, :value => @user.id %>
   <%= f.hidden_field :project_id, :value => @project.id %>

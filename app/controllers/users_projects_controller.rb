@@ -106,6 +106,9 @@ class UsersProjectsController < ApplicationController
           @user = User.find(params[:user_id])
           @users_project = UsersProject.find(params[:id])
           @project = Project.find(@users_project.project_id)
+          @group = @project.master_group
+          @members = @project.master_group.members
+
           @owner = User.find(@project.creator_id)
         end
 
