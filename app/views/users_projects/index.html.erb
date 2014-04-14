@@ -34,7 +34,7 @@
 					<% end %>
 					</span>
 					
-					<%= link_to project.name, user_users_project_path(current_user, project), :class=>"project" %>
+					<%= link_to project.name, user_users_project_path(current_user, UsersProject.where(:project_id => project.id).first), :class=>"project" %>
 				</h4>
 				<p><%= project.tagline %> </p>
 				<div class="last-activity">
