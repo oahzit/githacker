@@ -33,6 +33,7 @@ class UsersProjectsController < ApplicationController
         @group = Group.create!(name: "Master Group", owner_id: @user.id)
         @group.save
         @users_groups = UsersGroup.create!(user_id: @user.id, group_id: @group.id)
+        @projects_group = ProjectsGroup.create!(group_id: @group.id, project_id: @project.id)
 
         # and the user who created it is added to the group and project
         @users_project = UsersProject.create!(user_id: @user.id, project_id: @project.id)
