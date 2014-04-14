@@ -48,20 +48,28 @@
     </ul>
 </div> -->
 <% else %>
-<div class='span12'>
 
-<%  (1..6).each do %>
+<style type="text/css">
+body{
+	background-color: #eee;
+}
+
+</style>
+<div class='span12'>
+	    <h3 class="page-title center"> Browse all our public projects here</h3>
+
+<%  Project.public_viewing.each do |project| %>
 
 <div class='span4' style="margin:0px;">
 <div class='card' style="background: no-repeat;background-size:cover;">
 
 <div class='banner'>
     <div class='mainline'>
-<a href="http://www.opensourcebeehives.net/" target="_blank"> Open Source Beehive </a>
+    	<%= link_to project.name, project_path(project) %>
     </div>
     <div class='tagline'> 
-        <p>This is a test ... </br>
-        	Website: <a href="http://www.opensourcebeehives.net/" target="_blank">http://www.opensourcebeehives.net/ </a>
+        <%= project.tagline %>, 
+        	<a href="<%= project.website %>" target="_blank">Website</a>
 
         <span class='more-details'></span>
         </p>

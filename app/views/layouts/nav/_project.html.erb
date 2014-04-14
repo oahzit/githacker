@@ -1,3 +1,6 @@
+<% @user = current_user %>
+<% @users_project = @user.users_projects.where(:project_id => @project.id).first %>
+
 <nav class="main-nav">
 	<div class="container">
 		<ul>
