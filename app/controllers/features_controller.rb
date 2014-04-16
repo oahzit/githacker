@@ -1,7 +1,6 @@
 class FeaturesController < ApplicationController
-    before_filter :authenticate_user!
-    before_filter :authorize
-
+    before_filter :authenticate_user!, :except => :index
+    before_filter :authorize, :except => :index
 	def index
 		@users = User.all
 		@user = current_user
