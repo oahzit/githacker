@@ -10,4 +10,4 @@ Feature: Visitor Access
     Scenario: Cannot access users projects
       Given I exist as a visitor
       When I go to view another users projects
-      Then I should see an authorization error
+      Then I should see an authentication error

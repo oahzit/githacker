@@ -13,20 +13,38 @@ class ApplicationController < ActionController::Base
   protected
 
   def admin?
-  	current_user.has_role? :admin
+  	if current_user.present?
+  		current_user.has_role? :admin
+  	else
+  		false
+  	end
   end  
 
   # Create authorization function to prevent users from accessing other users content 
   def authorize
+  	access = true
   	if !admin?
-  		@user = User.find(params[:user_id])
-  		if @user == current_user
-  			true
-  		else
-  			flash[:error] = "Unauthorized access"
-  			redirect_to root_path
-  			false
+  		access = false
+  		if params[:user_id].present?
+  			@user = User.find(params[:user_id])
+  			if @user == current_user
+  				access = true
+  			else 
+  				access = false
+  			end
+  		elsif params[:project_id].present?
+  			if UsersProject.where(:project_id => params[:project_id], :user_id => current_user.id).first.present? || Project.find(params[:project_id]).public
+  				access = true
+  			else 
+  				access = false
+  			end
   		end
+  	end
+  	
+  	if !access
+  		flash[:error] = "Unauthorized access"
+  		redirect_to root_path
+  		false
   	end
   end
 

@@ -12,18 +12,17 @@ def create_project
   create_example_project
   delete_project
   @project = FactoryGirl.create(:project, name: @example_project[:name])
+  create_user_project
 end
 
 def create_private_project
-  create_example_project
-  delete_project
-  @project = FactoryGirl.create(:project, name: @example_project[:name], public: false)
+  create_project
+  @project.update_atrribute(:public => false)
 end
 
 def create_public_project
-  create_example_project
-  delete_project
-  @project = FactoryGirl.create(:project, name: @example_project[:name], public: true)
+  create_project
+  @project.update_atrribute(:public => true)
 end
 
 def delete_project
@@ -32,6 +31,10 @@ def delete_project
 end
 
 ### GIVEN ###
+Given /^a project exists$/ do
+  create_project
+end
+
 Given /^a public project exists$/ do
   create_public_project
 end

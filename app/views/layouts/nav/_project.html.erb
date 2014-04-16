@@ -1,4 +1,9 @@
 
+<% if !@users_project.present? %>
+	<% @users_project = UsersProject.where(:user_id => current_user.id, :project_id => @project.id).first %>
+<% end %>
+
+
 <nav class="main-nav">
 	<div class="container">
 		<ul>
