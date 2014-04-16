@@ -6,14 +6,14 @@ class ProjectsController < ApplicationController
 	def show
 		@project = Project.find(params[:id])
         @activities = @project.activities.order("updated_at DESC").all
-	end
+    end
 
-	def new
+    def new
         @user = User.find(params[:user_id])
-		@project = Project.new
-	end
+        @project = Project.new
+    end
 
-	def create
+    def create
         # When a project is created 
         @user = User.find(params[:user_id])
         @project = Project.create(params[:project])
@@ -64,20 +64,20 @@ def team
 end
 
 def add_member
- UsersProject.in_project(Project.find(1)).count
- @project = Project.find(params[:id])
- @group = Group.where(:name => "Master Group: #{@project.id}").first
- @user = User.where(:email => params[:email]).first
- @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: params[:users_project][:access])
- @usersgroup = UsersGroup.create(user_id: @user.id, group_id: @group.id, access: 0, notification_level: 0)
-respond_to do |format|
+   UsersProject.in_project(Project.find(1)).count
+   @project = Project.find(params[:id])
+   @group = Group.where(:name => "Master Group: #{@project.id}").first
+   @user = User.where(:email => params[:email]).first
+   @usersproject = UsersProject.create(user_id: @user.id, project_id: @project.id, access: params[:users_project][:access])
+   @usersgroup = UsersGroup.create(user_id: @user.id, group_id: @group.id, access: 0, notification_level: 0)
+   respond_to do |format|
     if @usersproject.save && @usersgroup.save
-     UserMailer.add_member_email(@user, @project).deliver
-     format.html { redirect_to team_project_path(@project), notice: 'Project was successfully updated.' }
- else
-     format.html { redirect_to team_project_path(@project), notice: 'Project was unsuccessfully updated.' }
+       UserMailer.add_member_email(@user, @project).deliver
+       format.html { redirect_to team_project_path(@project), notice: 'Project was successfully updated.' }
+   else
+       format.html { redirect_to team_project_path(@project), notice: 'Project was unsuccessfully updated.' }
 
- end
+   end
 end
 end
 

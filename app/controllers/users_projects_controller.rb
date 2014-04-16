@@ -1,4 +1,7 @@
 class UsersProjectsController < ApplicationController
+    before_filter :authenticate_user!
+    before_filter :authorize
+
 	def index
     @user = User.find(params[:user_id])
     @projects = @user.projects.order("updated_at DESC").all

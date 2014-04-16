@@ -1,4 +1,7 @@
 class IssuesController < ApplicationController
+    before_filter :authenticate_user!
+    before_filter :authorize
+
 	def display
         @user = User.find(params[:user_id])
         @issues = @user.issues

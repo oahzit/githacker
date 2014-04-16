@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+    before_filter :authenticate_user!
+    before_filter :authorize
 
 	def create
         # When an issue is created 

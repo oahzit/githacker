@@ -10,11 +10,11 @@ Feature: Sign in
         And I should be signed out
 
   Scenario: User has not confirmed account
-    Given I exist as an unconfirmed user
+    Given I exist as a user
     And I am not logged in
     When I sign in with valid credentials
-    Then I see an unconfirmed account message
-    And I should be signed out
+    Then I see a successful sign in message
+
     Scenario: User signs in successfully
       Given I exist as a user
         And I am not logged in

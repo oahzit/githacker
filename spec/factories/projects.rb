@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :project do
     name "MyString"
-    path "MyString"
     tagline "MyString"
     description "MyText"
     creator_id 1

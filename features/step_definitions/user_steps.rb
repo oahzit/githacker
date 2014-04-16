@@ -55,6 +55,10 @@ Given /^I am logged in$/ do
   sign_in
 end
 
+Given /^I exist as a visitor$/ do
+  create_visitor
+end
+
 Given /^I exist as a user$/ do
   create_user
 end
@@ -129,7 +133,7 @@ When /^I edit my account details$/ do
 end
 
 When /^I look at the list of users$/ do
-  visit '/'
+  visit '/users'
 end
 
 ### THEN ###
@@ -145,32 +149,28 @@ Then /^I should be signed out$/ do
   page.should_not have_content "Logout"
 end
 
-Then /^I see an unconfirmed account message$/ do
-  page.should have_content "You have to confirm your account before continuing."
-end
-
 Then /^I see a successful sign in message$/ do
   page.should have_content "Signed in successfully."
 end
 
 Then /^I should see a successful sign up message$/ do
-  page.should have_content "A message with a confirmation link has been sent to your email address."
+  page.should have_content "Welcome! You have signed up successfully."
 end
 
 Then /^I should see an invalid email message$/ do
-  page.should have_content "Emailis invalid"
+  page.should have_content "Please review the problems below"
 end
 
 Then /^I should see a missing password message$/ do
-  page.should have_content "Passwordcan't be blank"
+  page.should have_content "Please review the problems below"
 end
 
 Then /^I should see a missing password confirmation message$/ do
-  page.should have_content "Passworddoesn't match confirmation"
+  page.should have_content "Please review the problems below"
 end
 
 Then /^I should see a mismatched password message$/ do
-  page.should have_content "Passworddoesn't match confirmation"
+  page.should have_content "Please review the problems below"
 end
 
 Then /^I should see a signed out message$/ do
