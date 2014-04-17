@@ -72,6 +72,10 @@ Given /^I exist as an unconfirmed user$/ do
   create_unconfirmed_user
 end
 
+Given /^I am an admin$/ do
+  @user.add_role :admin
+end
+
 ### WHEN ###
 When /^I sign in with valid credentials$/ do
   create_visitor

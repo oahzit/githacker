@@ -18,33 +18,33 @@ class Project < ActiveRecord::Base
     # 2: Member
     # 3: Watching
 
-  def last_activity_to_text
-  end
+    def last_activity_to_text
+    end
 
-  def creator
-    User.find(creator_id)
-  end
+    def creator
+      User.find(creator_id)
+    end
 
-  def last_edited
-  	difference = Time.now- self.updated_at
+    def last_edited
+     difference = Time.now- self.updated_at
 
-  	days = (difference/(3600*24)).floor
-  	hr = (difference/(3600)).floor
-  	min = (difference/(60)).floor
+     days = (difference/(3600*24)).floor
+     hr = (difference/(3600)).floor
+     min = (difference/(60)).floor
 
-  	if days > 1 
-  		return "#{days} days ago"
-  	elsif days == 1 
-  		return "#{days} day ago"
-  	elsif hr > 1 
-  		return "#{hr} hours ago"
-  	elsif hr == 1 
-  		return "#{hr} hour ago"  	
-  	elsif min > 1 || min == 0
-  		return "#{min} minutes ago"
-  	elsif min == 1 
-  		return "#{min} minute ago"
-  	end	
+     if days > 1 
+      return "#{days} days ago"
+    elsif days == 1 
+      return "#{days} day ago"
+    elsif hr > 1 
+      return "#{hr} hours ago"
+    elsif hr == 1 
+      return "#{hr} hour ago"  	
+    elsif min > 1 || min == 0
+      return "#{min} minutes ago"
+    elsif min == 1 
+      return "#{min} minute ago"
+    end	
   end
 
   def master_group
@@ -52,7 +52,11 @@ class Project < ActiveRecord::Base
   end
 
   def members_count
-    self.master_group.users.count
+    if self.master_group.present?
+      self.master_group.users.count 
+    else
+      1
+    end
   end
 
   def groups_count

@@ -2,6 +2,7 @@
 <%= render 'layouts/nav/public' %>
 <% end %>
 
+<% if @project.public %>
 <div class="row">
 	<div class="span9">
 					<p> <%= @project.description %></p>
@@ -26,3 +27,4 @@
 	</div>
 </div>
 </div>
+<% end %>

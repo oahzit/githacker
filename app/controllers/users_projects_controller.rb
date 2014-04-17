@@ -6,7 +6,7 @@ class UsersProjectsController < ApplicationController
     @user = User.find(params[:user_id])
     @projects = @user.projects.order("updated_at DESC").all
     @users_projects = UsersProject.where(:user_id => @user.id)
-    @as_owner = Project.where(:creator_id => @user.id).all
+    @as_owner = @users_projects.where(:access_level => 0).all
     @as_member = @users_projects.where(:access_level => 1).all
     @as_watcher = @users_projects.where(:access_level => 2).all
   end
@@ -15,7 +15,7 @@ class UsersProjectsController < ApplicationController
     @user = User.find(params[:user_id])
     @users_project = UsersProject.find(params[:id])
     @project = Project.find(@users_project.project_id)
-    @owner = User.find(@project.creator_id)
+    @owner = Profile.find(@project.creator_id)
     @activities = @project.activities.order("updated_at DESC").all
   end
 

@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController
+
 	def index
 		@projects = Project.public_viewing.order("updated_at DESC").all
 	end
 
 	def show
-		@project = Project.find(params[:id])
+		    @project = Project.find(params[:id])
         @activities = @project.activities.order("updated_at DESC").all
     end
 

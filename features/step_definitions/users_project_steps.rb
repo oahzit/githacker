@@ -2,6 +2,10 @@ def create_user_project
 	@users_project = FactoryGirl.create(:users_project, user_id: @user.id, project_id: @project.id)
 end
 
+When /^I go to the users projects page$/ do
+	visit user_users_projects_path(@user)
+end
+
 When /^I go to view another users projects$/ do
 	@second_user = FactoryGirl.create(:user, :email => "test@test.com") if !@second_user.present?
 	visit user_users_projects_path(@second_user)

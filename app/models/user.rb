@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
         self.profile = @profile
         self.profile.update_attributes(:name => name)
       else
-        self.create_profile(:name => name)
+        self.create_profile!(:name => name)
       end
     end
 
