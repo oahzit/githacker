@@ -1,5 +1,5 @@
 <% content_for :nav do %>
-  <%= render 'layouts/nav/dashboard' %>
+<%= render 'layouts/nav/dashboard' %>
 <% end %>
 
 <h3 class="page-title"> My Projects </h3>
@@ -7,44 +7,48 @@
 <hr>
 
 <div class="span3">
-    <ul class="nav nav-pills nav-stacked">
-      <li><a> ALL
-          <span class="pull-right"> <%= @projects.count %> <span></a></li>
-      <li><a> Owner
-          <span class="pull-right"> <%= @as_owner.count %> <span></a></li>
-      <li><a> Member
-          <span class="pull-right"> <%= @as_member.count %> <span></a></li>    
-      <li><a> Watching
-          <span class="pull-right"> <%= @as_watcher.count %> <span></a></li>    
-    </ul>
-</div>
+	<ul class="nav nav-pills nav-stacked">
+		<li><a> ALL
+			<span class="pull-right"> <%= @projects.count %> <span></a></li>
+				<li><a> Owner
+					<span class="pull-right"> <%= @as_owner.count %> <span></a></li>
+						<li><a> Member
+							<span class="pull-right"> <%= @as_member.count %> <span></a></li>    
+								<li><a> Watching
+									<span class="pull-right"> <%= @as_watcher.count %> <span></a></li>    
+									</ul>
+								</div>
 
-<div class="span8">
-	<% if @projects.blank? %>
-	    <h3 class="page-title center"> There are no projects here.</h3>
-	<% else %>
-		<ul>
-		<% @projects.each do |project| %>
-				<h4 class="project-title">
-					<span class="access-icon">
-					<% if project.public %>
-					<i class="icon-globe" style="margin-top:5px;"></i>
-					<% else %>
-					<i class="icon-lock" style="margin-top:5px;"></i>
-					<% end %>
-					</span>
-					
-					<%= link_to project.name, user_users_project_path(current_user, UsersProject.where(:project_id => project.id).first), :class=>"project" %>
-				</h4>
-				<p><%= project.tagline %> </p>
-				<div class="last-activity">
-				<span class="light">Last activity:</span>
-				<span class="date"><%= project.last_edited %></span>
-				</div>
-			<hr>
-		<% end %>
-	</ul>
-	<% end %>
+								<div class="span8">
+									<% if @projects.blank? %>
+									<h3 class="page-title center"> There are no projects here.</h3>
+									<% else %>
+									<ul>
+										<% @projects.each do |project| %>
+										<div  style="position:relative;">
+											<h4 class="project-title">
+												<span class="access-icon">
+													<% if project.public %>
+													<i class="icon-globe" style="margin-top:5px;"></i>
+													<% else %>
+													<i class="icon-lock" style="margin-top:5px;"></i>
+													<% end %>
+												</span>
 
-	<%= link_to "Create Project", new_user_users_project_path(current_user), :class => "btn btn-default pull-right" %>
-</div>
+												<%= link_to project.name, user_users_project_path(current_user, UsersProject.where(:project_id => project.id).first), :class=>"project" %>
+											</h4>
+											<p><%= project.tagline %> </p>
+											<div class="last-activity">
+												<span class="light">Last activity:</span>
+												<span class="date"><%= project.last_edited %></span>
+												<span class="action last pull-right" style="position:absolute;top:15px;right:10px;"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, user_users_project_path(current_user, UsersProject.where(:project_id => project.id).first), :data => { :confirm => "Are you sure?" }, :method => :delete) %></span>
+
+											</div>
+										</div>
+										<hr>
+										<% end %>
+									</ul>
+									<% end %>
+
+									<%= link_to "Create Project", new_user_users_project_path(current_user), :class => "btn btn-default pull-right" %>
+								</div>

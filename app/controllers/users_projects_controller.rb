@@ -1,8 +1,8 @@
 class UsersProjectsController < ApplicationController
-    before_filter :authenticate_user!
-    before_filter :authorize
+  before_filter :authenticate_user!
+  before_filter :authorize
 
-	def index
+  def index
     @user = User.find(params[:user_id])
     @projects = @user.projects.order("updated_at DESC").all
     @users_projects = UsersProject.where(:user_id => @user.id)
@@ -78,6 +78,17 @@ class UsersProjectsController < ApplicationController
       end
     end 
 
+    def destroy
+      @user = User.find(params[:user_id])
+      @users_project = UsersProject.find(params[:id])
+      @project = Project.find(@users_project.project_id)
+      if @user.profile.id == @project.creator_id
+
+      end
+      @users_project.destroy
+      redirect_to :back
+    end
+
     def add_member
         # When a project is created 
         @user = User.where(:email => params[:email]).first
@@ -116,9 +127,9 @@ class UsersProjectsController < ApplicationController
           @owner = User.find(@project.creator_id)
         end
 
-    def follow
-      @users_project = UsersProject.create!(:user_id => params[:user_id], :project_id => params[:project_id], :access_level => 2)
-      redirect_to :back
-    end
+        def follow
+          @users_project = UsersProject.create!(:user_id => params[:user_id], :project_id => params[:project_id], :access_level => 2)
+          redirect_to :back
+        end
 
       end
