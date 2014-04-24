@@ -25,7 +25,12 @@
   <p><%= f.label :description, "Description (optional)" %>
     <%= f.text_area :description, placeholder: "enter project description", class: "form-control", :style => "width:100%;" , rows: 7, maxlength: 700%>
   </p>
+  <p><%= label_tag "new_group", "Create a New Group"%>
+    <%= text_field_tag "new_group", "", class: "form-control", :style => "width:100%;" %>
 
+  <p><%= label_tag "group_id", "Assign to Existing Group"%>
+  <%= select_tag "group_id", content_tag(:option,'Start New Group',:value=> 0)+options_from_collection_for_select(@user.groups, "id", "name" ), :required => true, :class => "form-control" %></p> 
+<!-- content_tag(:option,'select one...',:value=>"")+ -->
 <% if @users_project.access_level == 0 %>
     <p><%= f.check_box :public %>
       <span class="help-inline"> Make project visible to everyone </span></p>

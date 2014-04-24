@@ -26,19 +26,33 @@ class UsersProjectsController < ApplicationController
   end
 
   def create
-        # When a project is created 
-        @user = User.find(params[:user_id])
+    @user = User.find(params[:user_id])
 
+        # When a project is created 
         ActiveRecord::Base.transaction do
           @project = Project.create(params[:users_project][:project])
 
-        # a group is automatically generated
-        @group = Group.create!(name: "Master Group", owner_id: @user.id)
-        @group.save
-        @users_groups = UsersGroup.create!(user_id: @user.id, group_id: @group.id)
+          if params[:group_id].present? 
+            if params[:group_id] == "0"
+        # if the group doesn't exist
+        if params[:new_group] == ""
+          @group = Group.create!(name: "#{@project.name} Team", owner_id: @user.id, parent_id: 0)
+
+        else
+          @name = params[:new_group]        
+          @group = Group.create!(name: @name, owner_id: @user.id, parent_id: 0)
+        end
+      else
+        # if the group exists
+        @group = Group.find(params[:group_id])
+      end
+    end
+
+        # a relationship to the group is automatically generated
         @projects_group = ProjectsGroup.create!(group_id: @group.id, project_id: @project.id)
 
         # and the user who created it is added to the group and project
+        @users_group = UsersGroup.create!(user_id: @user.id, group_id: @group.id)
         @users_project = UsersProject.create!(user_id: @user.id, project_id: @project.id)
       end
 
@@ -83,7 +97,7 @@ class UsersProjectsController < ApplicationController
       @users_project = UsersProject.find(params[:id])
       @project = Project.find(@users_project.project_id)
       if @user.profile.id == @project.creator_id
-
+        @project.destroy
       end
       @users_project.destroy
       redirect_to :back
@@ -128,7 +142,9 @@ class UsersProjectsController < ApplicationController
         end
 
         def follow
-          @users_project = UsersProject.create!(:user_id => params[:user_id], :project_id => params[:project_id], :access_level => 2)
+          if !UsersProject.where(:user_id => params[:user_id], :project_id => params[:project_id]).present?
+            @users_project = UsersProject.create!(:user_id => params[:user_id], :project_id => params[:project_id], :access_level => 2)
+          end
           redirect_to :back
         end
 

@@ -1,6 +1,6 @@
 class DiscussionsController < ApplicationController
     before_filter :authenticate_user!
-    before_filter :authorize
+    before_filter :authorize, :except => :up_vote, :except => :down_vote
 
 	def new
 		@project = Project.find(params[:project_id])

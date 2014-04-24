@@ -16,21 +16,27 @@
 	<ul>
 		<% @projects.each do |project| %>
 		<h4 class="project-title">
+			<% users_project = @user.users_projects.where(:project_id => project.id).first %>
+
 			<span class="access-icon">
-				<% if @user.users_projects.where(:project_id => project.id).present? %>
-				<% if @user.users_projects.where(:project_id => project.id).first.access_level == 0 %>
+				<% if users_project.present? %>
+				<% if users_project.access_level == 0 %>
 				<i class="icon-bookmark" style="margin-top:5px;"></i>
 				<% else %>
-				<%= link_to("<i class=\"icon-eye-open\" style=\"margin-top:5px;\"></i>".html_safe.html_safe, user_users_project_path(@user, @users_project), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-default pull-right', :style => "margin-right:10px;") %>
+				<%= link_to("<i class=\"icon-eye-open\" style=\"margin-top:5px;\"></i>".html_safe.html_safe, user_users_project_path(@user, project), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'pull-right', :style => "margin-right:10px;") %>
 				<% end %>
 				<% else %>
-				<%= link_to "<i class=\"icon-eye-close\" style=\"margin-top:5px;\"></i>".html_safe, follow_project_path(current_user, project), :class=>"btn btn-default btn-mini pull-right" %>
+				<%= link_to "<i class=\"icon-eye-close\" style=\"margin-top:5px;\"></i>".html_safe, follow_project_path(current_user, project), :class=>"pull-right" %>
 
 				<% end %>
 			</span>
 
+			<% if users_project.present? %>
+			<%= link_to project.name, user_users_project_path(current_user, users_project), :class=>"project" %>
+			<% else %>
+			<%= link_to project.name, project_path(project), :class=>"project" %>
+			<% end %>
 
-			<%= link_to project.name, user_users_project_path(current_user, project), :class=>"project" %>
 		</h4>
 		<div>
 			<p><%= project.tagline %> </p>

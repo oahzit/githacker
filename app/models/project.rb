@@ -11,6 +11,8 @@ class Project < ActiveRecord::Base
   attr_accessible :name, :website, :wiki, :github, :tagline, :description, :creator_id, :public
 
   scope :public_viewing, where(:public => true)
+  validates :name, presence: true
+  validates :creator_id, presence: true
 
   # ACCESS LEVELS
     # 0: Owner

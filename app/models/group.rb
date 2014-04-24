@@ -2,8 +2,10 @@ class Group < ActiveRecord::Base
   has_many :users_groups, dependent: :destroy
   has_many :users, foreign_key: "user_id", :through => :users_groups
 
-  has_many :projects
-  attr_accessible :user_id, :group_id, :access_level
+  has_many :projects_groups, dependent: :destroy
+  has_many :projects, foreign_key: "project_id", :through => :projects_groups
+
+  attr_accessible :owner_id, :group_id, :access_level, :name
 
   def owners
     @owners ||= users_groups.owners.map(&:user)
@@ -31,7 +33,24 @@ class Group < ActiveRecord::Base
     has_owner?(user) && owners.size == 1
   end
 
+  def children
+    Group.where(:parent_id => self.id).all
+  end
+
   def members
     users
   end
+
+  def total_members
+    users 
+    self.children.each do |group|
+      group.total_members.each do |user|
+        if !users.where(:user_id => user.id).first.present?
+          users << user
+        end
+      end
+    end
+    return users
+  end
+
 end

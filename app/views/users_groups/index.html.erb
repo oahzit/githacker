@@ -1,0 +1,36 @@
+<% content_for :nav do %>
+<%= render 'layouts/nav/dashboard' %>
+<% end %>
+
+<h3 class="page-title"> My Groups </h3>
+<p class="light"> All teams that you are a part of. </p>
+<hr>
+
+<div class="span3">
+	<ul class="nav nav-pills nav-stacked">
+		<% @user.groups.each do |group| %>
+		<li><a> <%= group.name %>  <span class="pull-right"> 0 <span></a>
+		</li>
+		<% end %>   
+	</ul>
+</div>
+
+<div class="span8">
+	<ul>
+		<% @user.groups.each do |group| %>
+		<div  style="position:relative;">
+			<h4 class="project-title">
+				<%= link_to group.name, user_users_group_path(current_user, UsersGroup.where(:group_id => group.id).first), :class=>"project" %>
+			</h4>
+			<div class="last-activity">
+				<span class="light">Last activity:</span>
+				<span class="date"><%= group.created_at %></span>
+				<span class="action last pull-right" style="position:absolute;top:15px;right:10px;"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, user_users_group_path(current_user, UsersGroup.where(:group_id => group.id).first), :data => { :confirm => "Are you sure?" }, :method => :delete) %></span>
+
+			</div>
+		</div>
+		<hr>
+		<% end %>
+	</ul>
+	<%= link_to "Create Group", new_user_users_group_path(current_user), :class => "btn btn-default pull-right" %>
+</div>
