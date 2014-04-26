@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '2.1.1'
 gem 'rails'
 gem 'jbuilder', '~> 1.2'
 gem 'cancan'
