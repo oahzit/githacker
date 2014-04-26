@@ -11,22 +11,21 @@ class User < ActiveRecord::Base
 
   has_many :users_projects, dependent: :destroy
   has_many :users_skills, dependent: :destroy
-  has_many :skills, foreign_key: "skill_id", :through => :users_skills, :uniq => true
-  has_many :projects, foreign_key: "project_id", :through => :users_projects, :uniq => true
-
+  has_many :skills, foreign_key: "skill_id", :through => :users_skills
+  has_many :projects, foreign_key: "project_id", :through => :users_projects
   has_many :users_groups, dependent: :destroy
-  has_many :groups, foreign_key: "group_id", :through => :users_groups, :uniq => true
+  has_many :groups, foreign_key: "group_id", :through => :users_groups
 
   attr_accessible :name, :email, :password, :password_confirmation
 
     # Required to create complete profile for user
     def instantiate_profile
-      @profile = Profile.where(:name => name).first
+      @profile = Profile.where(:email => email).first
       if @profile.present?
         self.profile = @profile
-        self.profile.update_attributes(:name => name)
+        self.profile.update_attributes(:email => email)
       else
-        self.create_profile!(:name => name)
+        self.create_profile!(:email => email)
       end
     end
 

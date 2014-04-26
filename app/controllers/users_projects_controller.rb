@@ -1,6 +1,6 @@
 class UsersProjectsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :authorize
+  before_filter :authorize, :except => :add_member
 
   def index
     @user = User.find(params[:user_id])
