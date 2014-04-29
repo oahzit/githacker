@@ -26,6 +26,13 @@ li {
   list-style-type:none;
 }
 
+a{
+  text-decoration: none;
+}
+.action:hover{
+  text-decoration: none;
+}
+
 .content {
   width: 1170px;
     padding-top: 0px;

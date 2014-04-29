@@ -1,10 +1,6 @@
-<% if @project.present? %>
 <% content_for :nav do %>
 <%= render 'layouts/nav/project' %>
 <% end %>
-
-<h3 style="text-align:center;margin-bottom:25px;">Your files are presently stored off-site:</h3>
-<p style = "text-align:center;"><%= link_to "Visit them on GitHub", @project.github, :target => "_blank", :class => "btn btn-default" %></p>
 
 <style type="text/css">
 body{
@@ -21,35 +17,20 @@ body{
 	width:100%;
 	background-color: #fff;
 }
-#editable { margin-bottom: 20px; }
-[contenteditable="true"] { padding: 5px; outline: 2px dashed #CCC; }
-[contenteditable="true"]:hover { outline: 2px dashed #0090D2; }
-li{
-	list-style-type: none;
-}
+
 </style>
 
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#new_feature_form").hide();
 });
-
-
-function toggle_edit(id){
-				if ($("#"+id)[0].getAttribute("contentEditable") == "false"){
-					$("#"+id)[0].setAttribute("contentEditable", true);
-}
-else{
-	$("#"+id)[0].setAttribute("contentEditable", false);
-}
-};
 </script>
 
 <div class="row">
 	<% @discussion = Feature.new %>
 	<div class="span12">
 		<div class="project_clone_panel">
-			<strong>Storyboard for <%= @project.name %> </strong>
+			<strong><%= @storyboard.subject %> </strong>
 			<span class="glyphicon glyphicon-plus-sign pull-right" style="font-size:20px;" onClick='$("#new_feature_form").toggle();'></span>			
 		</div>
 		<section class="discussions-body" id="new_feature_form" style="margin-top:-15px;margin-bottom:20px;">
@@ -59,12 +40,27 @@ else{
 		</section>
 	</div>
 
-	<% if !@storyboards.present? %>
-	<p class="center"> There are no active storyboards for this project.</p>
-	<% else %>
+
+	<section class="discussions-body" style="position:relative;margin-bottom:30px;padding:10px;margin-left:20px;width:95%;">
+		<span style ="position:absolute; margin-left:-28px;">
+			<%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_discussion_path(@storyboard) %></br>
+			<strong style="margin-left:3px;margin-top:-5px;"><%= @storyboard.vote_count %></strong>
+			<p style="margin-top:5px;"><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_discussion_path(@storyboard) %></p>
+		</span>
+<!-- 		<img alt="" style="margin: 6px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
+-->		<span class="title first"><%= link_to @storyboard.subject, project_feature_path(@project, @storyboard) %> </span>
+<span class="action last pull-right"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_feature_path(@project, @storyboard), :data => { :confirm => "Are you sure?" }, :method => :delete) %></span>
+<span class="lastEditedDate pull-right" style="width:110px;"><%= @storyboard.created %></span>
+
+</br>
+<div><%= simple_format(@storyboard.body)%></div>
+<span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"> edit content <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, edit_project_discussion_path(@project, @storyboard) %>
+</span>
+</section>
 
 
-	<% @storyboards.each do |storyboard| %>
+
+	<% @comments.each do |storyboard| %>
 	<section class="discussions-body" style="position:relative;margin-bottom:30px;padding:10px;margin-left:20px;width:95%;">
 		<span style ="position:absolute; margin-left:-28px;">
 			<%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_discussion_path(storyboard) %></br>
@@ -77,29 +73,8 @@ else{
 <span class="lastEditedDate pull-right" style="width:110px;"><%= storyboard.created %></span>
 
 </br>
-<div id="editable<%=storyboard.id%>" class="editable" contentEditable="false">
-<%= simple_format(storyboard.body)%>
-<span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"> <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, edit_project_discussion_path(@project, storyboard), :remote => true, :onClick => "toggle_edit(this.parentNode.parentNode.id)" %>
+<div><%= simple_format(storyboard.body)%></div>
+<span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"> edit content <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, edit_project_discussion_path(@project, storyboard) %>
 </span>
-</div>
 </section>
 <% end %>
-
-<% end %>
-
-
-
-
-
-
-
-
-
-
-<% else %>
-<% content_for :nav do %>
-<%= render 'layouts/nav/public' %>
-<% end %>
-
-<% end %>
-
