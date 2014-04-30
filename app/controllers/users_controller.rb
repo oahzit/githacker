@@ -19,6 +19,10 @@ class UsersController < ApplicationController
       redirect_to users_path, :alert => "Unable to update user."
     end
   end
+
+  def add_skills
+    d
+  end
     
   def destroy
     authorize! :destroy, @user, :message => 'Not authorized as an administrator.'

@@ -57,18 +57,6 @@ class FeaturesController < ApplicationController
     	end
     end 
 
-    def up_vote
-    	@storyboard = Discussion.find(params[:id])
-    	@storyboard.up_vote
-    	redirect_to :back
-    end
-
-    def down_vote
-    	@storyboard = Discussion.find(params[:id])
-    	@storyboard.down_vote
-    	redirect_to :back
-    end
-
     def destroy
     	@storyboard = Discussion.find(params[:id])
     	@storyboard.destroy

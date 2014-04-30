@@ -49,10 +49,10 @@ def create
 
     	respond_to do |format|
     		if @issue.update_attributes(params[:discussion])
-    			format.html { redirect_to project_path(@project), notice: 'Project was successfully updated.' }
+    			format.html { redirect_to project_path(@project), notice: 'Issue was successfully updated.' }
     			format.json { head :no_content }
     		else
-    			format.html { render :action => 'edit', alert: 'Project was unsuccessfully updated.' }
+    			format.html { render :action => 'edit', alert: 'Issue was unsuccessfully updated.' }
     			format.json { render json: @message.errors, status: :unprocessable_entity }
     		end 
     	end

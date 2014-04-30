@@ -2,7 +2,10 @@ class Discussion < ActiveRecord::Base
 	attr_accessible :subject, :body, :type, :archived, :author_id, :vote_count, :status
 	belongs_to :project
 	has_many :comments 
-	
+	acts_as_taggable_on :skills
+	acts_as_taggable_on :category
+	acts_as_taggable_on :related_to
+
 	scope :popular, -> {order("vote_count DESC")}
 	scope :recent, -> {order("created_at DESC")}
 	scope :notes, -> {where(:type => "Note")}
@@ -43,5 +46,16 @@ class Discussion < ActiveRecord::Base
 	def down_vote
 		self.vote_count = self.vote_count - 1
 		self.save
+	end
+
+	def related_content(type)
+		content_array = []
+		self.related_to_list.each do |id|
+			discussion = Discussion.find(id.to_i)
+			if discussion.type == type
+				content_array << discussion
+			end
+		end
+		return content_array
 	end
 end

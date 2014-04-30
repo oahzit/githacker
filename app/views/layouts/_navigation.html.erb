@@ -5,8 +5,8 @@
       <li><%= link_to 'Admin', users_path %></li>
     <% end %>
 
- <!--  <li><%= link_to 'Add Skills', new_users_skill_path, :class=> "btn btn-default btn-sm", :style=>"padding:5px 20px;height:30px;", :data => {:toggle => "modal", :target => "#addSkillsModal"}, :remote => true %></li>
-  -->   <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+    <li><%= link_to 'Add Skills', "", :data => {:toggle => "modal", :target => "#addSkillsModal"}%></li>
+    <li><%= link_to 'Edit account', edit_user_registration_path %></li>
     <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
   
   <% else %>
@@ -14,4 +14,3 @@
     <li><%= link_to 'Sign up', new_user_registration_path %></li>
   <% end %>
 </ul>
-

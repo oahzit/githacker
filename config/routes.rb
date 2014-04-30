@@ -2,6 +2,10 @@ Githacker::Application.routes.draw do
 	root :to => "home#index"
 	devise_for :users, :controllers => {:registrations => "registrations"}
 	resources :users do
+		member do
+			post :add_skills  
+		end
+
 		resources :groups 
 		resources :users_groups do
 		end

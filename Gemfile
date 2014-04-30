@@ -11,7 +11,7 @@ gem 'rolify'
 gem 'thin'
 gem 'heroku'
 gem 'protected_attributes'
-
+gem 'acts-as-taggable-on'
 gem 'git'
 
   gem "uglifier"

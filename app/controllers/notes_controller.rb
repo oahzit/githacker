@@ -47,27 +47,15 @@ class NotesController < ApplicationController
 
     	respond_to do |format|
     		if @note.update_attributes(params[:discussion])
-    			format.html { redirect_to project_path(@project), notice: 'Project was successfully updated.' }
+    			format.html { redirect_to project_path(@project), notice: 'Note was successfully updated.' }
     			format.json { head :no_content }
     		else
-    			format.html { render :action => 'edit', alert: 'Project was unsuccessfully updated.' }
+    			format.html { render :action => 'edit', alert: 'Note was unsuccessfully updated.' }
     			format.json { render json: @message.errors, status: :unprocessable_entity }
     		end 
     	end
     end 
-
-    def up_vote
-        @note = Discussion.find(params[:id])
-        @note.up_vote
-        redirect_to :back
-    end
-
-    def down_vote
-        @note = Discussion.find(params[:id])
-        @note.down_vote
-        redirect_to :back
-    end
-
+    
     def destroy
     	@note = Discussion.find(params[:id])
     	@note.destroy

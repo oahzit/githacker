@@ -6,24 +6,60 @@
 body{
 	background-color: #eee;
 }
-.discussions-body {
-	display:inline-block;
-	background-color: #fff;
-	margin: 0 auto;
-	box-shadow: 0 1px 2px #aaa;
-	border-collapse: collapse;
-	border: 0;
-	text-shadow: none;
-	width:100%;
-	background-color: #fff;
+
+.feature-body{
+	position:relative;
+	margin-bottom:30px;
+	padding:10px;
+	margin-left:20px;
+	width:96%;
 }
 
+section{
+	margin-left: 20px;
+}
 </style>
 
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#new_feature_form").hide();
+	$("#features").hide();
+	$("#issues").hide();
 });
+
+function navigateContent(url){
+	var id = url.hash.substr(1);
+	$("#content-nav").find('li').each(function(){
+		$(this).removeClass("active");
+	});
+	$("#comments").hide();
+	$("#features").hide();
+	$("#issues").hide();
+	$("#" + id).show();
+	$("#" + id + "_link").addClass("active");
+
+}
+
+function toggle_edit(id){
+	alert(id);
+	if ($("#"+id)[0].getAttribute("contentEditable") == "false"){
+
+		$("#"+id)[0].setAttribute("contentEditable", true);
+	}
+	else{
+		$("#"+id)[0].setAttribute("contentEditable", false);
+		$.ajax({
+			type: 'PUT',
+			url:  '/discussions/'+ id + '/edit',
+			data: "Here",
+			dataType: "JSON",
+			success: function(data) {
+				console.log(data);
+			}
+		});
+	}
+};
+
 </script>
 
 <div class="row">
@@ -40,33 +76,43 @@ $(document).ready(function() {
 		</section>
 	</div>
 
+	<section id="feature-body" class="discussions-body" style="padding:10px;margin-left:20px; width:96%;margin-bottom:40px;">
+		<div class="row">
+			<div id="text-body" class="span10"><%= simple_format(@storyboard.body)%></div>
+			<div class="span1" style="margin-left:80px;">		<span class="action last pull-right"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_feature_path(@project, @storyboard), :data => { :confirm => "Are you sure?" }, :method => :delete) %></span>
+				<span class="pull-right" style ="margin-right:10px;"> <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, "", :id=>"link", :remote => true, :onClick => "toggle_edit(this.parentNode.parentNode.previousSibling.id)", :style=>"color:#888" %>
 
-	<section class="discussions-body" style="position:relative;margin-bottom:30px;padding:10px;margin-left:20px;width:95%;">
-		<span style ="position:absolute; margin-left:-28px;">
-			<%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_discussion_path(@storyboard) %></br>
-			<strong style="margin-left:3px;margin-top:-5px;"><%= @storyboard.vote_count %></strong>
-			<p style="margin-top:5px;"><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_discussion_path(@storyboard) %></p>
-		</span>
-<!-- 		<img alt="" style="margin: 6px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
--->		<span class="title first"><%= link_to @storyboard.subject, project_feature_path(@project, @storyboard) %> </span>
-<span class="action last pull-right"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_feature_path(@project, @storyboard), :data => { :confirm => "Are you sure?" }, :method => :delete) %></span>
-<span class="lastEditedDate pull-right" style="width:110px;"><%= @storyboard.created %></span>
+				</div>
+			</div>
+			<span class="lastEditedDate pull-right" style="margin-top:-15px;"><%= @storyboard.created %></span>
 
-</br>
-<div><%= simple_format(@storyboard.body)%></div>
-<span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"> edit content <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, edit_project_discussion_path(@project, @storyboard) %>
-</span>
-</section>
+		</section>
 
+		<section>
+			<% if @storyboard.skill_list.present? %>
+			<p><strong>Requires skills: </strong> <%= @storyboard.skill_list %></p>
+			<% end %>
 
+		</br>
+		<strong> Related Content </strong>
+		<ul id="content-nav" class="nav nav-tabs">
+			<li id="comments_link" class="active"><a href="#comments" onClick="navigateContent(this)">Comments</a></li>
+			<li id="features_link"><a href="#features" onClick="navigateContent(this)">Features</a></li>
+			<li id="issues_link"><a href="#issues" onClick="navigateContent(this)">Issues</a></li>
+		</ul>
+	</section>
 
-	<% @comments.each do |storyboard| %>
-	<section class="discussions-body" style="position:relative;margin-bottom:30px;padding:10px;margin-left:20px;width:95%;">
-		<span style ="position:absolute; margin-left:-28px;">
-			<%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_discussion_path(storyboard) %></br>
-			<strong style="margin-left:3px;margin-top:-5px;"><%= storyboard.vote_count %></strong>
-			<p style="margin-top:5px;"><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_discussion_path(storyboard) %></p>
-		</span>
+	<section id="comments">
+		<% if !@comments.present? %> 
+		There are no comments yet.
+		<% end %>
+		<% @comments.each do |storyboard| %>
+		<div class="discussions-body" style="position:relative;margin-bottom:30px;padding:10px;margin-left:20px;width:95%;">
+			<span style ="position:absolute; margin-left:-28px;">
+				<%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_discussion_path(storyboard) %></br>
+				<strong style="margin-left:3px;margin-top:-5px;"><%= storyboard.vote_count %></strong>
+				<p style="margin-top:5px;"><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_discussion_path(storyboard) %></p>
+			</span>
 <!-- 		<img alt="" style="margin: 6px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
 -->		<span class="title first"><%= link_to storyboard.subject, project_feature_path(@project, storyboard) %> </span>
 <span class="action last pull-right"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_feature_path(@project, storyboard), :data => { :confirm => "Are you sure?" }, :method => :delete) %></span>
@@ -76,5 +122,45 @@ $(document).ready(function() {
 <div><%= simple_format(storyboard.body)%></div>
 <span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"> edit content <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, edit_project_discussion_path(@project, storyboard) %>
 </span>
-</section>
+</div>
 <% end %>
+</section>
+<section id="features">
+
+	<% if !@storyboard.related_content("Feature").present? %>
+	There are no related features.
+	<% end %>
+
+	<section class="discussions-body simpletable" style="width:97%;margin-left:15px;">
+		<table class="table table-condensed table-hover">
+			<tbody>
+				<% @storyboard.related_content("Feature").each do |feature| %>
+				<tr>
+					<td class="title first"><%= link_to feature.subject, [@project, feature] %></td>
+					<td class="lastEditedDate"><%= feature.created %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</section>
+
+</section>
+<section id="issues">
+
+	<% if !@storyboard.related_content("Issue").present? %>
+	There are no related issues.
+	<% end %>
+
+	<section class="discussions-body simpletable" style="width:97%;margin-left:15px;">
+		<table class="table table-condensed table-hover">
+			<tbody>
+				<% @storyboard.related_content("Issue").each do |issue| %>
+				<tr>
+					<td class="title first"><%= link_to issue.subject, [@project, issue] %></td>
+					<td class="lastEditedDate"><%= issue.created %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</section>
+</section>

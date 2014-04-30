@@ -21,12 +21,7 @@ body{
 	width:100%;
 	background-color: #fff;
 }
-#editable { margin-bottom: 20px; }
-[contenteditable="true"] { padding: 5px; outline: 2px dashed #CCC; }
-[contenteditable="true"]:hover { outline: 2px dashed #0090D2; }
-li{
-	list-style-type: none;
-}
+
 </style>
 
 <script type="text/javascript">
@@ -36,22 +31,22 @@ $(document).ready(function() {
 
 
 function toggle_edit(id){
-				if ($("#"+id)[0].getAttribute("contentEditable") == "false"){
+	if ($("#"+id)[0].getAttribute("contentEditable") == "false"){
 
-					$("#"+id)[0].setAttribute("contentEditable", true);
-}
-else{
-	$("#"+id)[0].setAttribute("contentEditable", false);
-  $.ajax({
-        type: 'PUT',
-        url:  '/discussions/'+ id + '/edit',
-        data: "Here",
-        dataType: "JSON",
-        success: function(data) {
-            console.log(data);
-        }
-    });
-}
+		$("#"+id)[0].setAttribute("contentEditable", true);
+	}
+	else{
+		$("#"+id)[0].setAttribute("contentEditable", false);
+		$.ajax({
+			type: 'PUT',
+			url:  '/discussions/'+ id + '/edit',
+			data: "Here",
+			dataType: "JSON",
+			success: function(data) {
+				console.log(data);
+			}
+		});
+	}
 };
 
 
@@ -90,12 +85,12 @@ else{
 
 </br>
 <div id="<%=storyboard.id%>" class="editable" contentEditable="false">
-<%= simple_format(storyboard.body)%>
-<%= form_for "discussion" do |f| %>
-    <%= f.hidden_field :body, :value => "Test"%>
-<% end %>
-<span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"> <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, "", :remote => true, :onClick => "toggle_edit(this.parentNode.parentNode.id)", :style=>"color:#888" %>
-</span>
+	<%= simple_format(storyboard.body)%>
+	<%= form_for "discussion" do |f| %>
+	<%= f.hidden_field :body, :value => "Test"%>
+	<% end %>
+	<span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"> <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, "", :remote => true, :onClick => "toggle_edit(this.parentNode.parentNode.id)", :style=>"color:#888" %>
+	</span>
 </div>
 </section>
 <% end %>

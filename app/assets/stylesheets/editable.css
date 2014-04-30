@@ -1,0 +1,6 @@
+#editable { margin-bottom: 20px; }
+[contenteditable="true"] { padding: 5px; outline: 2px dashed #CCC; }
+[contenteditable="true"]:hover { outline: 2px dashed #0090D2; }
+li{
+	list-style-type: none;
+}

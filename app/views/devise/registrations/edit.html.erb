@@ -1,25 +1,40 @@
 
 <% content_for :nav do %>
-  <%= render 'layouts/nav/dashboard' %>
+<%= render 'layouts/nav/dashboard' %>
 <% end %>
-
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }, :id=> "edit_user") do |f| %>
 <%= f.error_notification %>
-<div class="form-inputs" style="height:100%;">
-    <%= f.input :name, :required => false, :autofocus => true %>
-    <%= f.input :email, :required => false %>
+<h3>Edit Your Account</h3>
+<div class="row">
+<div class="span4">
+<div class="form-inputs">
+  <%= f.input :name, :required => false, :autofocus => true %>
+  <%= f.input :email, :required => false %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+  <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+  <% end %>
 
-    <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
-    <%= f.input :password_confirmation, :required => false %>
-    <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
-  </div>
-  <div class="form-actions">
+  <%= f.input :password, :autocomplete => "off", :required => false %>
+  <p><em>Leave blank if you don't want to change it</em></p>
+  <%= f.input :password_confirmation, :required => false %>
+  <%= f.input :current_password, :required => true %>
+  <p><em>Enter current password to confirm changes</em></p>
+</div>
+</div>
+
+<div class="span8">
+<p>You have listed the following as your skills.</p>
+<strong><%= @user.skills %></strong>
+<p></br>
+<%= text_field_tag "skill", "", :placeholder => "add new skill here", :style => "width:90%;" %></p>
+<%= link_to "Add Skills", add_skills_user_path(current_user.id), :method => "post", :class => "btn btn-default" %>
+<p><em>Enter multiple skills by adding commas to them</em></p>
+
+</div>
+</div>
+<div class="form-actions"> 
   <%= f.button :submit, "Update", :class=>"btn btn-default", :id=> "edit_user"%>
 </div>
 <% end %>

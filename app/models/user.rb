@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :profile
   before_create :instantiate_profile
 
+  acts_as_taggable_on :skills
+
   has_many :users_projects, dependent: :destroy
-  has_many :users_skills, dependent: :destroy
-  has_many :skills, foreign_key: "skill_id", :through => :users_skills
   has_many :projects, foreign_key: "project_id", :through => :users_projects
   has_many :users_groups, dependent: :destroy
   has_many :groups, foreign_key: "group_id", :through => :users_groups
@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
         end
       end
       return @issues.sort_by{|e| -e[:vote_count]}
+    end
+
+    def skills
+      self.skill_list
     end
 
   end

@@ -35,7 +35,7 @@ class DiscussionsController < ApplicationController
  if @discussion.update_attributes(params[:discussion])
     respond_to do |format|
       format.html {
-                  flash[:success] = "discussion's info was updated Successfully."
+                  flash[:success] = "Discussion was updated successfully."
                   redirect_to discussions_path
       }
       format.js

@@ -27,10 +27,10 @@ class UsersGroupsController < ApplicationController
           if @group.save
           # leave a trail when project is created 
           @activity = Activity.new.create_message!(@user, @group)
-          format.html { redirect_to user_users_groups_path(@user), notice: 'Project was successfully created.' }
+          format.html { redirect_to user_users_groups_path(@user), notice: 'Group was successfully created.' }
           format.json { head :no_content }
         else
-          format.html { render :action => 'new', alert: 'Project was unsuccessfully created.' }
+          format.html { render :action => 'new', alert: 'Group was unsuccessfully created.' }
           format.json { render json: @message.errors, status: :unprocessable_entity }
         end 
       end
@@ -50,10 +50,10 @@ class UsersGroupsController < ApplicationController
       
       respond_to do |format|
         if @group.save
-          format.html { redirect_to user_users_group_path(@user, @users_group), notice: 'Project was successfully updated.' }
+          format.html { redirect_to user_users_group_path(@user, @users_group), notice: 'Group was successfully updated.' }
           format.json { head :no_content }
         else
-          format.html { render :action => 'edit', alert: 'Project was unsuccessfully updated.' }
+          format.html { render :action => 'edit', alert: 'Group was unsuccessfully updated.' }
           format.json { render json: @message.errors, status: :unprocessable_entity }
         end 
       end
