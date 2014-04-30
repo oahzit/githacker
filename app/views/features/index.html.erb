@@ -37,12 +37,24 @@ $(document).ready(function() {
 
 function toggle_edit(id){
 				if ($("#"+id)[0].getAttribute("contentEditable") == "false"){
+
 					$("#"+id)[0].setAttribute("contentEditable", true);
 }
 else{
 	$("#"+id)[0].setAttribute("contentEditable", false);
+  $.ajax({
+        type: 'PUT',
+        url:  '/discussions/'+ id + '/edit',
+        data: "Here",
+        dataType: "JSON",
+        success: function(data) {
+            console.log(data);
+        }
+    });
 }
 };
+
+
 </script>
 
 <div class="row">
@@ -73,13 +85,16 @@ else{
 		</span>
 <!-- 		<img alt="" style="margin: 6px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
 -->		<span class="title first"><%= link_to storyboard.subject, project_feature_path(@project, storyboard) %> </span>
-<span class="action last pull-right"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_feature_path(@project, storyboard), :data => { :confirm => "Are you sure?" }, :method => :delete) %></span>
+<span class="action last pull-right"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_feature_path(@project, storyboard), :data => { :confirm => "Are you sure?" }, :method => :delete, :style=>"color:#888") %></span>
 <span class="lastEditedDate pull-right" style="width:110px;"><%= storyboard.created %></span>
 
 </br>
-<div id="editable<%=storyboard.id%>" class="editable" contentEditable="false">
+<div id="<%=storyboard.id%>" class="editable" contentEditable="false">
 <%= simple_format(storyboard.body)%>
-<span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"> <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, edit_project_discussion_path(@project, storyboard), :remote => true, :onClick => "toggle_edit(this.parentNode.parentNode.id)" %>
+<%= form_for "discussion" do |f| %>
+    <%= f.hidden_field :body, :value => "Test"%>
+<% end %>
+<span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"> <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, "", :remote => true, :onClick => "toggle_edit(this.parentNode.parentNode.id)", :style=>"color:#888" %>
 </span>
 </div>
 </section>

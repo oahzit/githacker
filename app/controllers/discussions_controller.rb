@@ -25,6 +25,32 @@ class DiscussionsController < ApplicationController
         end
     end
 
+    def edit
+        @discussion = Discussion.find(params[:id])
+        @discussion.update_attributes(params[:discussion])
+        d
+    end
+
+    def update
+ if @discussion.update_attributes(params[:discussion])
+    respond_to do |format|
+      format.html {
+                  flash[:success] = "discussion's info was updated Successfully."
+                  redirect_to discussions_path
+      }
+      format.js
+    end
+  else
+    respond_to do |format|
+      format.html {
+                  flash[:error] = @discussion.errors.present? ? @discussion.errors.full_messages.join('<br />') : "Oops! There is some problem with category update."
+                  render :edit
+      }
+      format.js
+    end
+  end
+    end
+
     def up_vote
         @discussion = Discussion.find(params[:id])
         @discussion.up_vote
