@@ -10,16 +10,21 @@ class DiscussionsController < ApplicationController
         # When a discussion is created 
         @project = Project.find(params[:project_id])
         @discussion = Discussion.create(params[:discussion])
-
+        if params[:related_to].present?
+          @related_discussion = Discussion.find(params[:related_to].to_i)
+          @related_discussion.related_to_list.add(@discussion.id.to_s)
+          @related_discussion.save
+          @discussion.related_to_list.add(params[:related_to])
+        end
         # leave a trail when Discussion is created 
 
         respond_to do |format|
         	if @discussion.save
         		@activity = Activity.new.create_issue!(@project, @discussion)
-        		format.html { redirect_to project_discussion_path(@project, @discussion), notice: 'Discussion was successfully created.' }
+        		format.html { redirect_to :back, notice: @discussion.type + ' was successfully created.' }
         		format.json { head :no_content }
         	else
-        		format.html { render :action => 'new', alert: 'Discussion was unsuccessfully created.' }
+        		format.html { render :action => 'new', alert: @discussion.type + 'was unsuccessfully created.' }
         		format.json { render json: @message.errors, status: :unprocessable_entity }
         	end 
         end

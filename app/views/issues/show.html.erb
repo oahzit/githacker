@@ -30,10 +30,10 @@
 
 			<%= simple_form_for Comment.new do |f| %>
 			<div class="form-group" style="padding:15px;">   
-				<p><%= f.text_area :body, class: "form-control", :rows => 6, placeholder: "Add your response here" %></p>
+				<p><%= f.text_area :body, class: "form-control", :style => "width:100%;", :rows => 6, placeholder: "Add your response here" %></p>
 				<p><%= f.hidden_field :author_id, :value => current_user.id %></p>
 				<p><%= f.hidden_field :discussion_id, :value => @issue.id %></p>
-				<p><%= f.submit 'Add Comment', class: "btn btn-primary pull-right", tabindex: 4 %></p>
+				<p><%= f.submit 'Add Comment', class: "btn btn-default pull-right", tabindex: 4 %></p>
 			</div>
 			<% end %>
 		</div>

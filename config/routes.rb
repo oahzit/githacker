@@ -23,6 +23,7 @@ Githacker::Application.routes.draw do
 		resources :notes
 		resources :discussions
 		resources :features
+		resources :comments
 	end
 
 	resources :comments

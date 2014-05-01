@@ -15,7 +15,7 @@ class FeaturesController < ApplicationController
 	def show
 		@project = Project.find(params[:project_id])
 		@storyboard = Discussion.find(params[:id])
-		@comments = @storyboard.comments
+		@comments = @storyboard.related_content("Comments")
 	end
 
 	def new

@@ -103,26 +103,42 @@ function toggle_edit(id){
 	</section>
 
 	<section id="comments">
-		<% if !@comments.present? %> 
-		There are no comments yet.
-		<% end %>
-		<% @comments.each do |storyboard| %>
-		<div class="discussions-body" style="position:relative;margin-bottom:30px;padding:10px;margin-left:20px;width:95%;">
+		<% if !@storyboard.related_content("Comment").present? %>
+			<p class="center">There are no responses to this issue. Be the first to comment.</p>
+			<% end %>
+
+		</br>
+
+			<%= simple_form_for [@project, Discussion.new], :method => "post" do |f| %>
+			<div class="form-group" style="padding:15px;">   
+				<p><%= f.text_area :body, class: "form-control", :style => "width:100%;", :rows => 6, placeholder: "Add your response here" %></p>
+				<p><%= f.hidden_field :author_id, :value => current_user.id %></p>
+				<p><%= f.hidden_field :type, :value => "Comment"%></p>
+				<p><%= hidden_field_tag "related_to", @storyboard.id %></p>
+				<p><%= f.submit 'Add Comment', class: "btn btn-default pull-right", tabindex: 4 %></p>
+			</div>
+			<% end %>
+
+			<h4><strong><%= @storyboard.related_content("Comment").count %> Responses</strong> </h4>
+			<hr>
+		<% @storyboard.related_content("Comment").each do |comment| %>
+		<div style="position:relative;margin-bottom:30px;padding:10px;margin-left:20px;width:95%;">
 			<span style ="position:absolute; margin-left:-28px;">
-				<%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_discussion_path(storyboard) %></br>
-				<strong style="margin-left:3px;margin-top:-5px;"><%= storyboard.vote_count %></strong>
-				<p style="margin-top:5px;"><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_discussion_path(storyboard) %></p>
+				<%= link_to '<span class="glyphicon glyphicon-arrow-up">'.html_safe, up_vote_discussion_path(comment) %></br>
+				<strong style="margin-left:3px;margin-top:-5px;"><%= comment.vote_count %></strong>
+				<p style="margin-top:5px;"><%= link_to '<span class="glyphicon glyphicon-arrow-down">'.html_safe, down_vote_discussion_path(comment) %></p>
 			</span>
 <!-- 		<img alt="" style="margin: 6px;" class="avatar" src="https://secure.gravatar.com/avatar/8e03c27a9b2aca99ca809828713a0e7c?s=40&amp;d=mm">
--->		<span class="title first"><%= link_to storyboard.subject, project_feature_path(@project, storyboard) %> </span>
-<span class="action last pull-right"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_feature_path(@project, storyboard), :data => { :confirm => "Are you sure?" }, :method => :delete) %></span>
-<span class="lastEditedDate pull-right" style="width:110px;"><%= storyboard.created %></span>
+-->	
+<span class="action last pull-right"><%= link_to('<span class="glyphicon glyphicon-remove">'.html_safe, project_feature_path(@project, comment), :data => { :confirm => "Are you sure?" }, :method => :delete) %></span>
+<span class="lastEditedDate pull-right" style="width:110px;"><%= comment.created %></span>
 
 </br>
-<div><%= simple_format(storyboard.body)%></div>
-<span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"> edit content <%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, edit_project_discussion_path(@project, storyboard) %>
+<div><%= simple_format(comment.body)%></div>
+<span class="pull-right" style ="position:absolute;right:10px;bottom:10px;"><%= link_to '<span class="glyphicon glyphicon-pencil">'.html_safe, edit_project_discussion_path(@project, comment) %>
 </span>
 </div>
+<hr>
 <% end %>
 </section>
 <section id="features">
