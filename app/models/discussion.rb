@@ -1,7 +1,6 @@
 class Discussion < ActiveRecord::Base
 	attr_accessible :subject, :body, :type, :archived, :author_id, :vote_count, :status
 	belongs_to :project
-	has_many :comments 
 	acts_as_taggable_on :skills
 	acts_as_taggable_on :category
 	acts_as_taggable_on :related_to
@@ -15,6 +14,10 @@ class Discussion < ActiveRecord::Base
 
 	scope :active, -> {where(:archive => false)}
 	scope :archived, -> {where(:archive => true)}
+
+	def comments
+		self.related_content("Comment")
+	end
 
 	def created
 		difference = Time.now- self.created_at
