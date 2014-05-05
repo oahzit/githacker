@@ -21,7 +21,10 @@ class UsersController < ApplicationController
   end
 
   def add_skills
-    d
+    @user = current_user
+    @user.skill_list.add(params[:skill], parse: true)
+    @user.save
+    redirect_to :back
   end
     
   def destroy

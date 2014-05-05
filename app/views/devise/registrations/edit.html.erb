@@ -7,40 +7,46 @@
 <%= f.error_notification %>
 <h3>Edit Your Account</h3>
 <div class="row">
-<div class="span4">
-<div class="form-inputs">
-  <%= f.input :name, :required => false, :autofocus => true %>
-  <%= f.input :email, :required => false %>
+  <div class="span6">
+    <div class="form-inputs">
+      <%= f.input :name, :required => false, :autofocus => true %>
+      <%= f.input :email, :required => false %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-  <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-  <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <% end %>
 
-  <%= f.input :password, :autocomplete => "off", :required => false %>
-  <p><em>Leave blank if you don't want to change it</em></p>
-  <%= f.input :password_confirmation, :required => false %>
-  <%= f.input :current_password, :required => true %>
-  <p><em>Enter current password to confirm changes</em></p>
-</div>
-</div>
+      <%= f.input :password, :autocomplete => "off", :required => false %>
+      <p><em>Leave blank if you don't want to change it</em></p>
+    </div>
+  </div>
+  <div class="span6">
+    <div class="form-inputs">
 
-<div class="span8">
-<p>You have listed the following as your skills.</p>
-<strong><%= @user.skills %></strong>
-<p></br>
-<%= text_field_tag "skill", "", :placeholder => "add new skill here", :style => "width:90%;" %></p>
-<%= link_to "Add Skills", add_skills_user_path(current_user.id), :method => "post", :class => "btn btn-default" %>
-<p><em>Enter multiple skills by adding commas to them</em></p>
-
-</div>
-</div>
-<div class="form-actions"> 
-  <%= f.button :submit, "Update", :class=>"btn btn-default", :id=> "edit_user"%>
+      <%= f.input :password_confirmation, :required => false %>
+      <%= f.input :current_password, :required => true %>
+      <p><em>Enter current password to confirm changes</em></p>
+      <%= f.button :submit, "Update", :class=>"btn btn-primary", :id=> "edit_user"%>
+    </div>
+  </div>
 </div>
 <% end %>
+<hr>
+      <div class="form-inputs">
+  <p>You have listed the following as your skills.</p>
+  <strong><%= @user.skills %></strong>
+  <p></br>
+    <%= form_for "", :url => add_skills_user_path(current_user.id), :html => { :method => :post }, :id => "add_skills" do |s| %>
 
-<h3>Cancel my account</h3>
+    <%= text_field_tag "skill", "", :placeholder => "add new skill here", :style => "width:90%;" %></p>
+    <%= s.submit "Add Skills", :class=>"btn btn-default", :id=> "add_skills"%>
+    <p><em>Enter multiple skills by adding commas to them</em></p>
+    <% end %>
+  </div>
+  <div class="form-actions"> 
+    <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+    <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 
-<%= link_to "Back", :back %>
+    <%= link_to "Back", :back %>
+  </div>
