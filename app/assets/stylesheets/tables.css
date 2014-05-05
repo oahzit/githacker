@@ -16,6 +16,8 @@
 
 .simpletable{
 	padding:0px !important;
+	width:97%;
+	margin-left:22px;
 }
 
 .simpletable a {
@@ -52,6 +54,7 @@ color: #888;
 
 .simpletable td.last {
 text-align: right;
+padding: 15px 7px;
 }
 
 table {

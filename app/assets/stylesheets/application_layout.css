@@ -13,14 +13,13 @@
  *= require bootstrap
  *= require bootstrap_and_overrides
  *= require bootstrap-datepicker
-*/
-@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+ */
+ @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
 
 
-body {
-  background-color: #eee;
-  }
-
+ body.issues_display, body.issues_index, body.notes_index {
+  background-color: #eee !important;
+}
 
 li {
   list-style-type:none;
@@ -35,7 +34,7 @@ a{
 
 .content {
   width: 1170px;
-    padding-top: 0px;
+  padding-top: 0px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -156,7 +155,7 @@ h3.page-title {
 }
 
 li {
-line-height: 18px;
+  line-height: 18px;
 }
 
 .light {
@@ -194,7 +193,7 @@ img {
 
 
 .cgray, li.commit .commit-row-info .committed_ago, li.commit.inline-commit .committed_ago, ul.notes .discussion-header, ul.notes .note-header, ul.notes .discussion .discussion-body .discussion-hidden .note, .discussion .discussion-actions a, .discussion .note-actions a, .note .discussion-actions a, .note .note-actions a {
-color: gray;
+  color: gray;
 }
 
 
@@ -272,20 +271,20 @@ color: gray;
 .nav-pills>.active>a:focus
 {color:#fff;background-color:#08c}
 
-          .numberCircle {
-            -webkit-border-radius: 999px;
-            -moz-border-radius: 999px;
-            border-radius: 999px;
-            behavior: url(PIE.htc);
+.numberCircle {
+  -webkit-border-radius: 999px;
+  -moz-border-radius: 999px;
+  border-radius: 999px;
+  behavior: url(PIE.htc);
 
-            width: 36px;
-            height: 36px;
-            padding: 8px;
+  width: 20px;
+  height: 20px;
+  padding: 8px;
 
-            background: #fff;
-            border: 2px solid #666;
-            color: #666;
-            text-align: center;
+  background: #fff;
+  border: 2px solid #666;
+  color: #666;
+  text-align: center;
 
-            font: 15px Arial, sans-serif
-          }
+  font: 15px Arial, sans-serif
+}

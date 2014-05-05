@@ -1,23 +1,6 @@
 <% content_for :nav do %>
 <%= render 'layouts/nav/project' %>
 <% end %>
-<style type="text/css">
-body{
-	background-color: #eee;
-}
-.discussions-body {
-	display:inline-block;
-	background-color: #fff;
-	margin: 0 auto;
-	box-shadow: 0 1px 2px #aaa;
-	border-collapse: collapse;
-	border: 0;
-	text-shadow: none;
-	width:100%;
-	background-color: #fff;
-}
-
-</style>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#new_note_form").hide();
@@ -42,7 +25,7 @@ $(document).ready(function() {
 		<p class="center">There are no notes for this project.</p>
 		<% else %>
 
-		<section class="discussions-body simpletable" style="width:97%;margin-left:15px;">
+		<section class="discussions-body simpletable" style="width:97%;margin-left:25px;">
 			<table class="table table-condensed table-hover">
 				<tbody>
 					<% @notes.each do |note| %>
