@@ -6,7 +6,9 @@ Githacker::Application.routes.draw do
 			post :add_skills  
 		end
 
-		resources :groups 
+		resources :groups do
+			post :create_subteam
+		end
 		resources :users_groups do
 		end
 		resources :users_projects do 

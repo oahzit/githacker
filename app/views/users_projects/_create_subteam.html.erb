@@ -1,0 +1,13 @@
+<%= form_for ["user", Group.new], :url => {:controller => "groups", :action => "create_subteam", :method => :post, :group_id => @project.master_group} do |f| %>
+
+			<div class="input-append" style="width:93%;">
+				<%=h f.text_field :name, :placeholder => "Subteam Title" %>
+				<%=h text_field_tag "emails", "", :placeholder => "add emails of team members here", :style => "width:68%;" %>
+				<%= f.hidden_field :parent_id, :value => @project.master_group.id %>
+				<%= hidden_field_tag "project_id", @project.id %>
+				<%= f.hidden_field :access_level, :value => 1 %>
+
+				<%= f.submit 'Add To Team', class: "btn btn-default project-submit", tabindex: 4 %>
+
+			</div>
+			<% end %>

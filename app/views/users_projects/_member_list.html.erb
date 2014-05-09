@@ -1,0 +1,32 @@
+<section class="discussions-body simpletable">
+<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Access Level</th>
+						<th>Date Joined</th>
+						<th></th>
+					</tr>       
+				</thead>
+				<tbody>
+
+					<% @members.each do |member| %>
+					<% members_project = @project.users_projects.where(:user_id => member.id).first %>
+					<% members_group = member.users_groups.where(:group_id => @group.id).first %>
+					<tr>
+
+						<td><%= member.name %></td>
+						<td><%= member.email %></td>
+						<td><%= members_project.access %></td>
+						<td><%= members_group.created %></td>
+						<td>
+							<% if member != current_user %>
+							<%= link_to raw("<span class=\"glyphicon glyphicon-remove\" style=\"font-size:18px;color:#999;\"></span>".html_safe), user_users_group_path(member, UsersGroup.where(:group_id => @group.id).first),  method: :remove_member, via: :post, data: { confirm: 'Are you sure? This action cannot be undone.' }%>
+							<% end %>
+						</td>
+						<% end %>
+					</tr>
+				</tbody>
+			</table>
+		</section>

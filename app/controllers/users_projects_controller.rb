@@ -138,6 +138,8 @@ class UsersProjectsController < ApplicationController
           @group = @project.master_group
           @members = @project.master_group.members
 
+          @subteams = Group.where(:parent_id => @project.master_group.id)
+
           @owner = User.find(@project.creator_id)
         end
 

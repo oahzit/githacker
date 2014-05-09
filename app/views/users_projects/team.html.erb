@@ -2,11 +2,15 @@
 $("#add-member-submit-btn").bind('click', function(event) {
 	$("#new_users_project").submit();
 });
+
+$(document).ready(function() {
+	$("#new_subteam_form").hide();
+});
 </script>
 
 <style type="text/css">
-body{
-	background-color: #eee;
+.accordion-heading{
+	background-color: lightblue;
 }
 </style>
 <% content_for :nav do %>
@@ -14,52 +18,82 @@ body{
 <% end %>
 
 <div class="row">
-
 	<div class="span12">
+
+		<!-- Instructions to creating first subteam -->
+		<% if !@subteams.present? %>
+		<p class="center">You do not have any teams within this group. Create one.</p>
+		<%= render "create_subteam.html.erb" %>
+		<% end %>
+
+		<!-- Top panel for the page -->
 		<div class="project_clone_panel">
-			<strong>Main Team for <%= @project.name %> </strong>
-			<p class="pull-right"><%= link_to "Edit", edit_project_path(@project), :class => "btn btn-default btn-small" %></p>
+			<strong>SubTeams for <%= @project.name %> </strong>
+			<span class="glyphicon glyphicon-plus-sign pull-right" style="font-size:20px;" onClick='$("#new_subteam_form").toggle();'></span>			
 		</div>
 
-		<section class="discussions-body simpletable" style="width:100%;">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Access Level</th>
-						<th>Date Joined</th>
-						<th></th>
-					</tr>       
-				</thead>
-				<tbody>
+		<section id="new_subteam_form" style="margin-top:-15px;margin-bottom:20px;">
+			<%= render "create_subteam.html.erb" %>
+		</section>
 
-					<% @members.each do |member| %>
-					<% members_project = @project.users_projects.where(:user_id => member.id).first %>
-					<% members_group = member.users_groups.where(:group_id => @group.id).first %>
-					<tr>
-
-						<td><%= member.name %></td>
-						<td><%= member.email %></td>
-						<td><%= members_project.access %></td>
-						<td><%= members_group.created %></td>
-						<td>
-							<% if member != current_user %>
-							<%= link_to raw("<span class=\"glyphicon glyphicon-remove\" style=\"font-size:18px;color:#999;\"></span>".html_safe), user_users_group_path(member, UsersGroup.where(:group_id => @group.id).first),  method: :remove_member, via: :post, data: { confirm: 'Are you sure? This action cannot be undone.' }%>
+		<!-- Collapisble nav for subteams -->
+		<div class="accordion" id="subteam-list">
+			<% @subteams.each do |team| %>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%=team.id%>">
+						<%= team.name %>
+					</a>
+				</div>
+				<div id="collapse<%=team.id%>" class="accordion-body collapse">
+					<div class="accordion-inner">
+						<% if !team.members.present? %>
+						<p class="center"> There are no individuals in this subteam.
 							<% end %>
-						</td>
-						<% end %>
-					</tr>
-				</tbody>
-			</table>
-		</section>
+							<section class="discussions-body simpletable">
+								<table class="table table-hover">
+									<tbody>
 
-		<% if @users_project.access_level == 0 || @users_project.access_level == 1 %>			
-		<section id="add_member_form" style="margin-top:20px;width:96%">
-			<%= render 'add_member' %>
-		</section>
-		<% end %>
+										<% team.members.each do |member| %>
+										<% members_project = @project.users_projects.where(:user_id => member.id).first %>
+										<% members_group = member.users_groups.where(:group_id => @group.id).first %>
+										<tr>
+
+											<td><%= member.name %></td>
+											<td><%= member.email %></td>
+											<td><%= members_project.access %></td>
+											<td><%= members_group.created %></td>
+											<td>
+												<% if member != current_user %>
+												<%= link_to raw("<span class=\"glyphicon glyphicon-remove\" style=\"font-size:18px;color:#999;\"></span>".html_safe), user_users_group_path(member, UsersGroup.where(:group_id => @group.id).first),  method: :remove_member, via: :post, data: { confirm: 'Are you sure? This action cannot be undone.' }%>
+												<% end %>
+											</td>
+											<% end %>
+										</tr>
+									</tbody>
+								</table>
+							</section>
+
+						</div>
+					</div>
+				</div>
+				<% end %>
+			</div>
+
+			<!-- Top panel for the page -->
+			<div class="project_clone_panel">
+				<strong>Complete Team for <%= @project.name %> </strong>
+			</div>
+
+			<!-- Form to add new members -->
+			<% if @users_project.access_level == 0 || @users_project.access_level == 1 %>			
+			<section id="add_member_form" style="margin-top:20px;width:96%">
+				<%= render 'add_member' %>
+			</section>
+			<% end %>
+
+			<!-- Table of all members -->
+			<%= render 'member_list'%>			
+
+		</div>
 	</div>
-
-
-</div>

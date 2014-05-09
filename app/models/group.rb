@@ -5,7 +5,7 @@ class Group < ActiveRecord::Base
   has_many :projects_groups, dependent: :destroy
   has_many :projects, foreign_key: "project_id", :through => :projects_groups
 
-  attr_accessible :owner_id, :group_id, :access_level, :name
+  attr_accessible :owner_id, :group_id, :access_level, :name, :parent_id
 
   def owners
     @owners ||= users_groups.owners.map(&:user)

@@ -17,7 +17,7 @@
  @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
 
 
- body.issues_display, body.issues_index, body.notes_index {
+ body.issues_display, body.issues_index, body.notes_index, body.users_projects_team {
   background-color: #eee !important;
 }
 
@@ -74,6 +74,7 @@ a{
   position:fixed;
   width:100%;
   margin-top: 50px;
+  z-index: 999;
 }
 
 .container {
