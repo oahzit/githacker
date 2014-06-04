@@ -10,13 +10,36 @@
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
 </head>
+
+<style type="text/css">
+/* NAVIGATION */
+.navbar {
+position: fixed;
+z-index: 9998;
+top: 0;
+width: 100%;
+opacity: 1;
+background: rgba(255,255,255,0.9);
+padding-top: 20px;
+  height: 73px;
+}
+
+.navbar .logo {
+background-image: url("http://www.littlelines.com.global.prod.fastly.net/images/elements-s76abe03715-bae0ef92.png");
+background-position: 0 -541px;
+background-repeat: no-repeat;
+display: block;
+height: 52px;
+width: 157px;
+float: left;
+max-width: 100%;
+margin-left:100px;
+}
+</style>
+
 <body class="<%= controller_name %>_<%= action_name %>">
-  <div class="navbar navbar-fixed-top navbar-inverse">
-    <nav class="navbar-inner">
-      <div class="container">
+  <div class="navbar">
         <%= render 'layouts/navigation' %>
-      </div>
-    </nav>
   </div>
 
   <%= yield(:nav) %> 
