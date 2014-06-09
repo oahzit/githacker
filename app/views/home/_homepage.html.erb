@@ -31,9 +31,20 @@ main section {
   position: relative;
   width: 100%;
   height: 700px;
-  background: url("http://37.media.tumblr.com/4fbe12e38b0311a7a007d226e617b6c4/tumblr_n6vr3i1Dkp1t4x564o1_1280.jpg") right top no-repeat;
-  background-size: cover;
   overflow: hidden;
+}
+
+.item1 {
+  background: url("http://37.media.tumblr.com/4fbe12e38b0311a7a007d226e617b6c4/tumblr_n6vr3i1Dkp1t4x564o1_1280.jpg") no-repeat;
+  background-size: cover;
+}
+.item2 {
+  background: url("http://24.media.tumblr.com/34ff6663c9148a1de5f64d5586793f61/tumblr_n6erylTSnO1st5lhmo1_1280.jpg") no-repeat; 
+  background-size: cover;
+}
+
+.carousel {
+  margin-bottom: 0px;
 }
 
 .sign-in {
@@ -74,6 +85,10 @@ main section {
   font-size: 5em;
   padding-bottom:120px;
   margin-top: 40px;
+}
+
+.item2-header {
+  color: #AB5C00;
 }
 
 p.top__subheader {
@@ -151,17 +166,46 @@ $(window).load(function(){
 
 </script>
 
-<section class="top">
- <div class="top__content">
-    <h1 class="top__header" style="text-align:center;">
-      <span>Open Source Beehives</span>
-    </h1>
-    <p class="top__subheader">
-      <span>Restoring ecosystems one arduino at a time</span>
-    </p>
-    <p style="text-align:center">
-    <a class="aubtn" href="http://www.eventbrite.com/e/hardware-hack-days-prosthetic-redesign-tickets-11785752503">View Featured Project</a>
-    </p>
+<div id="myCarousel" class="carousel slide" style="max-height:800px">
+
+<div class="carousel-inner">
+      <!-- Carousel items -->
+        <div class="active item">
+          <section class="top item1">
+            <div class="top__content">
+              <h1 class="top__header" style="text-align:center;">
+                <span>Open Source Beehives</span>
+              </h1>
+              <p class="top__subheader">
+                <span>Restoring ecosystems one arduino at a time</span>
+              </p>
+              <p style="text-align:center">
+               <a class="aubtn" href="http://www.eventbrite.com/e/hardware-hack-days-prosthetic-redesign-tickets-11785752503">View Featured Project</a>
+              </p>
+            </div>
+          </section>
+        </div>
+        <div class="item">
+          <section class="top item2">
+            <div class="top__content">
+              <h1 class="top__header item2-header" style="text-align:center;">
+                <span>GitHacker</span>
+              </h1>
+              <p class="top__subheader">
+                <span>[tagline]</span>
+              </p>
+              <p style="text-align:center">
+               <a class="aubtn" href="#">View Featured Project</a>
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+      <!-- Carousel nav -->
+      <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+
 </div>
 
 <style type="text/css">
